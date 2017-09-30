@@ -13,6 +13,7 @@ public class SaveLevel : MonoBehaviour {
 
 	//make all level object prefabs a public game object here
 	public GameObject wall;
+	//ADD NEW PREFABS ABOVE THIS LINE
 
 	void Update() {
 
@@ -68,6 +69,7 @@ public class SaveLevel : MonoBehaviour {
 		//match prefab name to prefab
 		if (name == "wall")
 			return wall;
+		//ADD NEW PREFABS ABOVE THIS LINE
 
 		//object's name didn't match a prefab
 		Debug.Log(comp.name + " has an improper name in its object identifier and could not be saved to level data.");
