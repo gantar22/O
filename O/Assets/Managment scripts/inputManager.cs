@@ -39,6 +39,10 @@ public class InputManager : MonoBehaviour {
     }
 
     public void Map(string actionName,string inputName)
+    //the action name is "object_function" and the input name
+    //is "player_button". This makes it so that Get_Buttons
+    // returns this is input name when actors want to know what
+    //input to listen to.
     {
     	ArrayList thisList = null;
         if (instance.inputDictionary.TryGetValue (actionName, out thisList))
@@ -57,10 +61,15 @@ public class InputManager : MonoBehaviour {
     {
     	ArrayList thisList = null;
         if (instance.inputDictionary.TryGetValue (actionName, out thisList))
-        {
             thisList.Remove(inputName);
-        } 
         
+    }
+    public ArrayList Get_Buttons(string actionName)
+    {
+    	ArrayList thisList = null;
+    	if (instance.inputDictionary.TryGetValue (actionName, out thisList))
+    		return thisList;
+    	return new ArrayList();
     }
 
 }
