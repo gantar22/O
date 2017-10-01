@@ -43,7 +43,8 @@ public class InputManager : MonoBehaviour {
     	ArrayList thisList = null;
         if (instance.inputDictionary.TryGetValue (actionName, out thisList))
         {
-            thisList.Add(inputName);
+			if(! thisList.Contains(inputName))
+				thisList.Add(inputName);
         } 
         else
         {
@@ -51,6 +52,15 @@ public class InputManager : MonoBehaviour {
             thisList.Add(inputName);
             instance.inputDictionary.Add(actionName, thisList);
         }
+    }
+    public void Remove(string actionName,string inputName)
+    {
+    	ArrayList thisList = null;
+        if (instance.inputDictionary.TryGetValue (actionName, out thisList))
+        {
+            thisList.Remove(inputName);
+        } 
+        
     }
 
 }
