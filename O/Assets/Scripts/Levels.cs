@@ -34,6 +34,8 @@ public class Levels : MonoBehaviour {
 		if (0 <= num && num < levels.Length) { //make sure level index is valid
 
 			if (levels [num] != null) { //make sure level to load exists
+				//update current level in Stats
+				GetComponent<Stats>().currLevel = num;
 
 				//stop players from moving
 				player1.GetComponent<Rigidbody2D> ().velocity = Vector2.zero;
