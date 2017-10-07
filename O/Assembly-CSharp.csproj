@@ -52,6 +52,7 @@
   </ItemGroup>
   <ItemGroup>
      <Compile Include="Assets\Managment scripts\inputManager.cs" />
+     <Compile Include="Assets\Scripts\Exit.cs" />
      <Compile Include="Assets\Scripts\Level.cs" />
      <Compile Include="Assets\Scripts\LevelObject.cs" />
      <Compile Include="Assets\Scripts\Levels.cs" />
@@ -59,6 +60,7 @@
      <Compile Include="Assets\Scripts\ObjIdentifier.cs" />
      <Compile Include="Assets\Scripts\PlayerMovement.cs" />
      <Compile Include="Assets\Scripts\SaveLevel.cs" />
+     <Compile Include="Assets\Scripts\Stats.cs" />
  <Reference Include="Facebook.Unity.Settings">
  <HintPath>/Users/matthewbofenkamp/Documents/GameStuff/O/O/Library/FacebookSDK/Facebook.Unity.Settings.dll</HintPath>
  </Reference>
