@@ -45,6 +45,9 @@ public class Exit : MonoBehaviour {
 		if ( (p1Exit && !p1Colliding) || (p2Exit && !p2Colliding)) {
 			return;
 		} else {
+			if (GameController == null)
+				GameController = GameObject.FindGameObjectWithTag ("GameController");
+
 			int nextLevel = 1 + GameController.GetComponent<Stats> ().currLevel;
 
 			GameController.GetComponent<Levels> ().EndLevel ();

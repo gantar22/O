@@ -7,7 +7,6 @@ public class Levels : MonoBehaviour {
 
 	public GameObject player1;
 	public GameObject player2;
-	public GameObject exit;
 
 	public Level[] levels;
 	public int startingLevel;
@@ -60,9 +59,6 @@ public class Levels : MonoBehaviour {
 
 					}
 				}
-
-				//set exit location
-				exit.transform.position = level.exitLoc;
 
 				//sets player 1 location and move keys
 				player1.transform.position = level.player1loc;

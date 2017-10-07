@@ -56,10 +56,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player1: {fileID: 0}
   player2: {fileID: 0}
-  exit: {fileID: 0}
   levels:
-  - {fileID: 11400000, guid: 4de2b6138ad904272a5325dcc5b9250f, type: 2}
-  startingLevel: 0
+  - {fileID: 11400000, guid: 78dfab03f07e2403fa73f4e774041009, type: 2}
+  - {fileID: 11400000, guid: ead38d7923bde4479a8cbd4fcbbb72fb, type: 2}
+  - {fileID: 11400000, guid: 3a0cd7cb6cbea4003b8e5517325ba107, type: 2}
+  startingLevel: 2
 --- !u!114 &114443866569585656
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -95,8 +96,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1854c98f7cc1d4c2d9a081644ae5fc78, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  exit: {fileID: 0}
   player1: {fileID: 0}
   player2: {fileID: 0}
-  newLevel: {fileID: 11400000, guid: 4de2b6138ad904272a5325dcc5b9250f, type: 2}
+  newLevel: {fileID: 11400000, guid: 3a0cd7cb6cbea4003b8e5517325ba107, type: 2}
+  exitBoth: {fileID: 1912214553670882, guid: dc80944325554442b9c3828bf253b97d, type: 2}
+  exitP1: {fileID: 1961994317094650, guid: 9ef8d824780e646188f88e292e12bd02, type: 2}
+  exitP2: {fileID: 1556375983336446, guid: aff8c2e8c02534e5ebcf238745a69592, type: 2}
   wall: {fileID: 1115300811046126, guid: 0e1653708c34d4c088cf22ec2eca93d3, type: 2}

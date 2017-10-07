@@ -5,20 +5,21 @@ using UnityEngine;
 [ExecuteInEditMode]
 public class SaveLevel : MonoBehaviour {
 
-	public GameObject exit;
 	public GameObject player1;
 	public GameObject player2;
 
 	public Level newLevel;
 
 	//make all level object prefabs a public game object here
+	public GameObject exitBoth;
+	public GameObject exitP1;
+	public GameObject exitP2;
 	public GameObject wall;
 	//ADD NEW PREFABS ABOVE THIS LINE
 
 	void Update() {
 
 		newLevel.components = GetComponentList();
-		newLevel.exitLoc = exit.transform.position;
 		newLevel.player1loc = player1.transform.position;
 		newLevel.player2loc = player2.transform.position;
 		newLevel.p1left = player1.GetComponent<PlayerMovement>().left;
@@ -67,6 +68,12 @@ public class SaveLevel : MonoBehaviour {
 		string name = comp.GetComponent<ObjIdentifier> ().prefabName;
 
 		//match prefab name to prefab
+		if (name == "exitBoth")
+			return exitBoth;
+		if (name == "exitP1")
+			return exitP1;
+		if (name == "exitP2")
+			return exitP2;
 		if (name == "wall")
 			return wall;
 		//ADD NEW PREFABS ABOVE THIS LINE

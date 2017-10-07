@@ -6,7 +6,6 @@ using System;
 public class Level : ScriptableObject {
 
 	public LevelObject[] components;
-	public Vector3 exitLoc;
 	public Vector3 player1loc;
 	public Vector3 player2loc;
 	public KeyCode p1left;
