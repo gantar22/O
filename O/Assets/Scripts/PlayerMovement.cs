@@ -24,14 +24,14 @@ public class PlayerMovement : MonoBehaviour {
 
 	}
 
-	void Awake () {
+	void OnEnable () {
 		inputManager = InputManager.instance;
 		inputManager.Map("Jump"  + Player.ToString(),jump);
 		inputManager.Map("left"  + Player.ToString(),left);
 		inputManager.Map("right" + Player.ToString(),right);
 	}
 
-	void OnDisable () {
+	void LetCSharpCollectItsOwnGarbage () {
 		inputManager.Remove("Jump"  + Player.ToString(),jump);
 		inputManager.Remove("left"  + Player.ToString(),left);
 		inputManager.Remove("right" + Player.ToString(),right);
