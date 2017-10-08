@@ -7,35 +7,59 @@ public class PlayerMovement : MonoBehaviour {
 	public KeyCode left;
 	public KeyCode right;
 	public KeyCode jump;
+	public int Player;
 
 	private Rigidbody2D rb;
 
 	public float runSpeed;
 	public float jumpForce;
+	private float velo;
+	private InputManager inputManager;
 
 	// Use this for initialization
 	void Start () {
 
 		rb = GetComponent<Rigidbody2D> ();
+		velo = 0f;
 
+	}
+
+	void Awake () {
+		inputManager = InputManager.instance;
+		inputManager.Map("Jump"  + Player.ToString(),jump);
+		inputManager.Map("left"  + Player.ToString(),left);
+		inputManager.Map("right" + Player.ToString(),right);
+	}
+
+	void OnDisable () {
+		inputManager.Remove("Jump"  + Player.ToString(),jump);
+		inputManager.Remove("left"  + Player.ToString(),left);
+		inputManager.Remove("right" + Player.ToString(),right);
 	}
 
 	// Update is called once per frame
 	void Update () {
 
 		//horizontal movement:
-		float velo = 0f;
+		velo = 0f;
+		
+		foreach(KeyCode key in inputManager.Get_Buttons("left" + Player.ToString())) {
+			if (Input.GetKey (key))
+				velo -= runSpeed;
+		}
 
-		if (Input.GetKey (left))
-			velo -= runSpeed;
-		if (Input.GetKey (right))
-			velo += runSpeed;
+		foreach(KeyCode key in inputManager.Get_Buttons("right" + Player.ToString())) {
+			if (Input.GetKey (key))
+				velo += runSpeed;
+		}
 
 		rb.velocity = new Vector2 (velo, rb.velocity.y);
 
-		//jumping:
-		if (Input.GetKeyDown (jump) && OnGround())
-			rb.AddForce (Vector2.up * jumpForce);
+		//jumping, it checks each key that could cause the player to jump:
+		foreach (KeyCode key in inputManager.Get_Buttons("Jump" + Player.ToString())) {
+			if (Input.GetKeyDown (key) && OnGround())
+				rb.AddForce (Vector2.up * jumpForce);
+		}
 
 	}
 
