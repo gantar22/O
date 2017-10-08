@@ -141,6 +141,7 @@ MonoBehaviour:
   left: 97
   right: 100
   jump: 273
+  Player: 1
   runSpeed: 5
   jumpForce: 1000
 --- !u!50 &266399999
@@ -254,6 +255,7 @@ GameObject:
   - component: {fileID: 495170834}
   - component: {fileID: 495170836}
   - component: {fileID: 495170837}
+  - component: {fileID: 495170838}
   m_Layer: 0
   m_Name: GameController
   m_TagString: GameController
@@ -319,6 +321,17 @@ MonoBehaviour:
   player2: {fileID: 677158114}
   newLevel: {fileID: 11400000, guid: 4de2b6138ad904272a5325dcc5b9250f, type: 2}
   wall: {fileID: 1115300811046126, guid: 0e1653708c34d4c088cf22ec2eca93d3, type: 2}
+--- !u!114 &495170838
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 495170833}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 611a4720feba9ae4b81636daa637e432, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &677158114
 GameObject:
   m_ObjectHideFlags: 0
@@ -352,6 +365,7 @@ MonoBehaviour:
   left: 276
   right: 275
   jump: 119
+  Player: 0
   runSpeed: 5
   jumpForce: 1000
 --- !u!50 &677158116
