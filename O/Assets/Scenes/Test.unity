@@ -168,6 +168,16 @@ Prefab:
       propertyPath: m_WasSpriteAssigned
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 114629061189796430, guid: 53cb2f6fee92c25428ae2c71fce97dc7,
+        type: 2}
+      propertyPath: p2Exit
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114629061189796430, guid: 53cb2f6fee92c25428ae2c71fce97dc7,
+        type: 2}
+      propertyPath: ExitSetting
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 53cb2f6fee92c25428ae2c71fce97dc7, type: 2}
   m_IsPrefabParent: 0

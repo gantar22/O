@@ -2,16 +2,21 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+public enum ExitOptions {And, Or, P1, P2};
+
 public class Exit : MonoBehaviour {
 
 	public GameObject GameController;
 
 	//whether or not each player is required to reach this exit
-	//in order to beat the level. At least one must be true.
-	//we may want this to be loaded for each level, but that will
-	//come once we start messing with different types of doors.
-	public bool p1Exit = true;
-	public bool p2Exit = true;
+	//in order to beat the level. Options are self-explanatory.
+	//we may want this to be loaded for each level with the serializer,
+	//but that will come once we start messing with different types of doors.
+	public ExitOptions ExitSetting;
+	[HideInInspector]
+	public bool p1Exit;
+	[HideInInspector]
+	public bool p2Exit;
 
 	//whether or not each player is currently in the exit.
 	[HideInInspector]
@@ -41,8 +46,19 @@ public class Exit : MonoBehaviour {
 
 	//checks to see if each player is Finnish if they are required to be Finnish.
 	void checkFinish() {
-		Debug.Log ("p1Exit: " + p1Exit + ". p1Colliding: " + p1Colliding + "\n p2Exit: " + p2Exit + ". p2Colliding: " + p2Colliding);
-		if ( (p1Exit && !p1Colliding) || (p2Exit && !p2Colliding)) {
+		p1Exit = true;
+		p2Exit = true;
+
+		if (ExitSetting == ExitOptions.P2 || ExitSetting == ExitOptions.Or) {
+			p1Exit = false;
+		}
+		if (ExitSetting == ExitOptions.P1 || ExitSetting == ExitOptions.Or) {
+			p2Exit = false;
+		}
+			
+		bool OrNotSatisfied = (ExitSetting == ExitOptions.Or && !p1Colliding && !p2Colliding);
+
+		if ((p1Exit && !p1Colliding) || (p2Exit && !p2Colliding) || OrNotSatisfied) {
 			return;
 		} else {
 			int nextLevel = 1 + GameController.GetComponent<Stats> ().currLevel;
