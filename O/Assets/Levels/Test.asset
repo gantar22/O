@@ -11,7 +11,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9eae96df7c2cd4d88a0bce0332189e3f, type: 3}
   m_Name: Test
   m_EditorClassIdentifier: 
-  components: []
+  components:
+  - type: {fileID: 1115300811046126, guid: 0e1653708c34d4c088cf22ec2eca93d3, type: 2}
+    position: {x: 0, y: -4.31, z: 0}
+    rotation: 0
+    scale: {x: 16.55, y: 1}
   exitLoc: {x: 0, y: 0, z: 0}
   player1loc: {x: -3, y: 0, z: 0}
   player2loc: {x: 3, y: 0, z: 0}

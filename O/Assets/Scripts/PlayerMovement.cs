@@ -67,7 +67,8 @@ public class PlayerMovement : MonoBehaviour {
 
 		//find width and height of character
 		BoxCollider2D coll = GetComponent<BoxCollider2D> ();
-		Vector2 pos = transform.position;
+		Vector2 pos = new Vector2(transform.position.x + coll.offset.x * transform.localScale.x, 
+			transform.position.y + coll.offset.y * transform.localScale.y);
 		float width = coll.bounds.size.x;
 		float height = coll.bounds.size.y;
 

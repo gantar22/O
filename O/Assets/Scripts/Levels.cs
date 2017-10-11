@@ -7,7 +7,6 @@ public class Levels : MonoBehaviour {
 
 	public GameObject player1;
 	public GameObject player2;
-	public GameObject exit;
 
 	public Level[] levels;
 	public int startingLevel;
@@ -34,6 +33,8 @@ public class Levels : MonoBehaviour {
 		if (0 <= num && num < levels.Length) { //make sure level index is valid
 
 			if (levels [num] != null) { //make sure level to load exists
+				//update current level in Stats
+				GetComponent<Stats>().currLevel = num;
 
 				//stop players from moving
 				player1.GetComponent<Rigidbody2D> ().velocity = Vector2.zero;
@@ -58,9 +59,6 @@ public class Levels : MonoBehaviour {
 
 					}
 				}
-
-				//set exit location
-				exit.transform.position = level.exitLoc;
 
 				//sets player 1 location and move keys
 				player1.transform.position = level.player1loc;
