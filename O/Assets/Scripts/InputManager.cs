@@ -38,7 +38,7 @@ public class InputManager : MonoBehaviour {
         }
     }
 
-    public void Map(string actionName,string inputName)
+    public void Map(string actionName,KeyCode inputName)
     //the action name is "object_function" and the input name
     //is "player_button". This makes it so that Get_Buttons
     // returns this is input name when actors want to know what
@@ -57,12 +57,15 @@ public class InputManager : MonoBehaviour {
             instance.inputDictionary.Add(actionName, thisList);
         }
     }
-    public void Remove(string actionName,string inputName)
+    public bool Remove(string actionName,KeyCode inputName)
     {
     	ArrayList thisList = null;
-        if (instance.inputDictionary.TryGetValue (actionName, out thisList))
+        if (instance.inputDictionary.TryGetValue (actionName, out thisList)) {
             thisList.Remove(inputName);
-        
+            return true;
+        }
+        return false;
+            
     }
     public ArrayList Get_Buttons(string actionName)
     {
@@ -71,6 +74,8 @@ public class InputManager : MonoBehaviour {
     		return thisList;
     	return new ArrayList();
     }
+
+
 
 }
 
