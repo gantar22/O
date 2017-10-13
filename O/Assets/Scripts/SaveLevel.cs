@@ -12,6 +12,7 @@ public class SaveLevel : MonoBehaviour {
 
 	//make all level object prefabs a public game object here
 	public GameObject exitBoth;
+	public GameObject exitEither;
 	public GameObject exitP1;
 	public GameObject exitP2;
 	public GameObject wall;
@@ -70,6 +71,8 @@ public class SaveLevel : MonoBehaviour {
 		//match prefab name to prefab
 		if (name == "exitBoth")
 			return exitBoth;
+		if (name == "exitEither")
+			return exitEither;
 		if (name == "exitP1")
 			return exitP1;
 		if (name == "exitP2")

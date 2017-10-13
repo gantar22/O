@@ -23,8 +23,9 @@ GameObject:
   - component: {fileID: 114629061189796430}
   - component: {fileID: 50001804380984040}
   - component: {fileID: 70186109099838808}
+  - component: {fileID: 114969243108755998}
   m_Layer: 0
-  m_Name: Exit
+  m_Name: Exit - Either
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -90,11 +91,23 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   GameController: {fileID: 0}
-  ExitSetting: 0
+  ExitSetting: 1
   p1Exit: 0
   p2Exit: 1
   p1Colliding: 0
   p2Colliding: 0
+--- !u!114 &114969243108755998
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1101303261507452}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0fab29d3c53274ab680c74cd805aa89c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  prefabName: exitEither
 --- !u!212 &212724030147572716
 SpriteRenderer:
   m_ObjectHideFlags: 1
