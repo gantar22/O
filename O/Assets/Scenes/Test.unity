@@ -286,6 +286,10 @@ Prefab:
       propertyPath: ExitSetting
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1101303261507452, guid: 53cb2f6fee92c25428ae2c71fce97dc7, type: 2}
+      propertyPath: m_Layer
+      value: 2
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 53cb2f6fee92c25428ae2c71fce97dc7, type: 2}
   m_IsPrefabParent: 0
