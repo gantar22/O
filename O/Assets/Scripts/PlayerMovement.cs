@@ -1,6 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
+using UnityEngine; //This is Adrian making a comment to make sure he knows how to use GitHub, you can remove this whenever you want
 
 public class PlayerMovement : MonoBehaviour {
 
