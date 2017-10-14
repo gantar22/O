@@ -53,6 +53,9 @@ public class PlayerMovement : MonoBehaviour {
 				velo += runSpeed;
 		}
 
+		//if player is on a platform, move with it
+		this.GetComponent<Transform>().Translate(GetPlatformVelo ()*Time.deltaTime);
+
 		rb.velocity = new Vector2 (velo, rb.velocity.y);
 
 		//jumping, it checks each key that could cause the player to jump:
@@ -60,7 +63,7 @@ public class PlayerMovement : MonoBehaviour {
 			if (Input.GetKeyDown (key) && OnGround())
 				rb.AddForce (Vector2.up * jumpForce);
 		}
-
+			
 	}
 
 	bool OnGround () {
@@ -79,8 +82,30 @@ public class PlayerMovement : MonoBehaviour {
 		Vector2 p1 = new Vector2 (pos.x - width / 2f + 0.01f, pos.y - height / 2f - 0.02f);
 		Vector2 p2 = new Vector2 (pos.x + width / 2f - 0.01f, pos.y - height / 2f - 0.02f);
 
+		if (Physics2D.Linecast (p1, p2)) {
+			Debug.Log(Physics2D.Linecast (p1, p2).collider.name.Contains("Platform"));
+		}
+
 		return Physics2D.Linecast (p1, p2);
 
 	}
 
+	Vector2 GetPlatformVelo () {
+
+		//find width and height of character
+		BoxCollider2D coll = GetComponent<BoxCollider2D> ();
+		Vector2 pos = new Vector2(transform.position.x + coll.offset.x * transform.localScale.x, 
+			transform.position.y + coll.offset.y * transform.localScale.y);
+		float width = coll.bounds.size.x;
+		float height = coll.bounds.size.y;
+
+		Vector2 p1 = new Vector2 (pos.x - width / 2f + 0.01f, pos.y - height / 2f - 0.02f);
+		Vector2 p2 = new Vector2 (pos.x + width / 2f - 0.01f, pos.y - height / 2f - 0.02f);
+
+		if (Physics2D.Linecast (p1, p2) && Physics2D.Linecast (p1, p2).collider.name.Contains("Platform")) {
+			return Physics2D.Linecast (p1, p2).collider.gameObject.GetComponent<Platform>().velo;
+		}
+
+		return Vector2.zero;
+	}
 }

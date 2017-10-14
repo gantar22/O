@@ -9,8 +9,8 @@ public class Platform : MonoBehaviour {
 	//[HideInInspector]
 	public KeyCode left, right, up, down;
 
-	public float horizontalMoveSpeed;
-	public float verticalMoveSpeed;
+	public float horizontalMoveSpeed = 4.0F;
+	public float verticalMoveSpeed = 3.0F;
 	[HideInInspector]
 	public Vector2 velo;
 	private InputManager inputManager;
@@ -58,7 +58,7 @@ public class Platform : MonoBehaviour {
 
 		foreach(KeyCode key in inputManager.Get_Buttons(actionString("down"))) {
 			if (Input.GetKey (key))
-				velo.y -= horizontalMoveSpeed;
+				velo.y -= verticalMoveSpeed;
 		}
 
 		this.GetComponent<Transform>().Translate(velo*Time.deltaTime);
