@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Mapping : MonoBehaviour {
 
+
 	//This is the string to call in event manager to trigger this mapping
 	[SerializeField]
 	public string callName;
@@ -20,7 +21,36 @@ public class Mapping : MonoBehaviour {
 	[SerializeField]
 	public List<string> remove_actions;
 
-	void call() {
+
+	void callP1() {
+		foreach (KeyCode input in inputs) {
+			foreach (string action in actions) {
+				if (action[action.Length - 1] == '1')
+					InputManager.instance.Map(action,input);
+			}
+		}
+		foreach (KeyCode input in remove_inputs) {
+			foreach (string action in remove_actions) {
+				if (action[action.Length - 1] == '1')
+					InputManager.instance.Remove(action,input);
+			}
+		}
+	}
+	void callP2() {
+		foreach (KeyCode input in inputs) {
+			foreach (string action in actions) {
+				if (action[action.Length - 1] == '2')
+					InputManager.instance.Map(action,input);
+			}
+		}
+		foreach (KeyCode input in remove_inputs) {
+			foreach (string action in remove_actions) {
+				if (action[action.Length - 1] == '2')
+					InputManager.instance.Map(action,input);
+			}
+		}
+	}
+	void callNull() {
 		foreach (KeyCode input in inputs) {
 			foreach (string action in actions) {
 				InputManager.instance.Map(action,input);
@@ -33,7 +63,10 @@ public class Mapping : MonoBehaviour {
 		}
 	}
 	
+
 	void Start() {
-		EventManager.StartListening(callName,call);
+		EventManager.StartListening(callName,callNull);
+		EventManager.StartListening(callName + "_1",callP1);
+		EventManager.StartListening(callName + "_2",callP2);
 	}
 }
