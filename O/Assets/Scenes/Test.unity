@@ -446,6 +446,8 @@ GameObject:
   - component: {fileID: 495170837}
   - component: {fileID: 495170838}
   - component: {fileID: 495170839}
+  - component: {fileID: 495170840}
+  - component: {fileID: 495170841}
   m_Layer: 0
   m_Name: GameController
   m_TagString: GameController
@@ -509,6 +511,7 @@ MonoBehaviour:
   player2: {fileID: 677158114}
   newLevel: {fileID: 11400000, guid: 4de2b6138ad904272a5325dcc5b9250f, type: 2}
   exitBoth: {fileID: 0}
+  exitEither: {fileID: 0}
   exitP1: {fileID: 0}
   exitP2: {fileID: 0}
   wall: {fileID: 1115300811046126, guid: 0e1653708c34d4c088cf22ec2eca93d3, type: 2}
@@ -536,6 +539,35 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currLevel: 0
+--- !u!114 &495170840
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 495170833}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 83bad4573f22f184b937c48112e28bf1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &495170841
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 495170833}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 49db0849beb54f248be7713b2e9c57c7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  callName: start
+  inputs: 20000000
+  actions:
+  - Jump2
+  - Jump1
+  remove_inputs: 
+  remove_actions: []
 --- !u!1 &677158114
 GameObject:
   m_ObjectHideFlags: 0
