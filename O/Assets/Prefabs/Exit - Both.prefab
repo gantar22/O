@@ -103,6 +103,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   GameController: {fileID: 0}
+  ExitSetting: 0
   p1Exit: 1
   p2Exit: 1
   p1Colliding: 0
@@ -139,7 +140,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: a6f3e624d0fa7e54ca8c35a54e8c13ba, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 890d00487633051428775defb93e41ee, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0

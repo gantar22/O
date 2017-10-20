@@ -24,7 +24,6 @@ GameObject:
   - component: {fileID: 61962631628634010}
   - component: {fileID: 114890004234221350}
   - component: {fileID: 114896359623340044}
-  - component: {fileID: 50709490368102240}
   m_Layer: 0
   m_Name: Platform
   m_TagString: LevelObj
@@ -84,26 +83,6 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1504169841305752}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
---- !u!50 &50709490368102240
-Rigidbody2D:
-  serializedVersion: 4
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1504169841305752}
-  m_BodyType: 2
-  m_Simulated: 1
-  m_UseFullKinematicContacts: 0
-  m_UseAutoMass: 0
-  m_Mass: 1
-  m_LinearDrag: 0
-  m_AngularDrag: 0.05
-  m_GravityScale: 1
-  m_Material: {fileID: 0}
-  m_Interpolate: 0
-  m_SleepingMode: 1
-  m_CollisionDetection: 0
-  m_Constraints: 0
 --- !u!61 &61962631628634010
 BoxCollider2D:
   m_ObjectHideFlags: 1
@@ -157,5 +136,18 @@ MonoBehaviour:
   right: 0
   up: 0
   down: 0
+  MoveSetting: 0
+  translation: {x: 0, y: 0}
+  travelTime: 0
+  moveDelay: 0
+  manualMapping: 0
   horizontalMoveSpeed: 0
   verticalMoveSpeed: 0
+  startPoint: {x: 0, y: 0}
+  endPoint: {x: 0, y: 0}
+  autoMove: {x: 0, y: 0}
+  velo: {x: 0, y: 0}
+  delayTimer: 0
+  moveTimer: 0
+  speed: 0
+  MoveState: 0

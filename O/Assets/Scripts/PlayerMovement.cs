@@ -82,10 +82,6 @@ public class PlayerMovement : MonoBehaviour {
 		Vector2 p1 = new Vector2 (pos.x - width / 2f + 0.01f, pos.y - height / 2f - 0.02f);
 		Vector2 p2 = new Vector2 (pos.x + width / 2f - 0.01f, pos.y - height / 2f - 0.02f);
 
-		if (Physics2D.Linecast (p1, p2)) {
-			Debug.Log(Physics2D.Linecast (p1, p2).collider.name.Contains("Platform"));
-		}
-
 		return Physics2D.Linecast (p1, p2);
 
 	}

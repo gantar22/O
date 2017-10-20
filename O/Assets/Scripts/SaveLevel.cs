@@ -17,6 +17,7 @@ public class SaveLevel : MonoBehaviour {
 	public GameObject exitP2;
 	public GameObject wall;
 	public GameObject platform;
+	public GameObject button;
 	//ADD NEW PREFABS ABOVE THIS LINE
 
 	void Update() {
@@ -82,6 +83,8 @@ public class SaveLevel : MonoBehaviour {
 			return wall;
 		if (name == "platform")
 			return platform;
+		if (name == "button")
+			return button;
 		//ADD NEW PREFABS ABOVE THIS LINE
 
 		//object's name didn't match a prefab
