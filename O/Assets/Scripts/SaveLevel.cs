@@ -20,6 +20,8 @@ public class SaveLevel : MonoBehaviour {
 	public GameObject button;
 	//ADD NEW PREFABS ABOVE THIS LINE
 
+	private LevelObject newObj;
+
 	void Update() {
 
 		newLevel.components = GetComponentList();
@@ -43,7 +45,7 @@ public class SaveLevel : MonoBehaviour {
 		for (int i = 0; i < things.Length; i++) {
 
 			GameObject compToAdd = levelComponents [i];
-			LevelObject newObj = new LevelObject ();
+			newObj = new LevelObject ();
 
 			newObj.type = GetType (compToAdd);
 			newObj.position = compToAdd.transform.position;
@@ -81,8 +83,18 @@ public class SaveLevel : MonoBehaviour {
 			return exitP2;
 		if (name == "wall")
 			return wall;
-		if (name == "platform")
+		if (name == "platform") {
+			Platform plat = comp.GetComponent<Platform> ();
+			newObj.platformID = plat.platformID;
+			newObj.platMoveSetting = plat.MoveSetting;
+			newObj.platTranslation = plat.translation;
+			newObj.platTravelTime = plat.travelTime;
+			newObj.platMoveDelay = plat.moveDelay;
+			newObj.platManualMapping = plat.manualMapping;
+			newObj.platHorizontalMoveSpeed = plat.horizontalMoveSpeed;
+			newObj.platVerticalMoveSpeed = plat.verticalMoveSpeed;
 			return platform;
+		}
 		if (name == "button")
 			return button;
 		//ADD NEW PREFABS ABOVE THIS LINE

@@ -57,6 +57,20 @@ public class Levels : MonoBehaviour {
 						else
 							comp.transform.localScale = new Vector3 (obj.scale.x, obj.scale.y, 1f);
 
+						if (comp.GetComponent<Platform> () != null) {
+
+							Platform plat = comp.GetComponent<Platform> ();
+							plat.platformID = obj.platformID;
+							plat.MoveSetting = obj.platMoveSetting;
+							plat.translation = obj.platTranslation;
+							plat.travelTime = obj.platTravelTime;
+							plat.moveDelay = obj.platMoveDelay;
+							plat.manualMapping = obj.platManualMapping;
+							plat.horizontalMoveSpeed = obj.platHorizontalMoveSpeed;
+							plat.verticalMoveSpeed = obj.platVerticalMoveSpeed;
+
+						}
+
 					}
 				}
 
