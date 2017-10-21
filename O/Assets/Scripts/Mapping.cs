@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Linq;
 
 public class Mapping : MonoBehaviour {
 
@@ -21,52 +22,80 @@ public class Mapping : MonoBehaviour {
 	[SerializeField]
 	public List<string> remove_actions;
 
+	List<Pair<string,KeyCode>> removed;
 
 	void callP1() {
-		foreach (KeyCode input in inputs) {
-			foreach (string action in actions) {
-				if (action[action.Length - 1] == '1')
-					InputManager.instance.Map(action,input);
-			}
+		if ( inputs.Count > actions.Count) {
+			print("fix the mapping assigned to this object");
 		}
-		foreach (KeyCode input in remove_inputs) {
-			foreach (string action in remove_actions) {
-				if (action[action.Length - 1] == '1')
-					InputManager.instance.Remove(action,input);
-			}
+
+		for (int i = 0; i < inputs.Count; i++) {
+			if (actions[i][actions[i].Length - 1] == '1')
+				InputManager.instance.Map(actions[i],inputs[i]);
+		}
+		for (int i = 0; i < inputs.Count; i++) {
+			if (actions[i][actions[i].Length - 1] == '1')
+				if (InputManager.instance.Remove(remove_actions[i],remove_inputs[i])) {
+					removed.Add(new Pair<string,KeyCode>(remove_actions[i],remove_inputs[i]));
+				}
 		}
 	}
 	void callP2() {
-		foreach (KeyCode input in inputs) {
-			foreach (string action in actions) {
-				if (action[action.Length - 1] == '2')
-					InputManager.instance.Map(action,input);
-			}
+		if ( inputs.Count > actions.Count) {
+			print("fix the mapping assigned to this object");
 		}
-		foreach (KeyCode input in remove_inputs) {
-			foreach (string action in remove_actions) {
-				if (action[action.Length - 1] == '2')
-					InputManager.instance.Map(action,input);
-			}
+
+		for (int i = 0; i < inputs.Count; i++) {
+			if (actions[i][actions[i].Length - 1] == '2')
+				InputManager.instance.Map(actions[i],inputs[i]);
+		}
+		removed = new List<Pair<string,KeyCode>>();
+		for (int i = 0; i < inputs.Count; i++) {
+			if (actions[i][actions[i].Length - 1] == '2')
+				if (InputManager.instance.Remove(remove_actions[i],remove_inputs[i])) {
+					removed.Add(new Pair<string,KeyCode>(remove_actions[i],remove_inputs[i]));
+				}
 		}
 	}
 	void callNull() {
-		foreach (KeyCode input in inputs) {
-			foreach (string action in actions) {
-				InputManager.instance.Map(action,input);
-			}
+		if ( inputs.Count > actions.Count) {
+			print("fix the mapping assigned to this object");
 		}
-		foreach (KeyCode input in remove_inputs) {
-			foreach (string action in remove_actions) {
-				InputManager.instance.Remove(action,input);
+
+		for (int i = 0; i < inputs.Count; i++) {
+			InputManager.instance.Map(actions[i],inputs[i]);
+		}
+		removed = new List<Pair<string,KeyCode>>();
+		for (int i = 0; i < inputs.Count; i++) {
+			if (InputManager.instance.Remove(remove_actions[i],remove_inputs[i])) {
+				removed.Add(new Pair<string,KeyCode>(remove_actions[i],remove_inputs[i]));
 			}
 		}
 	}
-	
+	void callUndo () { //you don't really need to use this, but if your
+	                   // thing is a togglable it might be cool to undo
+	                   // your changes
+	                   // this also only works for the whole list, but
+	                   // that could be added if really want
+		if (inputs.Count > actions.Count) {
+			print("The input list doesn't match the actions list");
+		}
+		for (int i = 0; i < inputs.Count; i++) {
+			if (removed.Any(pair => pair.fst == remove_actions[i] && pair.snd == remove_inputs[i])) {
+				InputManager.instance.Map(remove_actions[i],remove_inputs[i]);
+			}
+		}
+		removed = new List<Pair<string,KeyCode>>();
+		for (int i = 0; i < inputs.Count; i++) {
+			InputManager.instance.Remove(actions[i],inputs[i]);
+		}
+	}
 
 	void Start() {
 		EventManager.StartListening(callName,callNull);
 		EventManager.StartListening(callName + "_1",callP1);
 		EventManager.StartListening(callName + "_2",callP2);
+		EventManager.StartListening(callName + "_undo",callUndo);
+
 	}
 }
