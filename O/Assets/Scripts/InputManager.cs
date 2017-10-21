@@ -5,6 +5,9 @@ using UnityEngine;
 public class InputManager : MonoBehaviour {
 
     private Dictionary <string, ArrayList> inputDictionary;
+    //@invariant there are never multiple occurances of the same keycode in
+    //           the pairs in the ArrayList. This would fuck everything up 
+    //           but I'm pretty sure I respect this so I hope it's okay
 
     private static InputManager inputManager;
 
@@ -47,13 +50,20 @@ public class InputManager : MonoBehaviour {
     	ArrayList thisList = null;
         if (instance.inputDictionary.TryGetValue (actionName, out thisList))
         {
-			if(! thisList.Contains(inputName))
-				thisList.Add(inputName);
+            bool flag = true;
+            foreach (Pair<KeyCode,int> input in thisList) {
+                if (input.fst == inputName) {
+                    flag = false;
+                    input.snd++;
+                }
+            }
+            if(flag) 
+				thisList.Add(new Pair<KeyCode,int>(inputName,0));
         } 
         else
         {
             thisList = new ArrayList ();
-            thisList.Add(inputName);
+            thisList.Add(new Pair<KeyCode,int>(inputName,1));
             instance.inputDictionary.Add(actionName, thisList);
         }
     }
@@ -61,8 +71,22 @@ public class InputManager : MonoBehaviour {
     {
     	ArrayList thisList = null;
         if (instance.inputDictionary.TryGetValue (actionName, out thisList)) {
-            thisList.Remove(inputName);
-            return true;
+            Pair<KeyCode,int> forRemove = null;
+            foreach (Pair<KeyCode,int> input in thisList) {
+                if (input.fst == inputName) {
+                    if (input.snd > 1) {
+                        input.snd--;
+                        return true;
+                    } else {
+                        forRemove = input;
+                    }
+                }
+            }
+            if(forRemove != null) {
+                thisList.Remove(forRemove);
+                return true;
+            }
+            return false;
         }
         return false;
             
@@ -70,8 +94,13 @@ public class InputManager : MonoBehaviour {
     public ArrayList Get_Buttons(string actionName)
     {
     	ArrayList thisList = null;
-    	if (instance.inputDictionary.TryGetValue (actionName, out thisList))
-    		return thisList;
+    	if (instance.inputDictionary.TryGetValue (actionName, out thisList)) {
+            ArrayList r = new ArrayList();
+            foreach (Pair<KeyCode,int> input in thisList) {
+                r.Add(input.fst);
+            }
+    		return r;
+        }
     	return new ArrayList();
     }
 
