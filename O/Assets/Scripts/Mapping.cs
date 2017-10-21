@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Linq;
 
 public class Mapping : MonoBehaviour {
 
@@ -48,7 +49,7 @@ public class Mapping : MonoBehaviour {
 			if (actions[i][actions[i].Length - 1] == '2')
 				InputManager.instance.Map(actions[i],inputs[i]);
 		}
-		removed = Pair<KeyCode,string>();
+		removed = new List<Pair<string,KeyCode>>();
 		for (int i = 0; i < inputs.Count; i++) {
 			if (actions[i][actions[i].Length - 1] == '2')
 				if (InputManager.instance.Remove(remove_actions[i],remove_inputs[i])) {
@@ -64,7 +65,7 @@ public class Mapping : MonoBehaviour {
 		for (int i = 0; i < inputs.Count; i++) {
 			InputManager.instance.Map(actions[i],inputs[i]);
 		}
-		removed = Pair<KeyCode,string>();
+		removed = new List<Pair<string,KeyCode>>();
 		for (int i = 0; i < inputs.Count; i++) {
 			if (InputManager.instance.Remove(remove_actions[i],remove_inputs[i])) {
 				removed.Add(new Pair<string,KeyCode>(remove_actions[i],remove_inputs[i]));
@@ -84,7 +85,7 @@ public class Mapping : MonoBehaviour {
 				InputManager.instance.Map(remove_actions[i],remove_inputs[i]);
 			}
 		}
-		removed = new List<string,KeyCode>();
+		removed = new List<Pair<string,KeyCode>>();
 		for (int i = 0; i < inputs.Count; i++) {
 			InputManager.instance.Remove(actions[i],inputs[i]);
 		}
