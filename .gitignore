@@ -36,3 +36,4 @@ sysinfo.txt
 
 #fuck DS store
 .DS_STORE
+*.meta

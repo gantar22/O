@@ -8,16 +8,25 @@ public class triggersOnCollision : MonoBehaviour {
 	public string callName;
 	public bool playerSpecific;
 	public bool switched;
+	public List<string> triggerList;
+	public List<string> untriggerList;
 
 	void OnTriggerEnter2D(Collider2D coll) {
+		if (switched) {
+			string one = "_2";
+			string two = "_1";
+		} else {
+			string one = "_1";
+			string two = "_2";
+		}
 		if (playerSpecific) {
 			if (coll.name == "Player1"){
 				foreach (string name in mappingNames)
-					EventManager.TriggerEvent(name + "_2");
+					EventManager.TriggerEvent(name + one);
 			}
 			if (coll.name == "Player2"){
 				foreach (string name in mappingNames)
-					EventManager.TriggerEvent(name + "_1");
+					EventManager.TriggerEvent(name + two);
 			} 
 			EventManager.TriggerEvent(callName);
 		} else {
@@ -25,6 +34,35 @@ public class triggersOnCollision : MonoBehaviour {
 			foreach (string name in mappingNames)
 				EventManager.TriggerEvent(name);
 		}
+		foreach (string name in triggerList)
+			EventManager.TriggerEvent(name);
+	}
+
+	void OnTriggerExit2D(Collider2D coll) {
+		if (switched) {
+			string one = "_2";
+			string two = "_1";
+		} else {
+			string one = "_1";
+			string two = "_2";
+		}
+		if (playerSpecific) {
+			if (coll.name == "Player1"){
+				foreach (string name in mappingNames)
+					EventManager.TriggerEvent(name + "_undo" + one);
+			}
+			if (coll.name == "Player2"){
+				foreach (string name in mappingNames)
+					EventManager.TriggerEvent(name + "_undo" + two);
+			} 
+			EventManager.TriggerEvent(callName);
+		} else {
+			EventManager.TriggerEvent(callName);
+			foreach (string name in mappingNames)
+				EventManager.TriggerEvent(name + "undo");
+		}
+		foreach (string name in untriggerList)
+			EventManager.TriggerEvent(name);
 	}
 
 }
