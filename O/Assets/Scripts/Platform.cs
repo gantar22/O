@@ -10,17 +10,17 @@ public enum MoveStateOptions {idleAtStart, delayedAtStart, movingToEnd, idleAtEn
 public class Platform : MonoBehaviour {
 
 	// "Constants"
-	public int platformID;
 	private InputManager inputManager;
 	[HideInInspector]
 	public KeyCode left, right, up, down;
 
 	// Settings
+	public int platformID;
 	[HideInInspector]
 	public MoveOptions MoveSetting;
 
 	public Vector2 translation;
-	public float travelTime;
+	public float travelTime = 1F;
 	public float moveDelay;
 
 	public bool manualMapping;
@@ -173,6 +173,7 @@ public class PlatformEditor : Editor
 		GUI.changed = false;
 
 		// Variable Fields
+		plat.platformID = EditorGUILayout.IntField("Platform ID", plat.platformID);
 		plat.MoveSetting = (MoveOptions) EditorGUILayout.EnumPopup ("Movement Setting", plat.MoveSetting);
 
 		if (plat.MoveSetting == MoveOptions.InputMapping) {
