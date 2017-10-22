@@ -6,6 +6,7 @@ public enum ExitOptions {And, Or, P1, P2};
 
 public class Exit : MonoBehaviour {
 
+	[HideInInspector]
 	public GameObject GameController;
 
 	//whether or not each player is required to reach this exit

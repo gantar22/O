@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Spikes : MonoBehaviour {
 
+	[HideInInspector]
 	public GameObject GameController;
 
 	void OnTriggerEnter2D(Collider2D other) {
