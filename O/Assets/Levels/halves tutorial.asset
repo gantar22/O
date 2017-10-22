@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Name: halves tutorial
   m_EditorClassIdentifier: 
   components: []
-  player1loc: {x: 0, y: 0, z: 0}
+  player1loc: {x: 1, y: 0, z: 0}
   player2loc: {x: 0, y: 0, z: 0}
   p1left: 0
   p1right: 0
