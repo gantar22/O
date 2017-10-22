@@ -36,7 +36,6 @@ GameObject:
   m_Component:
   - component: {fileID: 4902458107695752}
   - component: {fileID: 212547231323034424}
-  - component: {fileID: 114426880218994200}
   - component: {fileID: 61881203388261566}
   - component: {fileID: 114374021065920862}
   - component: {fileID: 114426126520386304}
@@ -139,18 +138,6 @@ MonoBehaviour:
   switched: 0
   triggerList: []
   untriggerList: []
---- !u!114 &114426880218994200
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1916458246586444}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0fab29d3c53274ab680c74cd805aa89c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  prefabName: button
 --- !u!212 &212547231323034424
 SpriteRenderer:
   m_ObjectHideFlags: 1
