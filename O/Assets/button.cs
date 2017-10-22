@@ -37,6 +37,7 @@ public class button : MonoBehaviour {
 			StartCoroutine("startShrink");
 		}
 		n++;
+		print("!");
 	}
 	IEnumerator startShrink() {
 		while(transform.parent.transform.localScale[1] > .3) {
