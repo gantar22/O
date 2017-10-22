@@ -267,6 +267,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 266399997}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -6.67, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -385,6 +386,8 @@ MonoBehaviour:
   platform: {fileID: 1504169841305752, guid: 5d14798ae3fd4ca4a91c1f0684134f1d, type: 2}
   button: {fileID: 1115476776793828, guid: efccc6ebe0cbc62499c790364e11671c, type: 2}
   spikes: {fileID: 1264043383694622, guid: df91e76f37f22b7468d6ab9ce721c50c, type: 2}
+  spikedPlatform: {fileID: 1288662759904228, guid: dc34c89c69adb6a4294cb1711992ad0c,
+    type: 2}
 --- !u!114 &495170838
 MonoBehaviour:
   m_ObjectHideFlags: 0
