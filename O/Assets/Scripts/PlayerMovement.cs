@@ -39,7 +39,7 @@ public class PlayerMovement : MonoBehaviour {
 
 	// Update is called once per frame
 	void Update () {
-
+		OnPlatform();
 		//horizontal movement:
 		velo = 0f;
 		
@@ -54,7 +54,7 @@ public class PlayerMovement : MonoBehaviour {
 		}
 
 		//if player is on a platform, move with it
-		this.GetComponent<Transform>().Translate(GetPlatformVelo ()*Time.deltaTime);
+		//this.GetComponent<Transform>().Translate(GetPlatformVelo ()*Time.deltaTime);
 
 		rb.velocity = new Vector2 (velo, rb.velocity.y);
 
@@ -86,8 +86,7 @@ public class PlayerMovement : MonoBehaviour {
 
 	}
 
-	Vector2 GetPlatformVelo () {
-
+	void OnPlatform () {
 		//find width and height of character
 		BoxCollider2D coll = GetComponent<BoxCollider2D> ();
 		Vector2 pos = new Vector2(transform.position.x + coll.offset.x * transform.localScale.x, 
@@ -99,9 +98,16 @@ public class PlayerMovement : MonoBehaviour {
 		Vector2 p2 = new Vector2 (pos.x + width / 2f - 0.01f, pos.y - height / 2f - 0.02f);
 
 		if (Physics2D.Linecast (p1, p2) && Physics2D.Linecast (p1, p2).collider.name.Contains("Platform")) {
-			return Physics2D.Linecast (p1, p2).collider.gameObject.GetComponent<Platform>().velo;
+			transform.parent = Physics2D.Linecast (p1, p2).collider.gameObject.transform;
 		}
-
-		return Vector2.zero;
 	}
+	void OnCollisionExit2D(Collision2D coll) {
+		print(transform.parent);
+		if (coll.collider.name.Contains("Platform")) {
+			if (transform.parent != null && transform.parent == coll.collider.transform) {
+				transform.parent = null;
+			}
+		}
+	}
+
 }

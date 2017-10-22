@@ -70,6 +70,7 @@ public class Platform : MonoBehaviour {
 		}
 	}
 
+
 	void clearInputManager () {
 		inputManager.Remove(actionString("left"),left);
 		inputManager.Remove(actionString("right"),right);
