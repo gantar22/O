@@ -56,8 +56,8 @@ public class Platform : MonoBehaviour {
 		}
 
 		EventManager.StartListening ("platform_" + platformID, trigger);
-		EventManager.StartListening ("platformInvert_" + platformID, invertButtonSetting);
 		EventManager.StartListening ("platform_untrigger_" + platformID, untrigger);
+		EventManager.StartListening ("platform_invert_" + platformID, invertButtonSetting);
 	}
 
 	void OnEnable () {
@@ -119,7 +119,7 @@ public class Platform : MonoBehaviour {
 	}
 
 	void startMoving() {
-		if (MoveState == MoveStateOptions.idleAtStart || MoveState == MoveStateOptions.delayedAtStart) {
+		if (MoveState == MoveStateOptions.idleAtStart || MoveState == MoveStateOptions.delayedAtStart || MoveState == MoveStateOptions.returningToStart) {
 			MoveState = MoveStateOptions.movingToEnd;
 		} else if (MoveState == MoveStateOptions.idleAtEnd || MoveState == MoveStateOptions.delayedAtEnd) {
 			MoveState = MoveStateOptions.movingToStart;
