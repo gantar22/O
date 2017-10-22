@@ -14,13 +14,12 @@ public class TriggersOnCollision : MonoBehaviour {
 	string two;
 
 	void OnTriggerEnter2D(Collider2D coll) {
-		string one, two;
 		if (switched) {
-			one = "_2";
-			two = "_1";
+			string one = "_2";
+			string two = "_1";
 		} else {
-			one = "_1";
-			two = "_2";
+			string one = "_1";
+			string two = "_2";
 		}
 		if (playerSpecific) {
 			if (coll.name == "Player1"){
@@ -42,13 +41,12 @@ public class TriggersOnCollision : MonoBehaviour {
 	}
 
 	void OnTriggerExit2D(Collider2D coll) {
-		string one, two;
 		if (switched) {
-			one = "_2";
-			two = "_1";
+			string one = "_2";
+			string two = "_1";
 		} else {
-			one = "_1";
-			two = "_2";
+			string one = "_1";
+			string two = "_2";
 		}
 		if (playerSpecific) {
 			if (coll.name == "Player1"){

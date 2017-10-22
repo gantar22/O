@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class triggersOnCollision : MonoBehaviour {
+public class TriggersOnCollision : MonoBehaviour {
 
 	public List<string> mappingNames;
 	public string callName;
