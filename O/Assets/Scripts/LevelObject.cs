@@ -18,5 +18,6 @@ public class LevelObject {
 	public bool platManualMapping;
 	public float platHorizontalMoveSpeed;
 	public float platVerticalMoveSpeed;
+	public bool platReturnOnUntrigger;
 
 }

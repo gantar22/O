@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
 
-public enum MoveOptions {Constant, ConstantAfterTrigger, OneWayTrigger, ThereAndBackTrigger, InputMapping};
-public enum MoveStateOptions {idleAtStart, delayedAtStart, movingToEnd, idleAtEnd, delayedAtEnd, movingToStart, mappingOnly};
+public enum MoveOptions {Constant, ConstantAfterTrigger, OneWayTrigger, ThereAndBackTrigger, ButtonMoves, ButtonStops, InputMapping};
+public enum MoveStateOptions {idleAtStart, delayedAtStart, movingToEnd, idleAtEnd, delayedAtEnd, movingToStart};
 
 
 public class Platform : MonoBehaviour {
@@ -23,17 +23,19 @@ public class Platform : MonoBehaviour {
 	public float travelTime = 1F;
 	public float moveDelay;
 
-	public bool manualMapping;
+	public bool manualMapping, returnOnUntrigger;
 	public float horizontalMoveSpeed;
 	public float verticalMoveSpeed;
 
 	// Variables
 	[HideInInspector]
-	public Vector2 startPoint, endPoint, autoMove, velo;
+	public Vector2 startPoint, endPoint, velo;
 	[HideInInspector]
-	public float delayTimer, moveTimer, speed;
+	public float delayTimer, speed;
 	[HideInInspector]
 	public MoveStateOptions MoveState;
+	[HideInInspector]
+	public bool inverted;
 
 
 	// Use this for initialization
@@ -45,14 +47,16 @@ public class Platform : MonoBehaviour {
 		startPoint = new Vector2(transform.position.x, transform.position.y);
 		endPoint = startPoint + translation;
 		speed = translation.magnitude / travelTime;
+		inverted = false;
 
 
 		MoveState = MoveStateOptions.idleAtStart;
-		if (MoveSetting == MoveOptions.InputMapping) {
-			MoveState = MoveStateOptions.mappingOnly;
-		} else if (MoveSetting == MoveOptions.Constant) {
+		if (MoveSetting == MoveOptions.Constant || MoveSetting == MoveOptions.ButtonStops) {
 			startMoving ();
 		}
+
+		EventManager.StartListening ("platform_" + platformID, trigger);
+		EventManager.StartListening ("platformInvert_" + platformID, invertButtonSetting);
 	}
 
 	void OnEnable () {
@@ -78,34 +82,60 @@ public class Platform : MonoBehaviour {
 			if (MoveState == MoveStateOptions.idleAtStart || MoveState == MoveStateOptions.idleAtEnd) {
 				startMoving ();
 			}
+		} else if (MoveSetting == MoveOptions.ButtonMoves) {
+			startMoving ();
+		} else if (MoveSetting == MoveOptions.ButtonStops) {
+			stopMoving_ButtonControlled ();
 		}
 	}
 
-	void startMoving() {
-		Vector2 Pos = new Vector2 (transform.position.x, transform.position.y);
+	// Called by a button being unpressed or zone being exited
+	void untrigger () {
+		if (MoveSetting == MoveOptions.ButtonMoves) {
+			stopMoving_ButtonControlled ();
+		} else if (MoveSetting == MoveOptions.ButtonStops) {
+			startMoving ();
+		}
+	}
 
+	void invertButtonSetting() {
+		if (inverted)
+			return;
+
+		if (MoveSetting == MoveOptions.ButtonStops) {
+			MoveSetting = MoveOptions.ButtonMoves;
+		} else if (MoveSetting == MoveOptions.ButtonMoves) {
+			MoveSetting = MoveOptions.ButtonStops;
+		}
+
+		if (MoveState == MoveStateOptions.idleAtEnd || MoveState == MoveStateOptions.idleAtStart) {
+			startMoving ();
+		} else {
+			stopMoving_ButtonControlled ();
+		}
+
+		inverted = true;
+	}
+
+	void startMoving() {
 		if (MoveState == MoveStateOptions.idleAtStart || MoveState == MoveStateOptions.delayedAtStart) {
 			MoveState = MoveStateOptions.movingToEnd;
-			moveTimer = travelTime;
-			autoMove = (endPoint - Pos).normalized * speed;
 		} else if (MoveState == MoveStateOptions.idleAtEnd || MoveState == MoveStateOptions.delayedAtEnd) {
 			MoveState = MoveStateOptions.movingToStart;
-			moveTimer = travelTime;
-			autoMove = (startPoint - Pos).normalized * speed;
 		}
 	}
 
 	void stopMoving() {
-		autoMove = Vector2.zero;
 		if (MoveState == MoveStateOptions.movingToEnd) {
-			if (MoveSetting == MoveOptions.Constant || MoveSetting == MoveOptions.ConstantAfterTrigger || MoveSetting == MoveOptions.ThereAndBackTrigger) {
+			if (MoveSetting == MoveOptions.Constant || MoveSetting == MoveOptions.ConstantAfterTrigger || MoveSetting == MoveOptions.ThereAndBackTrigger
+				|| MoveSetting == MoveOptions.ButtonMoves || MoveSetting == MoveOptions.ButtonStops) {
 				MoveState = MoveStateOptions.delayedAtEnd;
 				delayTimer = moveDelay;
 			} else {
 				MoveState = MoveStateOptions.idleAtEnd;
 			}
 		} else if (MoveState == MoveStateOptions.movingToStart) {
-			if (MoveSetting == MoveOptions.Constant || MoveSetting == MoveOptions.ConstantAfterTrigger) {
+			if (MoveSetting == MoveOptions.Constant || MoveSetting == MoveOptions.ConstantAfterTrigger || MoveSetting == MoveOptions.ButtonMoves || MoveSetting == MoveOptions.ButtonStops) {
 				MoveState = MoveStateOptions.delayedAtStart;
 				delayTimer = moveDelay;
 			} else {
@@ -114,48 +144,74 @@ public class Platform : MonoBehaviour {
 		}
 	}
 
+	void stopMoving_ButtonControlled() {
+		if (returnOnUntrigger) {
+			MoveState = MoveStateOptions.movingToStart;
+		} else {
+			if (MoveState == MoveStateOptions.movingToEnd || MoveState == MoveStateOptions.delayedAtStart) {
+				MoveState = MoveStateOptions.idleAtStart;
+			} else if (MoveState == MoveStateOptions.movingToStart || MoveState == MoveStateOptions.delayedAtEnd) {
+				MoveState = MoveStateOptions.idleAtEnd;
+			}
+		}
+	}
+
 	// Update is called once per frame
 	void Update () {
-
 		velo = Vector2.zero;
+		Vector2 Pos = new Vector2 (transform.position.x, transform.position.y);
 
-		// Managing automatic movement with movement settings
+
+		// Managing automatic movement with movement settings, V2
 		if (MoveState == MoveStateOptions.delayedAtEnd || MoveState == MoveStateOptions.delayedAtStart) {
 			delayTimer -= Time.deltaTime;
-			if (delayTimer <= 0F) {
+			if (delayTimer <= 0f) {
 				startMoving ();
 			}
-		} else {
-			velo = autoMove;
-			moveTimer -= Time.deltaTime;
-			if (moveTimer <= 0f) {
+		} else if (MoveState == MoveStateOptions.movingToEnd) {
+			velo = (endPoint - Pos).normalized * speed;
+			if (hasReached(endPoint)) {
+				stopMoving ();
+			}
+		} else if (MoveState == MoveStateOptions.movingToStart) {
+			velo = (startPoint - Pos).normalized * speed;
+			if (hasReached(startPoint)) {
 				stopMoving ();
 			}
 		}
 
+
 		// Input mapping
-		foreach(KeyCode key in inputManager.Get_Buttons(actionString("left"))) {
-			if (Input.GetKey (key))
-				velo.x -= horizontalMoveSpeed;
-		}
-		foreach(KeyCode key in inputManager.Get_Buttons(actionString("right"))) {
-			if (Input.GetKey (key))
-				velo.x += horizontalMoveSpeed;
-		}
-		foreach(KeyCode key in inputManager.Get_Buttons(actionString("up"))) {
-			if (Input.GetKey (key))
-				velo.y += verticalMoveSpeed;
-		}
-		foreach(KeyCode key in inputManager.Get_Buttons(actionString("down"))) {
-			if (Input.GetKey (key))
-				velo.y -= verticalMoveSpeed;
+		if (MoveSetting == MoveOptions.InputMapping) {
+			foreach (KeyCode key in inputManager.Get_Buttons(actionString("left"))) {
+				if (Input.GetKey (key))
+					velo.x -= horizontalMoveSpeed;
+			}
+			foreach (KeyCode key in inputManager.Get_Buttons(actionString("right"))) {
+				if (Input.GetKey (key))
+					velo.x += horizontalMoveSpeed;
+			}
+			foreach (KeyCode key in inputManager.Get_Buttons(actionString("up"))) {
+				if (Input.GetKey (key))
+					velo.y += verticalMoveSpeed;
+			}
+			foreach (KeyCode key in inputManager.Get_Buttons(actionString("down"))) {
+				if (Input.GetKey (key))
+					velo.y -= verticalMoveSpeed;
+			}
 		}
 
 		this.GetComponent<Transform>().Translate(velo*Time.deltaTime);
 	}
 
+	// Helper functions
 	string actionString(string key) {
 		return (key + "_Platform" + platformID.ToString()); 
+	}
+
+	bool hasReached (Vector2 destination) {
+		Vector2 Pos = new Vector2 (transform.position.x, transform.position.y);
+		return (Pos - destination).magnitude < 0.05f; // Change this float to adjust how close the platform has to get to start/end
 	}
 }
 
@@ -166,7 +222,7 @@ public class PlatformEditor : Editor
 	public override void OnInspectorGUI()
 	{
 		// Visual settings
-		EditorGUIUtility.labelWidth = 140;
+		EditorGUIUtility.labelWidth = 185;
 
 		// Custom editor setup
 		var plat = target as Platform;
@@ -175,6 +231,10 @@ public class PlatformEditor : Editor
 		// Variable Fields
 		plat.platformID = EditorGUILayout.IntField("Platform ID", plat.platformID);
 		plat.MoveSetting = (MoveOptions) EditorGUILayout.EnumPopup ("Movement Setting", plat.MoveSetting);
+
+		if (plat.MoveSetting == MoveOptions.ButtonMoves || plat.MoveSetting == MoveOptions.ButtonStops) {
+			plat.returnOnUntrigger = EditorGUILayout.Toggle ("Return on Untrigger (vs pause)", plat.returnOnUntrigger);
+		}
 
 		if (plat.MoveSetting == MoveOptions.InputMapping) {
 			plat.horizontalMoveSpeed = EditorGUILayout.FloatField ("Horizontal Movespeed", plat.horizontalMoveSpeed);

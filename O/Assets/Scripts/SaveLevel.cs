@@ -93,6 +93,7 @@ public class SaveLevel : MonoBehaviour {
 			newObj.platManualMapping = plat.manualMapping;
 			newObj.platHorizontalMoveSpeed = plat.horizontalMoveSpeed;
 			newObj.platVerticalMoveSpeed = plat.verticalMoveSpeed;
+			newObj.platReturnOnUntrigger = plat.returnOnUntrigger;
 			return platform;
 		}
 		if (name == "button")

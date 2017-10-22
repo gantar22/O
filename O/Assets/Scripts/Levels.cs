@@ -68,6 +68,7 @@ public class Levels : MonoBehaviour {
 							plat.manualMapping = obj.platManualMapping;
 							plat.horizontalMoveSpeed = obj.platHorizontalMoveSpeed;
 							plat.verticalMoveSpeed = obj.platVerticalMoveSpeed;
+							plat.returnOnUntrigger = obj.platReturnOnUntrigger;
 
 						}
 
