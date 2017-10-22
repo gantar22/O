@@ -149,8 +149,8 @@ public class Mapping : MonoBehaviour {
 		}
 		removed = new List<Pair<string,KeyCode>>();
 		for (int i = 0; i < inputs.Count; i++) {
-			(actions[i][actions[i].Length - 1] == '1')
-			InputManager.instance.Remove(actions[i],inputs[i]);
+			if (actions[i][actions[i].Length - 1] == '1')
+				InputManager.instance.Remove(actions[i],inputs[i]);
 		}
 	}
 	void callUndoP2 () { //you don't really need to use this, but if your
@@ -169,8 +169,8 @@ public class Mapping : MonoBehaviour {
 		}
 		removed = new List<Pair<string,KeyCode>>();
 		for (int i = 0; i < inputs.Count; i++) {
-			(actions[i][actions[i].Length - 1] == '2')
-			InputManager.instance.Remove(actions[i],inputs[i]);
+			if (actions[i][actions[i].Length - 1] == '2')
+				InputManager.instance.Remove(actions[i],inputs[i]);
 		}
 	}
 	void Start() {
