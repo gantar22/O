@@ -13,7 +13,7 @@ public class ButtonTrigger : MonoBehaviour {
 	string one;
 	string two;
 
-	public void trigger() {
+	public void trigger(string collName) {
 		if (switched) {
 			string one = "_2";
 			string two = "_1";
@@ -22,11 +22,11 @@ public class ButtonTrigger : MonoBehaviour {
 			string two = "_2";
 		}
 		if (playerSpecific) {
-			if (coll.name == "Player1"){
+			if (collName == "Player1"){
 				foreach (string name in mappingNames)
 					EventManager.TriggerEvent(name + one);
 			}
-			if (coll.name == "Player2"){
+			if (collName == "Player2"){
 				foreach (string name in mappingNames)
 					EventManager.TriggerEvent(name + two);
 			} 
@@ -40,7 +40,7 @@ public class ButtonTrigger : MonoBehaviour {
 			EventManager.TriggerEvent(name);
 	}
 
-	public void untrigger() {
+	public void untrigger(string collName) {
 		if (switched) {
 			string one = "_2";
 			string two = "_1";
@@ -49,11 +49,11 @@ public class ButtonTrigger : MonoBehaviour {
 			string two = "_2";
 		}
 		if (playerSpecific) {
-			if (coll.name == "Player1"){
+			if (collName == "Player1"){
 				foreach (string name in mappingNames)
 					EventManager.TriggerEvent(name + "_undo" + one);
 			}
-			if (coll.name == "Player2"){
+			if (collName == "Player2"){
 				foreach (string name in mappingNames)
 					EventManager.TriggerEvent(name + "_undo" + two);
 			} 
