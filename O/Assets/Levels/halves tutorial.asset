@@ -77,7 +77,7 @@ MonoBehaviour:
     platHorizontalMoveSpeed: 0
     platVerticalMoveSpeed: 0
     platReturnOnUntrigger: 0
-  player1loc: {x: -5.32, y: -1.44, z: 0}
+  player1loc: {x: -8.52, y: -1.44, z: 0}
   player2loc: {x: 9.46, y: -1.94, z: 0}
   p1left: 97
   p1right: 100
