@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEditor;
 
 public enum MoveOptions {Constant, ConstantAfterTrigger, OneWayTrigger, ThereAndBackTrigger, ButtonMoves, ButtonStops, InputMapping};
-public enum MoveStateOptions {idleAtStart, delayedAtStart, movingToEnd, idleAtEnd, delayedAtEnd, movingToStart};
+public enum MoveStateOptions {idleAtStart, delayedAtStart, movingToEnd, idleAtEnd, delayedAtEnd, movingToStart, returningToStart};
 
 
 public class Platform : MonoBehaviour {
@@ -127,7 +127,9 @@ public class Platform : MonoBehaviour {
 	}
 
 	void stopMoving() {
-		if (MoveState == MoveStateOptions.movingToEnd) {
+		if (MoveState == MoveStateOptions.returningToStart) {
+			MoveState = MoveStateOptions.idleAtStart;
+		} else if (MoveState == MoveStateOptions.movingToEnd) {
 			if (MoveSetting == MoveOptions.Constant || MoveSetting == MoveOptions.ConstantAfterTrigger || MoveSetting == MoveOptions.ThereAndBackTrigger
 				|| MoveSetting == MoveOptions.ButtonMoves || MoveSetting == MoveOptions.ButtonStops) {
 				MoveState = MoveStateOptions.delayedAtEnd;
@@ -147,7 +149,7 @@ public class Platform : MonoBehaviour {
 
 	void stopMoving_ButtonControlled() {
 		if (returnOnUntrigger) {
-			MoveState = MoveStateOptions.movingToStart;
+			MoveState = MoveStateOptions.returningToStart;
 		} else {
 			if (MoveState == MoveStateOptions.movingToEnd || MoveState == MoveStateOptions.delayedAtStart) {
 				MoveState = MoveStateOptions.idleAtStart;
@@ -174,7 +176,7 @@ public class Platform : MonoBehaviour {
 			if (hasReached(endPoint)) {
 				stopMoving ();
 			}
-		} else if (MoveState == MoveStateOptions.movingToStart) {
+		} else if (MoveState == MoveStateOptions.movingToStart || MoveState == MoveStateOptions.returningToStart) {
 			velo = (startPoint - Pos).normalized * speed;
 			if (hasReached(startPoint)) {
 				stopMoving ();
