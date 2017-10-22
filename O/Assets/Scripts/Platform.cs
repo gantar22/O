@@ -53,6 +53,8 @@ public class Platform : MonoBehaviour {
 		} else if (MoveSetting == MoveOptions.Constant) {
 			startMoving ();
 		}
+
+		EventManager.StartListening ("platform_" + platformID, trigger);
 	}
 
 	void OnEnable () {
