@@ -18,6 +18,7 @@ public class SaveLevel : MonoBehaviour {
 	public GameObject wall;
 	public GameObject platform;
 	public GameObject button;
+	public GameObject spikes;
 	//ADD NEW PREFABS ABOVE THIS LINE
 
 	private LevelObject newObj;
@@ -93,10 +94,13 @@ public class SaveLevel : MonoBehaviour {
 			newObj.platManualMapping = plat.manualMapping;
 			newObj.platHorizontalMoveSpeed = plat.horizontalMoveSpeed;
 			newObj.platVerticalMoveSpeed = plat.verticalMoveSpeed;
+			newObj.platReturnOnUntrigger = plat.returnOnUntrigger;
 			return platform;
 		}
 		if (name == "button")
 			return button;
+		if (name == "spikes")
+			return spikes;
 		//ADD NEW PREFABS ABOVE THIS LINE
 
 		//object's name didn't match a prefab
