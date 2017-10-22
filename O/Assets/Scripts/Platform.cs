@@ -57,6 +57,7 @@ public class Platform : MonoBehaviour {
 
 		EventManager.StartListening ("platform_" + platformID, trigger);
 		EventManager.StartListening ("platformInvert_" + platformID, invertButtonSetting);
+		EventManager.StartListening ("platform_untrigger_" + platformID, untrigger);
 	}
 
 	void OnEnable () {
