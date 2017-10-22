@@ -16,7 +16,13 @@ public class button : MonoBehaviour {
 	}
 	
 	void OnCollisionExit2D(Collision2D coll) {
-		if (pressed) {
+		foreach (ContactPoint2D hit in coll.contacts)
+            {
+                Vector2 hitPoint = hit.point;
+                print(hitPoint);
+            }
+		n--;
+		if (pressed && n == 0) {
 			pressed = false;
 			triggerer.untrigger(coll.collider.name);
 
@@ -27,6 +33,7 @@ public class button : MonoBehaviour {
 		if (coll.relativeVelocity[1] < -.5f && !pressed) {
 			pressed = true;
 			triggerer.trigger(coll.collider.name);
+			n++;
 		}
 	}
 }
