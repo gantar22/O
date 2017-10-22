@@ -461,6 +461,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currLevel: 0
+--- !u!114 &495170841
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
@@ -508,7 +509,6 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4626782441100606, guid: dc80944325554442b9c3828bf253b97d, type: 2}
       propertyPath: m_RootOrder
-      value: 8
       value: 9
       objectReference: {fileID: 0}
     m_RemovedComponents: []
