@@ -88,6 +88,16 @@ public class SaveLevel : MonoBehaviour {
 			newObj.platReturnOnUntrigger = plat.returnOnUntrigger;
 		}
 
+		if (comp.GetComponentInChildren<ButtonTrigger> () != null) {
+			ButtonTrigger BT = comp.GetComponentInChildren<ButtonTrigger> ();
+			newObj.BTmappingNames = BT.mappingNames;
+			newObj.BTcallName = BT.callName;
+			newObj.BTplayerSpecific = BT.playerSpecific;
+			newObj.BTswitched = BT.switched;
+			newObj.BTtriggerList = BT.triggerList;
+			newObj.BTuntriggerList = BT.untriggerList;
+		}
+
 		//match prefab name to prefab
 		if (name == "exitBoth")
 			return exitBoth;

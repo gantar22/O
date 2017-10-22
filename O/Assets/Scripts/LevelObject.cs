@@ -1,3 +1,5 @@
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using System;
 
@@ -20,4 +22,11 @@ public class LevelObject {
 	public float platVerticalMoveSpeed;
 	public bool platReturnOnUntrigger;
 
+	//ButtonTrigger specific parameters
+	public List<string> BTmappingNames;
+	public string BTcallName;
+	public bool BTplayerSpecific;
+	public bool BTswitched;
+	public List<string> BTtriggerList;
+	public List<string> BTuntriggerList;
 }

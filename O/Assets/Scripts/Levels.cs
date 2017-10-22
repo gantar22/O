@@ -58,7 +58,6 @@ public class Levels : MonoBehaviour {
 							comp.transform.localScale = new Vector3 (obj.scale.x, obj.scale.y, 1f);
 
 						if (comp.GetComponent<Platform> () != null) {
-
 							Platform plat = comp.GetComponent<Platform> ();
 							plat.platformID = obj.platformID;
 							plat.MoveSetting = obj.platMoveSetting;
@@ -69,9 +68,17 @@ public class Levels : MonoBehaviour {
 							plat.horizontalMoveSpeed = obj.platHorizontalMoveSpeed;
 							plat.verticalMoveSpeed = obj.platVerticalMoveSpeed;
 							plat.returnOnUntrigger = obj.platReturnOnUntrigger;
-
 						}
 
+						if (comp.GetComponentInChildren<ButtonTrigger> () != null) {
+							ButtonTrigger BT = comp.GetComponentInChildren<ButtonTrigger> ();
+							BT.mappingNames = obj.BTmappingNames;
+							BT.callName = obj.BTcallName;
+							BT.playerSpecific = obj.BTplayerSpecific;
+							BT.switched = obj.BTswitched;
+							BT.triggerList = obj.BTtriggerList;
+							BT.untriggerList = obj.BTuntriggerList;
+						}
 					}
 				}
 
