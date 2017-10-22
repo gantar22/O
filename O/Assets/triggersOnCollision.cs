@@ -10,6 +10,8 @@ public class triggersOnCollision : MonoBehaviour {
 	public bool switched;
 	public List<string> triggerList;
 	public List<string> untriggerList;
+	string one;
+	string two;
 
 	void OnTriggerEnter2D(Collider2D coll) {
 		if (switched) {
