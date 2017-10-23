@@ -84,19 +84,6 @@ public class Levels : MonoBehaviour {
 						}
 					}
 				}
-/*
-				//sets player 1 location and move keys
-				player1.transform.position = new Vector3 (level.player1loc.x, level.player1loc.y, -1);
-				player1.GetComponent<PlayerMovement> ().left = level.p1left;
-				player1.GetComponent<PlayerMovement> ().right = level.p1right;
-				player1.GetComponent<PlayerMovement> ().jump = level.p1jump;
-
-				//sets player 2 location and move keys
-				player2.transform.position = new Vector3 (level.player2loc.x, level.player2loc.y, -1);
-				player2.GetComponent<PlayerMovement> ().left = level.p2left;
-				player2.GetComponent<PlayerMovement> ().right = level.p2right;
-				player2.GetComponent<PlayerMovement> ().jump = level.p2jump;
-				*/
 
 			} else //skips over gaps in list of levels
 				LoadLevel (num + 1);

@@ -5,7 +5,6 @@ using UnityEngine;
 [ExecuteInEditMode]
 public class SaveLevel : MonoBehaviour {
 
-
 	public Level newLevel;
 
 	//make all level object prefabs a public game object here

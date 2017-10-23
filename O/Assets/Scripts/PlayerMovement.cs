@@ -103,7 +103,6 @@ public class PlayerMovement : MonoBehaviour {
 		}
 	}
 	void OnCollisionExit2D(Collision2D coll) {
-		print(transform.parent);
 		if (coll.collider.name.Contains("Platform") || coll.collider.name.Contains("Button")) {
 			if (transform.parent != null && transform.parent == coll.collider.transform) {
 				transform.parent = null;
