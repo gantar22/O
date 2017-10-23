@@ -5,8 +5,6 @@ using UnityEngine;
 [ExecuteInEditMode]
 public class SaveLevel : MonoBehaviour {
 
-	public GameObject player1;
-	public GameObject player2;
 
 	public Level newLevel;
 
@@ -19,6 +17,8 @@ public class SaveLevel : MonoBehaviour {
 	public GameObject platform;
 	public GameObject button;
 	public GameObject spikes;
+	public GameObject Player1;
+	public GameObject Player2;
 	//ADD NEW PREFABS ABOVE THIS LINE
 
 	private LevelObject newObj;
@@ -26,15 +26,6 @@ public class SaveLevel : MonoBehaviour {
 	void Update() {
 
 		newLevel.components = GetComponentList();
-		newLevel.player1loc = player1.transform.position;
-		newLevel.player2loc = player2.transform.position;
-		newLevel.p1left = player1.GetComponent<PlayerMovement>().left;
-		newLevel.p1right = player1.GetComponent<PlayerMovement>().right;
-		newLevel.p1jump = player1.GetComponent<PlayerMovement>().jump;
-		newLevel.p2left = player2.GetComponent<PlayerMovement>().left;
-		newLevel.p2right = player2.GetComponent<PlayerMovement>().right;
-		newLevel.p2jump = player2.GetComponent<PlayerMovement>().jump;
-
 	}
 
 	LevelObject[] GetComponentList () {
@@ -73,6 +64,16 @@ public class SaveLevel : MonoBehaviour {
 		//find prefab's name
 		string name = comp.GetComponent<ObjIdentifier> ().prefabName;
 
+		if (comp.GetComponent<PlayerMovement>() != null) {
+			PlayerMovement move = comp.GetComponent<PlayerMovement>();
+			newObj.left = move.left;
+			newObj.right = move.right;
+			newObj.jump = move.jump;
+			newObj.Player = move.Player;
+			newObj.runSpeed = move.runSpeed;
+			newObj.jumpForce = move.jumpForce;
+		}
+
 		//match prefab name to prefab
 		if (name == "exitBoth")
 			return exitBoth;
@@ -101,6 +102,10 @@ public class SaveLevel : MonoBehaviour {
 			return button;
 		if (name == "spikes")
 			return spikes;
+		if(name == "Player1")
+			return Player1;
+		if(name == "Player2")
+			return Player2;
 		//ADD NEW PREFABS ABOVE THIS LINE
 
 		//object's name didn't match a prefab

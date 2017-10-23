@@ -19,5 +19,12 @@ public class LevelObject {
 	public float platHorizontalMoveSpeed;
 	public float platVerticalMoveSpeed;
 	public bool platReturnOnUntrigger;
+	public KeyCode right;
+	public KeyCode left;
+	public KeyCode jump;
+	public int Player;
+	public float runSpeed;
+	public float jumpForce;
+	
 
 }

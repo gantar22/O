@@ -5,9 +5,6 @@ using UnityEngine.UI;
 
 public class Levels : MonoBehaviour {
 
-	public GameObject player1;
-	public GameObject player2;
-
 	public Level[] levels;
 	public int startingLevel;
 
@@ -36,10 +33,7 @@ public class Levels : MonoBehaviour {
 				//update current level in Stats
 				GetComponent<Stats>().currLevel = num;
 
-				//stop players from moving
-				player1.GetComponent<Rigidbody2D> ().velocity = Vector2.zero;
-				player2.GetComponent<Rigidbody2D> ().velocity = Vector2.zero;
-
+			
 				//set the level to be loaded
 				Level level = levels [num];
 				LevelObject[] objs = level.components;
@@ -71,10 +65,19 @@ public class Levels : MonoBehaviour {
 							plat.returnOnUntrigger = obj.platReturnOnUntrigger;
 
 						}
+						if(comp.GetComponent<PlayerMovement> () != null) {
+							PlayerMovement move = comp.GetComponent<PlayerMovement> ();
+							move.left = obj.left;
+							move.right = obj.right;
+							move.jump = obj.jump;
+							move.Player = obj.Player;
+							move.runSpeed = obj.runSpeed;
+							move.jumpForce = obj.jumpForce;
+						}
 
 					}
 				}
-
+/*
 				//sets player 1 location and move keys
 				player1.transform.position = new Vector3 (level.player1loc.x, level.player1loc.y, -1);
 				player1.GetComponent<PlayerMovement> ().left = level.p1left;
@@ -86,6 +89,7 @@ public class Levels : MonoBehaviour {
 				player2.GetComponent<PlayerMovement> ().left = level.p2left;
 				player2.GetComponent<PlayerMovement> ().right = level.p2right;
 				player2.GetComponent<PlayerMovement> ().jump = level.p2jump;
+				*/
 
 			} else //skips over gaps in list of levels
 				LoadLevel (num + 1);
