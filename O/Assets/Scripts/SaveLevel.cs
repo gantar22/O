@@ -19,6 +19,7 @@ public class SaveLevel : MonoBehaviour {
 	public GameObject Player1;
 	public GameObject Player2;
 	public GameObject spikedPlatform;
+	public GameObject spikedWall;
 	//ADD NEW PREFABS ABOVE THIS LINE
 
 	private LevelObject newObj;
@@ -123,6 +124,8 @@ public class SaveLevel : MonoBehaviour {
 			return Player2;
 		if (name == "spikedPlatform")
 			return spikedPlatform;
+		if (name == "spikedWall")
+			return spikedWall;
 		//ADD NEW PREFABS ABOVE THIS LINE
 
 		//object's name didn't match a prefab
