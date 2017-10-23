@@ -9,6 +9,7 @@ public class button : MonoBehaviour {
 	ButtonTrigger triggerer;
 	private bool animating;
 	private float scale;
+	private string name;
 
 	// Use this for initialization
 	void Start () {
@@ -16,9 +17,38 @@ public class button : MonoBehaviour {
 		triggerer = GetComponent<ButtonTrigger>();
 		animating = false;
 		scale = transform.parent.transform.localScale[1];
+		name = "";
+
+	}
+
+	void Update () {
+		print(pressed);
+		Transform playerOne = transform.Find("Player 1");
+		Transform playerTwo = transform.Find("Player 2");
+		if (playerOne != null && !pressed) {
+			pressed = true;
+			StartCoroutine("startShrink");
+			triggerer.trigger("Player 1");
+			name = "Player 1";
+		}
+		if (playerTwo != null && !pressed) {
+			pressed = true;
+			StartCoroutine("startShrink");
+			triggerer.trigger("Player 2");
+			name = "Player 2";
+		}
+		if (pressed) {
+			if (transform.childCount == 0) {
+				triggerer.untrigger(name);
+				StartCoroutine("startGrow");
+				name = "";
+				pressed = false;
+				animating = true;
+			}
+		}
 	}
 	
-	void OnCollisionExit2D(Collision2D coll) {
+	/*void OnCollisionExit2D(Collision2D coll) {
 		n--;
 		if (pressed && n == 0 && !animating) {
 			pressed = false;
@@ -38,12 +68,17 @@ public class button : MonoBehaviour {
 		}
 		n++;
 		print("!");
-	}
+	}*/
+
 	IEnumerator startShrink() {
-		while(transform.parent.transform.localScale[1] > .3) {
+		/*while(transform.parent.transform.localScale[1] > .3) {
 			transform.parent.transform.localScale -= new Vector3(0,Time.deltaTime * 4,0);
 			if (transform.parent.transform.localScale[1] < 0)
 				transform.parent.transform.localScale += new Vector3(0,Time.deltaTime * 4,0);
+			yield return null;
+		}*/
+		while (transform.localPosition.y > .1 && !animating) {
+			transform.position -= new Vector3(0,Time.deltaTime * 3,0);
 			yield return null;
 		}
 		yield return new WaitForSeconds(.1f);
@@ -51,8 +86,14 @@ public class button : MonoBehaviour {
 
 	}
 	IEnumerator startGrow() {
-		while(transform.parent.transform.localScale[1] < scale) {
-			transform.parent.transform.localScale += new Vector3(0,Time.deltaTime * 5,0);
+		/*while(transform.parent.transform.localScale[1] > .3) {
+			transform.parent.transform.localScale -= new Vector3(0,Time.deltaTime * 4,0);
+			if (transform.parent.transform.localScale[1] < 0)
+				transform.parent.transform.localScale += new Vector3(0,Time.deltaTime * 4,0);
+			yield return null;
+		}*/
+		while (transform.localPosition.y < .7) {
+			transform.position += new Vector3(0,Time.deltaTime * 4,0);
 			yield return null;
 		}
 		yield return new WaitForSeconds(.1f);
