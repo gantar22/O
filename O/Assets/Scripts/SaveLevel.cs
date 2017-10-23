@@ -26,6 +26,7 @@ public class SaveLevel : MonoBehaviour {
 	void Update() {
 		newLevel.cameraSize = Camera.main.orthographicSize;
 		newLevel.components = GetComponentList();
+		Debug.Log("Level Saved: " + newLevel.name);
 	}
 
 	LevelObject[] GetComponentList () {
@@ -58,6 +59,10 @@ public class SaveLevel : MonoBehaviour {
 		//every level object must have an ObjIdentifier component
 		//the variable "Prefab name" in the ObjIdentifier MUST be the same as its prefab
 		if (comp.GetComponent<ObjIdentifier> () == null) {
+			if (comp.transform.parent.gameObject.GetComponent<ObjIdentifier>() != null
+				&& comp.name.Contains("button")
+				&& comp.transform.parent.gameObject.GetComponent<ObjIdentifier>().prefabName == "button")
+				return null;
 			Debug.Log (comp.name + " has no object identifier and could not be saved to level data.");
 			return null;
 		}

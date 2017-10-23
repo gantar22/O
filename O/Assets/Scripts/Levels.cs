@@ -20,8 +20,14 @@ public class Levels : MonoBehaviour {
 		//destroy all level objects not to carry over into next level
 		GameObject[] objs = GameObject.FindGameObjectsWithTag ("LevelObj");
 		foreach (GameObject obj in objs) {
-			Destroy (obj);
-		}
+			if (Application.isPlaying)
+				Destroy (obj);
+			else
+				DestroyImmediate (obj);
+		}/*
+		while (objs.Length > 0) {
+			DestroyImmediate(objs[0]);
+		} */
 
 	}
 

@@ -9,6 +9,7 @@ public class LoadLevel : MonoBehaviour {
 
 	void Update () {
 
+		GameObject.FindGameObjectWithTag ("GameController").GetComponent<Levels> ().EndLevel ();
 		GameObject.FindGameObjectWithTag ("GameController").GetComponent<Levels> ().LoadLevel (level);
 
 	}
