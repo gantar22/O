@@ -8,7 +8,7 @@ public class Spikes : MonoBehaviour {
 	public GameObject GameController;
 
 	void OnTriggerEnter2D(Collider2D other) {
-		if (other.name == "Player 1" || other.name == "Player 2") {
+		if (other.name.Contains("Player 1") || other.name.Contains("Player 2")) {
 			if (GameController == null)
 				GameController = GameObject.FindGameObjectWithTag ("GameController");
 
