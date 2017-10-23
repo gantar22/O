@@ -1,3 +1,5 @@
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using System;
 
@@ -27,4 +29,11 @@ public class LevelObject {
 	public float jumpForce;
 	
 
+	//ButtonTrigger specific parameters
+	public List<string> BTmappingNames;
+	public string BTcallName;
+	public bool BTplayerSpecific;
+	public bool BTswitched;
+	public List<string> BTtriggerList;
+	public List<string> BTuntriggerList;
 }

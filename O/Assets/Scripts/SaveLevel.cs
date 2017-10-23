@@ -19,6 +19,7 @@ public class SaveLevel : MonoBehaviour {
 	public GameObject spikes;
 	public GameObject Player1;
 	public GameObject Player2;
+	public GameObject spikedPlatform;
 	//ADD NEW PREFABS ABOVE THIS LINE
 
 	private LevelObject newObj;
@@ -73,6 +74,29 @@ public class SaveLevel : MonoBehaviour {
 			newObj.runSpeed = move.runSpeed;
 			newObj.jumpForce = move.jumpForce;
 		}
+		//if the prefab is any kind of platform, get its properties
+		if (comp.GetComponent<Platform> () != null) {
+			Platform plat = comp.GetComponent<Platform> ();
+			newObj.platformID = plat.platformID;
+			newObj.platMoveSetting = plat.MoveSetting;
+			newObj.platTranslation = plat.translation;
+			newObj.platTravelTime = plat.travelTime;
+			newObj.platMoveDelay = plat.moveDelay;
+			newObj.platManualMapping = plat.manualMapping;
+			newObj.platHorizontalMoveSpeed = plat.horizontalMoveSpeed;
+			newObj.platVerticalMoveSpeed = plat.verticalMoveSpeed;
+			newObj.platReturnOnUntrigger = plat.returnOnUntrigger;
+		}
+
+		if (comp.GetComponentInChildren<ButtonTrigger> () != null) {
+			ButtonTrigger BT = comp.GetComponentInChildren<ButtonTrigger> ();
+			newObj.BTmappingNames = BT.mappingNames;
+			newObj.BTcallName = BT.callName;
+			newObj.BTplayerSpecific = BT.playerSpecific;
+			newObj.BTswitched = BT.switched;
+			newObj.BTtriggerList = BT.triggerList;
+			newObj.BTuntriggerList = BT.untriggerList;
+		}
 
 		//match prefab name to prefab
 		if (name == "exitBoth")
@@ -85,19 +109,8 @@ public class SaveLevel : MonoBehaviour {
 			return exitP2;
 		if (name == "wall")
 			return wall;
-		if (name == "platform") {
-			Platform plat = comp.GetComponent<Platform> ();
-			newObj.platformID = plat.platformID;
-			newObj.platMoveSetting = plat.MoveSetting;
-			newObj.platTranslation = plat.translation;
-			newObj.platTravelTime = plat.travelTime;
-			newObj.platMoveDelay = plat.moveDelay;
-			newObj.platManualMapping = plat.manualMapping;
-			newObj.platHorizontalMoveSpeed = plat.horizontalMoveSpeed;
-			newObj.platVerticalMoveSpeed = plat.verticalMoveSpeed;
-			newObj.platReturnOnUntrigger = plat.returnOnUntrigger;
+		if (name == "platform")
 			return platform;
-		}
 		if (name == "button")
 			return button;
 		if (name == "spikes")
@@ -106,6 +119,8 @@ public class SaveLevel : MonoBehaviour {
 			return Player1;
 		if(name == "Player2")
 			return Player2;
+		if (name == "spikedPlatform")
+			return spikedPlatform;
 		//ADD NEW PREFABS ABOVE THIS LINE
 
 		//object's name didn't match a prefab
