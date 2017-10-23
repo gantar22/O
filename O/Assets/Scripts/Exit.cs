@@ -26,9 +26,9 @@ public class Exit : MonoBehaviour {
 	public bool p2Colliding = false;
 
 	void OnTriggerEnter2D(Collider2D other) {
-		if (other.name == "Player 1") {
+		if (other.name.Contains("Player 1")) {
 			p1Colliding = true;
-		} else if (other.name == "Player 2") {
+		} else if (other.name.Contains("Player 2")) {
 			p2Colliding = true;
 		}
 
@@ -36,9 +36,9 @@ public class Exit : MonoBehaviour {
 	}
 
 	void OnTriggerExit2D(Collider2D other) {
-		if (other.name == "Player 1") {
+		if (other.name.Contains("Player 1")) {
 			p1Colliding = false;
-		} else if (other.name == "Player 2") {
+		} else if (other.name.Contains("Player 2")) {
 			p2Colliding = false;
 		}
 
