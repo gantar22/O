@@ -22,11 +22,11 @@ public class TriggersOnCollision : MonoBehaviour {
 			two = "_2";
 		}
 		if (playerSpecific) {
-			if (coll.name == "Player1"){
+			if (coll.name.Contains("Player1")){
 				foreach (string name in mappingNames)
 					EventManager.TriggerEvent(name + one);
 			}
-			if (coll.name == "Player2"){
+			if (coll.name.Contains("Player2")){
 				foreach (string name in mappingNames)
 					EventManager.TriggerEvent(name + two);
 			} 
@@ -49,11 +49,11 @@ public class TriggersOnCollision : MonoBehaviour {
 			two = "_2";
 		}
 		if (playerSpecific) {
-			if (coll.name == "Player1"){
+			if (coll.name.Contains("Player1")){
 				foreach (string name in mappingNames)
 					EventManager.TriggerEvent(name + "_undo" + one);
 			}
-			if (coll.name == "Player2"){
+			if (coll.name.Contains("Player2")){
 				foreach (string name in mappingNames)
 					EventManager.TriggerEvent(name + "_undo" + two);
 			} 
