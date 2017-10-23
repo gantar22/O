@@ -23,8 +23,14 @@ public class button : MonoBehaviour {
 
 	void Update () {
 		print(pressed);
-		Transform playerOne = transform.Find("Player 1");
-		Transform playerTwo = transform.Find("Player 2");
+		Transform playerOne = null;
+		Transform playerTwo = null;
+		foreach (Transform child in transform) {
+			if (child.gameObject.name.Contains("Player 1"))
+				playerOne = child;
+			if (child.gameObject.name.Contains("Player 2"))
+				playerTwo = child;
+		}
 		if (playerOne != null && !pressed) {
 			pressed = true;
 			StartCoroutine("startShrink");
