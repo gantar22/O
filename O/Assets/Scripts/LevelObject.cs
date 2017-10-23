@@ -11,6 +11,14 @@ public class LevelObject {
 	public float rotation;
 	public Vector2 scale = Vector2.one;
 
+	//player specific paramters
+	public KeyCode right;
+	public KeyCode left;
+	public KeyCode jump;
+	public int Player;
+	public float runSpeed;
+	public float jumpForce;
+
 	//platform specific parameters
 	public int platformID;
 	public MoveOptions platMoveSetting;
@@ -21,13 +29,6 @@ public class LevelObject {
 	public float platHorizontalMoveSpeed;
 	public float platVerticalMoveSpeed;
 	public bool platReturnOnUntrigger;
-	public KeyCode right;
-	public KeyCode left;
-	public KeyCode jump;
-	public int Player;
-	public float runSpeed;
-	public float jumpForce;
-	
 
 	//ButtonTrigger specific parameters
 	public List<string> BTmappingNames;
