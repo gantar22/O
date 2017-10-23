@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9eae96df7c2cd4d88a0bce0332189e3f, type: 3}
+  m_Name: Carter 0 halves
+  m_EditorClassIdentifier: 
+  components: []
+  player1loc: {x: 0, y: 0, z: 0}
+  player2loc: {x: 0, y: 0, z: 0}
+  p1left: 0
+  p1right: 0
+  p1jump: 0
+  p2left: 0
+  p2right: 0
+  p2jump: 0

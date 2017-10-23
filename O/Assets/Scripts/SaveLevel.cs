@@ -24,12 +24,13 @@ public class SaveLevel : MonoBehaviour {
 	private LevelObject newObj;
 
 	void Update() {
-
+		newLevel.cameraSize = Camera.main.orthographicSize;
 		newLevel.components = GetComponentList();
 	}
 
 	LevelObject[] GetComponentList () {
-		
+
+
 		GameObject[] levelComponents = GameObject.FindGameObjectsWithTag ("LevelObj");
 
 		LevelObject[] things = new LevelObject[levelComponents.Length];

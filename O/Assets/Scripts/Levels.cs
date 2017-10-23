@@ -36,6 +36,7 @@ public class Levels : MonoBehaviour {
 			
 				//set the level to be loaded
 				Level level = levels [num];
+				Camera.main.orthographicSize = levels[num].cameraSize;
 				LevelObject[] objs = level.components;
 
 				//put all the objects in the level
