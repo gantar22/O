@@ -37,4 +37,6 @@ public class LevelObject {
 	public bool BTswitched;
 	public List<string> BTtriggerList;
 	public List<string> BTuntriggerList;
+
+	//ADD NEW PROPERTIES ABOVE THIS LINE
 }

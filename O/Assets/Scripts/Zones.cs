@@ -21,12 +21,9 @@ public class Zones : MonoBehaviour {
 
 	void onTriggerEnter(Collider other)
 	{
-		if (other.tag == "Player1")
-		{
+		if (other.name.Contains("Player1")) {
 
-		}
-		if (other.tag == "Player2")
-		{
+		} else if (other.name.Contains("Player2")) {
 
 		}
 	}

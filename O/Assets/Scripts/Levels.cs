@@ -82,6 +82,8 @@ public class Levels : MonoBehaviour {
 							BT.triggerList = obj.BTtriggerList;
 							BT.untriggerList = obj.BTuntriggerList;
 						}
+
+						//ADD NEW PROPERTIES ABOVE THIS LINE
 					}
 				}
 

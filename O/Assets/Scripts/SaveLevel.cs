@@ -97,6 +97,8 @@ public class SaveLevel : MonoBehaviour {
 			newObj.BTuntriggerList = BT.untriggerList;
 		}
 
+		//“ADD NEW PROPERTIES ABOVE THIS LINE”
+
 		//match prefab name to prefab
 		if (name == "exitBoth")
 			return exitBoth;
