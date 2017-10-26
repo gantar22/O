@@ -19,6 +19,7 @@ public class SaveLevel : MonoBehaviour {
 	public GameObject Player1;
 	public GameObject Player2;
 	public GameObject spikedPlatform;
+	public GameObject exitPlatform;
 	//ADD NEW PREFABS ABOVE THIS LINE
 
 	private LevelObject newObj;
@@ -60,10 +61,10 @@ public class SaveLevel : MonoBehaviour {
 		//the variable "Prefab name" in the ObjIdentifier MUST be the same as its prefab
 		if (comp.GetComponent<ObjIdentifier> () == null) {
 			if (comp.transform.parent.gameObject.GetComponent<ObjIdentifier>() != null
-				&& comp.name.Contains("button")
-				&& comp.transform.parent.gameObject.GetComponent<ObjIdentifier>().prefabName == "button")
+				&& (comp.transform.parent.gameObject.GetComponent<ObjIdentifier>().prefabName == "button"
+				||  comp.transform.parent.gameObject.GetComponent<ObjIdentifier>().prefabName == "spikedPlatform")) //if you make a parent object add it here
 				return null;
-			Debug.Log (comp.name + " has no object identifier and could not be saved to level data.");
+			Debug.Log (comp.name + " has no object identifier and could not be saved to level data." + comp.transform.parent.gameObject.GetComponent<ObjIdentifier>().prefabName);
 			return null;
 		}
 
@@ -128,6 +129,8 @@ public class SaveLevel : MonoBehaviour {
 			return Player2;
 		if (name == "spikedPlatform")
 			return spikedPlatform;
+		if (name == "exitPlatform")
+			return exitPlatform;
 		//ADD NEW PREFABS ABOVE THIS LINE
 
 		//object's name didn't match a prefab

@@ -15,13 +15,16 @@ public class PlayerMovement : MonoBehaviour {
 	public float jumpForce;
 	private float velo;
 	private InputManager inputManager;
+	private bool canJump;
+	private float timeSinceLastGround;
+	private float jumpGrace;
 
 	// Use this for initialization
 	void Start () {
 
 		rb = GetComponent<Rigidbody2D> ();
 		velo = 0f;
-
+		jumpGrace = .2f;
 	}
 
 	void OnEnable () {
@@ -53,15 +56,22 @@ public class PlayerMovement : MonoBehaviour {
 				velo += runSpeed;
 		}
 
-		//if player is on a platform, move with it
-		//this.GetComponent<Transform>().Translate(GetPlatformVelo ()*Time.deltaTime);
+
+		timeSinceLastGround += Time.deltaTime;
+		if (OnGround()) 
+			timeSinceLastGround = 0;
+		canJump = timeSinceLastGround < jumpGrace;
+
+
 
 		rb.velocity = new Vector2 (velo, rb.velocity.y);
 
 		//jumping, it checks each key that could cause the player to jump:
 		foreach (KeyCode key in inputManager.Get_Buttons("Jump" + Player.ToString())) {
-			if (Input.GetKeyDown (key) && OnGround())
+			if (Input.GetKeyDown (key) && canJump) {
 				rb.AddForce (Vector2.up * jumpForce);
+				timeSinceLastGround += jumpGrace;
+			}
 		}
 			
 	}
@@ -97,16 +107,24 @@ public class PlayerMovement : MonoBehaviour {
 		Vector2 p1 = new Vector2 (pos.x - width / 2f + 0.01f, pos.y - height / 2f - 0.02f);
 		Vector2 p2 = new Vector2 (pos.x + width / 2f - 0.01f, pos.y - height / 2f - 0.02f);
 
+
+
+
 		if (Physics2D.Linecast (p1, p2) && (Physics2D.Linecast (p1, p2).collider.name.Contains("Platform")
 			|| Physics2D.Linecast (p1, p2).collider.name.Contains("Button"))) {
 			transform.parent = Physics2D.Linecast (p1, p2).collider.gameObject.transform;
-		}
+		} 
 	}
 	void OnCollisionExit2D(Collision2D coll) {
 		if (coll.collider.name.Contains("Platform") || coll.collider.name.Contains("Button")) {
 			if (transform.parent != null && transform.parent == coll.collider.transform) {
 				transform.parent = null;
 			}
+		}
+	}
+	void OnCollisionEnter2D(Collision2D coll) {
+		if (coll.collider.name.Contains("Button")) {
+			transform.parent = coll.collider.transform;
 		}
 	}
 

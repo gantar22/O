@@ -16,6 +16,12 @@ MonoBehaviour:
     position: {x: -13.25, y: -3.1691842, z: 0}
     rotation: 0
     scale: {x: 2.5, y: 6.32}
+    right: 0
+    left: 0
+    jump: 0
+    Player: 0
+    runSpeed: 0
+    jumpForce: 0
     platformID: 0
     platMoveSetting: 0
     platTranslation: {x: 0, y: 0}
@@ -25,10 +31,22 @@ MonoBehaviour:
     platHorizontalMoveSpeed: 0
     platVerticalMoveSpeed: 0
     platReturnOnUntrigger: 0
+    BTmappingNames: []
+    BTcallName: 
+    BTplayerSpecific: 0
+    BTswitched: 0
+    BTtriggerList: []
+    BTuntriggerList: []
   - type: {fileID: 1349471688338012, guid: 56a255af996e12c4da9ce60393b32e8b, type: 2}
     position: {x: 13.31, y: -3.1691842, z: 0}
     rotation: 0
     scale: {x: 2.5, y: 6.32}
+    right: 0
+    left: 0
+    jump: 0
+    Player: 0
+    runSpeed: 0
+    jumpForce: 0
     platformID: 0
     platMoveSetting: 0
     platTranslation: {x: 0, y: 0}
@@ -38,10 +56,22 @@ MonoBehaviour:
     platHorizontalMoveSpeed: 0
     platVerticalMoveSpeed: 0
     platReturnOnUntrigger: 0
+    BTmappingNames: []
+    BTcallName: 
+    BTplayerSpecific: 0
+    BTswitched: 0
+    BTtriggerList: []
+    BTuntriggerList: []
   - type: {fileID: 1349471688338012, guid: 56a255af996e12c4da9ce60393b32e8b, type: 2}
     position: {x: 0.01, y: -4.51, z: 0}
     rotation: 0
     scale: {x: 26.26, y: 1.81}
+    right: 0
+    left: 0
+    jump: 0
+    Player: 0
+    runSpeed: 0
+    jumpForce: 0
     platformID: 0
     platMoveSetting: 0
     platTranslation: {x: 0, y: 0}
@@ -51,10 +81,22 @@ MonoBehaviour:
     platHorizontalMoveSpeed: 0
     platVerticalMoveSpeed: 0
     platReturnOnUntrigger: 0
+    BTmappingNames: []
+    BTcallName: 
+    BTplayerSpecific: 0
+    BTswitched: 0
+    BTtriggerList: []
+    BTuntriggerList: []
   - type: {fileID: 1349471688338012, guid: 56a255af996e12c4da9ce60393b32e8b, type: 2}
     position: {x: 0.05, y: -3.58, z: 0}
     rotation: 0
     scale: {x: 2.54, y: 3.31}
+    right: 0
+    left: 0
+    jump: 0
+    Player: 0
+    runSpeed: 0
+    jumpForce: 0
     platformID: 0
     platMoveSetting: 0
     platTranslation: {x: 0, y: 0}
@@ -64,10 +106,22 @@ MonoBehaviour:
     platHorizontalMoveSpeed: 0
     platVerticalMoveSpeed: 0
     platReturnOnUntrigger: 0
+    BTmappingNames: []
+    BTcallName: 
+    BTplayerSpecific: 0
+    BTswitched: 0
+    BTtriggerList: []
+    BTuntriggerList: []
   - type: {fileID: 1912214553670882, guid: dc80944325554442b9c3828bf253b97d, type: 2}
     position: {x: 0.1, y: 0.11, z: 0}
     rotation: 0
     scale: {x: 1, y: 1}
+    right: 0
+    left: 0
+    jump: 0
+    Player: 0
+    runSpeed: 0
+    jumpForce: 0
     platformID: 0
     platMoveSetting: 0
     platTranslation: {x: 0, y: 0}
@@ -77,11 +131,10 @@ MonoBehaviour:
     platHorizontalMoveSpeed: 0
     platVerticalMoveSpeed: 0
     platReturnOnUntrigger: 0
-  player1loc: {x: -8.52, y: -1.44, z: 0}
-  player2loc: {x: 9.46, y: -1.94, z: 0}
-  p1left: 97
-  p1right: 100
-  p1jump: 273
-  p2left: 276
-  p2right: 275
-  p2jump: 119
+    BTmappingNames: []
+    BTcallName: 
+    BTplayerSpecific: 0
+    BTswitched: 0
+    BTtriggerList: []
+    BTuntriggerList: []
+  cameraSize: 0
