@@ -1,7 +1,9 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEditor;
+#if UNITY_EDITOR
+	using UnityEditor;
+#endif
 
 [ExecuteInEditMode]
 public class SaveLevel : MonoBehaviour {
@@ -30,8 +32,10 @@ public class SaveLevel : MonoBehaviour {
 	void Update() {
 		newLevel.cameraSize = Camera.main.orthographicSize;
 		newLevel.components = GetComponentList();
-		EditorUtility.SetDirty (newLevel);
-		AssetDatabase.SaveAssets ();
+		#if UNITY_EDITOR
+			EditorUtility.SetDirty (newLevel);
+			AssetDatabase.SaveAssets ();
+		#endif
 		Debug.Log("Level Saved: " + newLevel.name);
 	}
 
