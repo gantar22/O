@@ -13,7 +13,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   components:
   - type: {fileID: 1349471688338012, guid: 56a255af996e12c4da9ce60393b32e8b, type: 2}
-    position: {x: 0, y: -3, z: -4.2}
+    position: {x: -0.01, y: -3.1, z: -4.2}
     rotation: 0
     scale: {x: 5.57, y: 3.31}
     right: 0
@@ -88,7 +88,7 @@ MonoBehaviour:
     BTtriggerList: []
     BTuntriggerList: []
   - type: {fileID: 1055245372309042, guid: 45aeefa8179926747b91555d81068bca, type: 2}
-    position: {x: 11.42, y: -1.43, z: -1}
+    position: {x: 10.7, y: -1.43, z: -1}
     rotation: 0
     scale: {x: 0.8, y: 0.75}
     right: 100
@@ -113,9 +113,9 @@ MonoBehaviour:
     BTtriggerList: []
     BTuntriggerList: []
   - type: {fileID: 1349471688338012, guid: 56a255af996e12c4da9ce60393b32e8b, type: 2}
-    position: {x: 0.01, y: -5.04, z: 0}
+    position: {x: 0.01, y: -6.781, z: 0}
     rotation: 0
-    scale: {x: 27.39, y: 4}
+    scale: {x: 27.39, y: 7.481347}
     right: 0
     left: 0
     jump: 0
@@ -187,4 +187,4 @@ MonoBehaviour:
     BTswitched: 0
     BTtriggerList: []
     BTuntriggerList: []
-  cameraSize: 5
+  cameraSize: 7.5

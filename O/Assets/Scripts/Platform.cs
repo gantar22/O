@@ -1,7 +1,9 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEditor;
+#if UNITY_EDITOR
+	using UnityEditor;
+#endif
 
 public enum MoveOptions {Constant, ConstantAfterTrigger, OneWayTrigger, ThereAndBackTrigger, ButtonMoves, ButtonStops, InputMapping};
 public enum MoveStateOptions {idleAtStart, delayedAtStart, movingToEnd, idleAtEnd, delayedAtEnd, movingToStart, returningToStart};
@@ -219,7 +221,7 @@ public class Platform : MonoBehaviour {
 	}
 }
 
-
+#if UNITY_EDITOR
 [CustomEditor(typeof(Platform))]
 public class PlatformEditor : Editor
 {
@@ -261,3 +263,4 @@ public class PlatformEditor : Editor
 		}
 	}
 }
+#endif
