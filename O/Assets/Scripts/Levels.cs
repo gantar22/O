@@ -5,6 +5,8 @@ using UnityEngine.UI;
 
 public class Levels : MonoBehaviour {
 
+	[SerializeField]
+	public bool updateSaveNewLevel;
 	public Level[] levels;
 	public int startingLevel;
 
@@ -42,6 +44,9 @@ public class Levels : MonoBehaviour {
 			
 				//set the level to be loaded
 				Level level = levels [num];
+				if (updateSaveNewLevel) {
+					gameObject.GetComponent<SaveLevel>().newLevel = level;
+				}
 				Camera.main.orthographicSize = levels[num].cameraSize;
 				LevelObject[] objs = level.components;
 
