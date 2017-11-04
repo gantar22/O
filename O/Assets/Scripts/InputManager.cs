@@ -91,6 +91,15 @@ public class InputManager : MonoBehaviour {
         return false;
             
     }
+    public ArrayList Remove(string actionName) { //this is bad form, but I'm too lazy to fix it. Bad me.
+        ArrayList thisList = null;
+        if (instance.inputDictionary.TryGetValue (actionName, out thisList)) {
+            thisList = Get_Buttons(actionName);
+            inputDictionary.Remove(actionName);
+            return thisList;
+        }
+        return null;
+    }
     public ArrayList Get_Buttons(string actionName)
     {
     	ArrayList thisList = null;

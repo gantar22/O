@@ -1,12 +1,12 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+#if UNITY_EDITOR
+	using UnityEditor;
+#endif
 
 [ExecuteInEditMode]
 public class SaveLevel : MonoBehaviour {
-
-	public GameObject player1;
-	public GameObject player2;
 
 	public Level newLevel;
 
@@ -18,26 +18,30 @@ public class SaveLevel : MonoBehaviour {
 	public GameObject wall;
 	public GameObject platform;
 	public GameObject button;
-	//ADD NEW PREFABS ABOVE THIS LINE
+	public GameObject spikes;
+	public GameObject Player1;
+	public GameObject Player2;
+	public GameObject spikedPlatform;
+	public GameObject exitPlatform;
+	public GameObject spikedWall;
+	public GameObject spikedBall;
+
 
 	private LevelObject newObj;
 
 	void Update() {
-
+		newLevel.cameraSize = Camera.main.orthographicSize;
 		newLevel.components = GetComponentList();
-		newLevel.player1loc = player1.transform.position;
-		newLevel.player2loc = player2.transform.position;
-		newLevel.p1left = player1.GetComponent<PlayerMovement>().left;
-		newLevel.p1right = player1.GetComponent<PlayerMovement>().right;
-		newLevel.p1jump = player1.GetComponent<PlayerMovement>().jump;
-		newLevel.p2left = player2.GetComponent<PlayerMovement>().left;
-		newLevel.p2right = player2.GetComponent<PlayerMovement>().right;
-		newLevel.p2jump = player2.GetComponent<PlayerMovement>().jump;
-
+		#if UNITY_EDITOR
+			EditorUtility.SetDirty (newLevel);
+			AssetDatabase.SaveAssets ();
+		#endif
+		Debug.Log("Level Saved: " + newLevel.name);
 	}
 
 	LevelObject[] GetComponentList () {
-		
+
+
 		GameObject[] levelComponents = GameObject.FindGameObjectsWithTag ("LevelObj");
 
 		LevelObject[] things = new LevelObject[levelComponents.Length];
@@ -65,12 +69,51 @@ public class SaveLevel : MonoBehaviour {
 		//every level object must have an ObjIdentifier component
 		//the variable "Prefab name" in the ObjIdentifier MUST be the same as its prefab
 		if (comp.GetComponent<ObjIdentifier> () == null) {
-			Debug.Log (comp.name + " has no object identifier and could not be saved to level data.");
+			if (comp.transform.parent.gameObject.GetComponent<ObjIdentifier>() != null
+				&& (comp.transform.parent.gameObject.GetComponent<ObjIdentifier>().prefabName == "button"
+				||  comp.transform.parent.gameObject.GetComponent<ObjIdentifier>().prefabName == "spikedPlatform")) //if you make a parent object add it here
+				return null;
+			Debug.Log (comp.name + " has no object identifier and could not be saved to level data." + comp.transform.parent.gameObject.GetComponent<ObjIdentifier>().prefabName);
 			return null;
 		}
 
 		//find prefab's name
 		string name = comp.GetComponent<ObjIdentifier> ().prefabName;
+
+		if (comp.GetComponent<PlayerMovement>() != null) {
+			PlayerMovement move = comp.GetComponent<PlayerMovement>();
+			newObj.left = move.left;
+			newObj.right = move.right;
+			newObj.jump = move.jump;
+			newObj.Player = move.Player;
+			newObj.runSpeed = move.runSpeed;
+			newObj.jumpForce = move.jumpForce;
+		}
+		//if the prefab is any kind of platform, get its properties
+		if (comp.GetComponent<Platform> () != null) {
+			Platform plat = comp.GetComponent<Platform> ();
+			newObj.platformID = plat.platformID;
+			newObj.platMoveSetting = plat.MoveSetting;
+			newObj.platTranslation = plat.translation;
+			newObj.platTravelTime = plat.travelTime;
+			newObj.platMoveDelay = plat.moveDelay;
+			newObj.platManualMapping = plat.manualMapping;
+			newObj.platHorizontalMoveSpeed = plat.horizontalMoveSpeed;
+			newObj.platVerticalMoveSpeed = plat.verticalMoveSpeed;
+			newObj.platReturnOnUntrigger = plat.returnOnUntrigger;
+		}
+
+		if (comp.GetComponentInChildren<ButtonTrigger> () != null) {
+			ButtonTrigger BT = comp.GetComponentInChildren<ButtonTrigger> ();
+			newObj.BTmappingNames = BT.mappingNames;
+			newObj.BTcallName = BT.callName;
+			newObj.BTplayerSpecific = BT.playerSpecific;
+			newObj.BTswitched = BT.switched;
+			newObj.BTtriggerList = BT.triggerList;
+			newObj.BTuntriggerList = BT.untriggerList;
+		}
+
+		//ADD NEW PROPERTIES ABOVE THIS LINE
 
 		//match prefab name to prefab
 		if (name == "exitBoth")
@@ -83,20 +126,24 @@ public class SaveLevel : MonoBehaviour {
 			return exitP2;
 		if (name == "wall")
 			return wall;
-		if (name == "platform") {
-			Platform plat = comp.GetComponent<Platform> ();
-			newObj.platformID = plat.platformID;
-			newObj.platMoveSetting = plat.MoveSetting;
-			newObj.platTranslation = plat.translation;
-			newObj.platTravelTime = plat.travelTime;
-			newObj.platMoveDelay = plat.moveDelay;
-			newObj.platManualMapping = plat.manualMapping;
-			newObj.platHorizontalMoveSpeed = plat.horizontalMoveSpeed;
-			newObj.platVerticalMoveSpeed = plat.verticalMoveSpeed;
+		if (name == "platform")
 			return platform;
-		}
 		if (name == "button")
 			return button;
+		if (name == "spikes")
+			return spikes;
+		if(name == "Player1")
+			return Player1;
+		if(name == "Player2")
+			return Player2;
+		if (name == "spikedPlatform")
+			return spikedPlatform;
+		if (name == "exitPlatform")
+			return exitPlatform;
+		if (name == "spikedWall")
+			return spikedWall;
+		if (name == "spikedBall")
+			return spikedBall;
 		//ADD NEW PREFABS ABOVE THIS LINE
 
 		//object's name didn't match a prefab

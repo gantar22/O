@@ -5,9 +5,8 @@ using UnityEngine.UI;
 
 public class Levels : MonoBehaviour {
 
-	public GameObject player1;
-	public GameObject player2;
-
+	[SerializeField]
+	public bool updateSaveNewLevel;
 	public Level[] levels;
 	public int startingLevel;
 
@@ -23,8 +22,14 @@ public class Levels : MonoBehaviour {
 		//destroy all level objects not to carry over into next level
 		GameObject[] objs = GameObject.FindGameObjectsWithTag ("LevelObj");
 		foreach (GameObject obj in objs) {
-			Destroy (obj);
-		}
+			if (Application.isPlaying)
+				Destroy (obj);
+			else
+				DestroyImmediate (obj);
+		}/*
+		while (objs.Length > 0) {
+			DestroyImmediate(objs[0]);
+		} */
 
 	}
 
@@ -36,12 +41,13 @@ public class Levels : MonoBehaviour {
 				//update current level in Stats
 				GetComponent<Stats>().currLevel = num;
 
-				//stop players from moving
-				player1.GetComponent<Rigidbody2D> ().velocity = Vector2.zero;
-				player2.GetComponent<Rigidbody2D> ().velocity = Vector2.zero;
-
+			
 				//set the level to be loaded
 				Level level = levels [num];
+				if (updateSaveNewLevel) {
+					gameObject.GetComponent<SaveLevel>().newLevel = level;
+				}
+				Camera.main.orthographicSize = levels[num].cameraSize;
 				LevelObject[] objs = level.components;
 
 				//put all the objects in the level
@@ -58,7 +64,6 @@ public class Levels : MonoBehaviour {
 							comp.transform.localScale = new Vector3 (obj.scale.x, obj.scale.y, 1f);
 
 						if (comp.GetComponent<Platform> () != null) {
-
 							Platform plat = comp.GetComponent<Platform> ();
 							plat.platformID = obj.platformID;
 							plat.MoveSetting = obj.platMoveSetting;
@@ -68,23 +73,31 @@ public class Levels : MonoBehaviour {
 							plat.manualMapping = obj.platManualMapping;
 							plat.horizontalMoveSpeed = obj.platHorizontalMoveSpeed;
 							plat.verticalMoveSpeed = obj.platVerticalMoveSpeed;
-
+							plat.returnOnUntrigger = obj.platReturnOnUntrigger;
+						}
+						if(comp.GetComponent<PlayerMovement> () != null) {
+							PlayerMovement move = comp.GetComponent<PlayerMovement> ();
+							move.left = obj.left;
+							move.right = obj.right;
+							move.jump = obj.jump;
+							move.Player = obj.Player;
+							move.runSpeed = obj.runSpeed;
+							move.jumpForce = obj.jumpForce;
 						}
 
+						if (comp.GetComponentInChildren<ButtonTrigger> () != null) {
+							ButtonTrigger BT = comp.GetComponentInChildren<ButtonTrigger> ();
+							BT.mappingNames = obj.BTmappingNames;
+							BT.callName = obj.BTcallName;
+							BT.playerSpecific = obj.BTplayerSpecific;
+							BT.switched = obj.BTswitched;
+							BT.triggerList = obj.BTtriggerList;
+							BT.untriggerList = obj.BTuntriggerList;
+						}
+
+						//ADD NEW PROPERTIES ABOVE THIS LINE
 					}
 				}
-
-				//sets player 1 location and move keys
-				player1.transform.position = level.player1loc;
-				player1.GetComponent<PlayerMovement> ().left = level.p1left;
-				player1.GetComponent<PlayerMovement> ().right = level.p1right;
-				player1.GetComponent<PlayerMovement> ().jump = level.p1jump;
-
-				//sets player 2 location and move keys
-				player2.transform.position = level.player2loc;
-				player2.GetComponent<PlayerMovement> ().left = level.p2left;
-				player2.GetComponent<PlayerMovement> ().right = level.p2right;
-				player2.GetComponent<PlayerMovement> ().jump = level.p2jump;
 
 			} else //skips over gaps in list of levels
 				LoadLevel (num + 1);
