@@ -9,6 +9,8 @@ using UnityEngine;
 public class SaveLevel : MonoBehaviour {
 
 	public Level newLevel;
+	[HideInInspector]
+	Stats stats;
 
 	//make all level object prefabs a public game object here
 	public GameObject exitBoth;
@@ -82,6 +84,17 @@ public class SaveLevel : MonoBehaviour {
 		//find prefab's name
 		string name = comp.GetComponent<ObjIdentifier> ().prefabName;
 
+
+		if (stats == null)
+			stats = GetComponent<Stats> ();
+		
+		if (comp.name.Contains ("Player 1")) {
+			stats.P1_respawn = comp.transform.position;
+		}
+		if (comp.name.Contains ("Player 2")) {
+			stats.P2_respawn = comp.transform.position;
+		}
+
 		if (comp.GetComponent<PlayerMovement>() != null) {
 			PlayerMovement move = comp.GetComponent<PlayerMovement>();
 			newObj.left = move.left;
@@ -114,6 +127,7 @@ public class SaveLevel : MonoBehaviour {
 			newObj.BTtriggerList = BT.triggerList;
 			newObj.BTuntriggerList = BT.untriggerList;
 		}
+		
 
 		//ADD NEW PROPERTIES ABOVE THIS LINE
 

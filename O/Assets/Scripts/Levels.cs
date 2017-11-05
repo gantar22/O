@@ -10,6 +10,9 @@ public class Levels : MonoBehaviour {
 	public Level[] levels;
 	public int startingLevel;
 
+	[HideInInspector]
+	Stats stats;
+
 	void Start() {
 
 		EndLevel ();
@@ -39,15 +42,17 @@ public class Levels : MonoBehaviour {
 
 			if (levels [num] != null) { //make sure level to load exists
 				//update current level in Stats
-				GetComponent<Stats>().currLevel = num;
+				if (stats == null)
+					stats = GetComponent<Stats> ();
+				stats.currLevel = num;
 
 			
 				//set the level to be loaded
 				Level level = levels [num];
 				if (updateSaveNewLevel) {
-					gameObject.GetComponent<SaveLevel>().newLevel = level;
+					gameObject.GetComponent<SaveLevel> ().newLevel = level;
 				}
-				Camera.main.orthographicSize = levels[num].cameraSize;
+				Camera.main.orthographicSize = levels [num].cameraSize;
 				LevelObject[] objs = level.components;
 
 				//put all the objects in the level
@@ -75,7 +80,8 @@ public class Levels : MonoBehaviour {
 							plat.verticalMoveSpeed = obj.platVerticalMoveSpeed;
 							plat.returnOnUntrigger = obj.platReturnOnUntrigger;
 						}
-						if(comp.GetComponent<PlayerMovement> () != null) {
+
+						if (comp.GetComponent<PlayerMovement> () != null) {
 							PlayerMovement move = comp.GetComponent<PlayerMovement> ();
 							move.left = obj.left;
 							move.right = obj.right;
@@ -94,6 +100,16 @@ public class Levels : MonoBehaviour {
 							BT.triggerList = obj.BTtriggerList;
 							BT.untriggerList = obj.BTuntriggerList;
 						}
+
+						/*
+						if (comp.name.Contains ("Player 1")) {
+							comp.transform.position = stats.P1_respawn;
+						}
+
+						if (comp.name.Contains ("Player 2")) {
+							comp.transform.position = stats.P2_respawn;
+						}
+						*/
 
 						//ADD NEW PROPERTIES ABOVE THIS LINE
 					}
