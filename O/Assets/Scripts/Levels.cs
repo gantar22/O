@@ -15,21 +15,42 @@ public class Levels : MonoBehaviour {
 
 	void Start() {
 
+		stats = GetComponent<Stats> ();
 		EndLevel ();
 		LoadLevel (startingLevel);
 
 	}
 
-	public void EndLevel () {
+	public void restart() {
+		int currLevel = stats.currLevel;
+		EndLevel ();
+		LoadLevel (currLevel);
+	}
 
+	public void respawn() {
+		stats.respawning = true;
+		restart ();
+		stats.respawning = false;
+	}
+
+	public void EndLevel () {
 		//destroy all level objects not to carry over into next level
+		if (stats == null)
+			stats = GetComponent<Stats> ();
+
 		GameObject[] objs = GameObject.FindGameObjectsWithTag ("LevelObj");
 		foreach (GameObject obj in objs) {
-			if (Application.isPlaying)
-				Destroy (obj);
-			else
-				DestroyImmediate (obj);
-		}/*
+
+			if (obj.GetComponent<Checkpoint> () != null && stats.respawning == true) {
+				if (obj.GetComponent<Checkpoint> ().Checkpt_State == States.triggered)
+					obj.GetComponent<Checkpoint> ().change_state(States.idle);
+			} else {
+				if (Application.isPlaying)
+					Destroy (obj);
+				else
+					DestroyImmediate (obj);
+			}
+		} /*
 		while (objs.Length > 0) {
 			DestroyImmediate(objs[0]);
 		} */
@@ -37,13 +58,13 @@ public class Levels : MonoBehaviour {
 	}
 
 	public void LoadLevel(int num) {
+		if (stats == null)
+			stats = GetComponent<Stats> ();
 
 		if (0 <= num && num < levels.Length) { //make sure level index is valid
 
 			if (levels [num] != null) { //make sure level to load exists
 				//update current level in Stats
-				if (stats == null)
-					stats = GetComponent<Stats> ();
 				stats.currLevel = num;
 
 			
@@ -58,7 +79,7 @@ public class Levels : MonoBehaviour {
 				//put all the objects in the level
 				foreach (LevelObject obj in objs) {
 
-					if (obj.type != null) {
+					if (obj.type != null && !(obj.type.name.Contains("Checkpoint") && stats.respawning == true)) {
 
 						GameObject comp = Instantiate (obj.type, obj.position, Quaternion.identity);
 					
@@ -67,6 +88,23 @@ public class Levels : MonoBehaviour {
 							comp.transform.localScale = Vector3.one;
 						else
 							comp.transform.localScale = new Vector3 (obj.scale.x, obj.scale.y, 1f);
+
+						if (comp.name.Contains ("Player 1")) {
+							if (!stats.respawning) {
+								stats.P1_respawn = comp.transform.position;
+								GameObject checkpt = Instantiate (this.GetComponentInParent<SaveLevel>().CheckpointP1, comp.transform.position, Quaternion.identity);
+								checkpt.GetComponent<Checkpoint> ().Checkpt_State = States.active;
+							}
+							comp.transform.position = stats.P1_respawn;
+						}
+						if (comp.name.Contains ("Player 2")) {
+							if (!stats.respawning) {
+								stats.P2_respawn = comp.transform.position;
+								GameObject checkpt = Instantiate (this.GetComponentInParent<SaveLevel>().CheckpointP2, comp.transform.position, Quaternion.identity);
+								checkpt.GetComponent<Checkpoint> ().Checkpt_State = States.active;
+							}
+							comp.transform.position = stats.P2_respawn;
+						}
 
 						if (comp.GetComponent<Platform> () != null) {
 							Platform plat = comp.GetComponent<Platform> ();
@@ -101,18 +139,13 @@ public class Levels : MonoBehaviour {
 							BT.untriggerList = obj.BTuntriggerList;
 						}
 
-						/*
-						if (comp.name.Contains ("Player 1")) {
-							comp.transform.position = stats.P1_respawn;
-						}
-
-						if (comp.name.Contains ("Player 2")) {
-							comp.transform.position = stats.P2_respawn;
-						}
-						*/
-
 						//ADD NEW PROPERTIES ABOVE THIS LINE
 					}
+				}
+
+				if (!stats.respawning) {
+					// Create a checkpoint where each player spawns
+
 				}
 
 			} else //skips over gaps in list of levels

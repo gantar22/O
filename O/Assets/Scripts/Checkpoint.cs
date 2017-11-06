@@ -7,6 +7,12 @@ public enum States {idle, triggered, active, invis}
 
 public class Checkpoint : MonoBehaviour {
 
+	[HideInInspector]
+	public GameObject GameController;
+	[HideInInspector]
+	Stats stats;
+
+	[HideInInspector]
 	public PlayerNums Player;
 	public Sprite[] Sprites;
 
@@ -25,8 +31,11 @@ public class Checkpoint : MonoBehaviour {
 
 	void OnTriggerEnter2D(Collider2D other) {
 		if (other.name.Contains("Player 1") && Player == PlayerNums.P1 && Checkpt_State == States.idle) {
-			Checkpt_State = States.triggered;
+			change_state(States.triggered);
 			EventManager.TriggerEvent ("Find_P2_checkpt");
+		} else if (other.name.Contains("Player 2") && Player == PlayerNums.P2 && Checkpt_State == States.idle) {
+			change_state(States.triggered);
+			EventManager.TriggerEvent ("Find_P1_checkpt");
 		}
 	}
 
@@ -37,12 +46,26 @@ public class Checkpoint : MonoBehaviour {
 	}
 
 	void Pair_found() {
-		if (Checkpt_State == States.active)
-			// Fading/dissapearing animation?
-			Checkpt_State = States.invis;
-		if (Checkpt_State == States.triggered)
-			Checkpt_State = States.active;
+		if (GameController == null)
+			GameController = GameObject.FindGameObjectWithTag ("GameController");
+		stats = GameController.GetComponent<Stats> ();
 
+		if (Checkpt_State == States.active) {
+			// Fading/dissapearing animation?
+			change_state(States.invis);
+		}
+			
+		if (Checkpt_State == States.triggered) {
+			change_state(States.active);
+			if (Player == PlayerNums.P1)
+				stats.P1_respawn = transform.position;
+			else
+				stats.P2_respawn = transform.position;
+		}
+	}
+
+	public void change_state(States new_state) {
+		Checkpt_State = new_state;
 		update_sprite ();
 	}
 
@@ -61,6 +84,9 @@ public class Checkpoint : MonoBehaviour {
 			sprite_index += 1;
 		if (Checkpt_State == States.active)
 			sprite_index += 2;
-		SR.sprite = Sprites [sprite_index];
+
+		if (!(SR.sprite == Sprites [sprite_index])) {
+			SR.sprite = Sprites [sprite_index];
+		}
 	}
 }

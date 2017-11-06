@@ -8,5 +8,11 @@ public class Stats : MonoBehaviour {
 	public int currLevel;
 	[HideInInspector]
 	public Vector3 P1_respawn, P2_respawn;
+	[HideInInspector]
+	public bool respawning;
+
+	void Start() {
+		respawning = false;
+	}
 
 }
