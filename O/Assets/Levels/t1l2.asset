@@ -65,13 +65,13 @@ MonoBehaviour:
   - type: {fileID: 1349471688338012, guid: 56a255af996e12c4da9ce60393b32e8b, type: 2}
     position: {x: 3.5, y: -3, z: 0}
     rotation: 0
-    scale: {x: 0.8, y: 0.75}
-    right: 275
-    left: 276
-    jump: 119
-    Player: 2
-    runSpeed: 5
-    jumpForce: 1300
+    scale: {x: 5, y: 4}
+    right: 0
+    left: 0
+    jump: 0
+    Player: 0
+    runSpeed: 0
+    jumpForce: 0
     platformID: 0
     platMoveSetting: 0
     platTranslation: {x: 0, y: 0}
@@ -113,7 +113,7 @@ MonoBehaviour:
     BTtriggerList: []
     BTuntriggerList: []
   - type: {fileID: 1349471688338012, guid: 56a255af996e12c4da9ce60393b32e8b, type: 2}
-    position: {x: 17.5, y: -7.926, z: 0}
+    position: {x: 17.516, y: -7.926, z: 0}
     rotation: 0
     scale: {x: -8.968297, y: 3.6473856}
     right: 0
@@ -195,7 +195,7 @@ MonoBehaviour:
     left: 97
     jump: 273
     Player: 1
-    runSpeed: 5
+    runSpeed: 6
     jumpForce: 1300
     platformID: 0
     platMoveSetting: 0
