@@ -207,7 +207,7 @@ public class Platform : MonoBehaviour {
 			}
 		}
 
-		this.GetComponent<Transform>().Translate(velo*Time.deltaTime);
+		this.GetComponent<Transform> ().position += (Vector3) (velo * Time.deltaTime);
 	}
 
 	// Helper functions
@@ -217,7 +217,7 @@ public class Platform : MonoBehaviour {
 
 	bool hasReached (Vector2 destination) {
 		Vector2 Pos = new Vector2 (transform.position.x, transform.position.y);
-		return (Pos - destination).magnitude < 0.05f; // Change this float to adjust how close the platform has to get to start/end
+		return (Pos - destination).magnitude < 0.1f; // Change this float to adjust how close the platform has to get to start/end
 	}
 }
 

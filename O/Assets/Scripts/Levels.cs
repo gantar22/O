@@ -28,6 +28,9 @@ public class Levels : MonoBehaviour {
 	}
 
 	public void respawn() {
+		if (stats == null)
+			stats = GetComponent<Stats> ();
+		
 		stats.respawning = true;
 		restart ();
 		stats.respawning = false;
@@ -92,16 +95,21 @@ public class Levels : MonoBehaviour {
 						if (comp.name.Contains ("Player 1")) {
 							if (!stats.respawning) {
 								stats.P1_respawn = comp.transform.position;
-								GameObject checkpt = Instantiate (this.GetComponentInParent<SaveLevel>().CheckpointP1, comp.transform.position, Quaternion.identity);
-								checkpt.GetComponent<Checkpoint> ().Checkpt_State = States.active;
+								if (Application.isPlaying) {
+									GameObject checkpt = Instantiate (this.GetComponentInParent<SaveLevel> ().CheckpointP1, comp.transform.position, Quaternion.identity);
+									checkpt.GetComponent<Checkpoint> ().Checkpt_State = States.active;
+								}
 							}
 							comp.transform.position = stats.P1_respawn;
 						}
+
 						if (comp.name.Contains ("Player 2")) {
 							if (!stats.respawning) {
 								stats.P2_respawn = comp.transform.position;
-								GameObject checkpt = Instantiate (this.GetComponentInParent<SaveLevel>().CheckpointP2, comp.transform.position, Quaternion.identity);
-								checkpt.GetComponent<Checkpoint> ().Checkpt_State = States.active;
+								if (Application.isPlaying) {
+									GameObject checkpt = Instantiate (this.GetComponentInParent<SaveLevel> ().CheckpointP2, comp.transform.position, Quaternion.identity);
+									checkpt.GetComponent<Checkpoint> ().Checkpt_State = States.active;
+								}
 							}
 							comp.transform.position = stats.P2_respawn;
 						}
@@ -141,11 +149,6 @@ public class Levels : MonoBehaviour {
 
 						//ADD NEW PROPERTIES ABOVE THIS LINE
 					}
-				}
-
-				if (!stats.respawning) {
-					// Create a checkpoint where each player spawns
-
 				}
 
 			} else //skips over gaps in list of levels

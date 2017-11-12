@@ -91,9 +91,14 @@ public class PlayerMovement : MonoBehaviour {
 		//p1 and p2 are the ends of that line
 		Vector2 p1 = new Vector2 (pos.x - width / 2f + 0.01f, pos.y - height / 2f - 0.02f);
 		Vector2 p2 = new Vector2 (pos.x + width / 2f - 0.01f, pos.y - height / 2f - 0.02f);
-		
-		return (Physics2D.Linecast (p1, p2) && !Physics2D.Linecast (p1, p2).collider.name.Contains("Exit"));
 
+		if (Physics2D.Linecast (p1, p2)) {
+			string collider = Physics2D.Linecast (p1, p2).collider.name;
+			if (!(collider.Contains ("Exit") || collider.Contains ("Checkpoint"))) {
+				return true;
+			}
+		}
+		return false;
 	}
 
 	void OnPlatform () {
