@@ -113,24 +113,18 @@ public class PlayerMovement : MonoBehaviour {
 		Vector2 p2 = new Vector2 (pos.x + width / 2f - 0.01f, pos.y - height / 2f - 0.02f);
 
 
-
-
-		if (Physics2D.Linecast (p1, p2) && (Physics2D.Linecast (p1, p2).collider.name.Contains("Platform")
-			|| Physics2D.Linecast (p1, p2).collider.name.Contains("Button"))) {
+		if (Physics2D.Linecast (p1, p2) && (Physics2D.Linecast (p1, p2).collider.name.Contains ("Platform")
+		    || Physics2D.Linecast (p1, p2).collider.name.Contains ("Button"))) {
 			transform.parent = Physics2D.Linecast (p1, p2).collider.gameObject.transform;
-		} 
+		} else if (transform.parent != null) {
+			transform.parent = null;
+		}
 	}
 	void OnCollisionExit2D(Collision2D coll) {
-		if (coll.collider.name.Contains("Platform") || coll.collider.name.Contains("Button")) {
-			if (transform.parent != null && transform.parent == coll.collider.transform) {
-				transform.parent = null;
-			}
-		}
+		
 	}
 	void OnCollisionEnter2D(Collision2D coll) {
-		if (coll.collider.name.Contains("Button")) {
-			transform.parent = coll.collider.transform;
-		}
+		
 	}
 
 }

@@ -42,22 +42,20 @@ public class Levels : MonoBehaviour {
 			stats = GetComponent<Stats> ();
 
 		GameObject[] objs = GameObject.FindGameObjectsWithTag ("LevelObj");
+
 		foreach (GameObject obj in objs) {
-
-			if (obj.GetComponent<Checkpoint> () != null && stats.respawning == true) {
-				if (obj.GetComponent<Checkpoint> ().Checkpt_State == States.triggered)
-					obj.GetComponent<Checkpoint> ().change_state(States.idle);
-			} else {
-				if (Application.isPlaying)
-					Destroy (obj);
-				else
-					DestroyImmediate (obj);
+			if (!(obj == null)) {
+				if (obj.GetComponent<Checkpoint> () != null && stats.respawning == true) {
+					if (obj.GetComponent<Checkpoint> ().Checkpt_State == States.triggered)
+						obj.GetComponent<Checkpoint> ().change_state (States.idle);
+				} else {
+					if (Application.isPlaying)
+						Destroy (obj);
+					else
+						DestroyImmediate (obj);
+				}
 			}
-		} /*
-		while (objs.Length > 0) {
-			DestroyImmediate(objs[0]);
-		} */
-
+		} 
 	}
 
 	public void LoadLevel(int num) {
