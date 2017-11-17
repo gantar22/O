@@ -45,7 +45,7 @@ public class Levels : MonoBehaviour {
 
 		foreach (GameObject obj in objs) {
 			if (!(obj == null)) {
-				if (obj.GetComponent<Checkpoint> () != null && stats.respawning == true) {
+				if (obj.GetComponent<Checkpoint> () != null && stats.respawning) {
 					if (obj.GetComponent<Checkpoint> ().Checkpt_State == States.triggered)
 						obj.GetComponent<Checkpoint> ().change_state (States.idle);
 				} else {
@@ -74,13 +74,15 @@ public class Levels : MonoBehaviour {
 				if (updateSaveNewLevel) {
 					gameObject.GetComponent<SaveLevel> ().newLevel = level;
 				}
-
-				Camera.main.orthographicSize = levels [num].cameraSize;
+					
 				if (levels [num].dynamicCam) {
 					Camera.main.GetComponent<DynamicCamera>().enabled = true;
 				} else {
 					Camera.main.GetComponent<DynamicCamera>().enabled = false;
+					Camera.main.transform.position = new Vector3 (0, 0, Camera.main.transform.position.z);
 				}
+				if (!stats.respawning)
+					Camera.main.orthographicSize = levels [num].cameraSize;
 
 				stats.trig_P1_check = null;
 				stats.trig_P2_check = null;
@@ -91,7 +93,7 @@ public class Levels : MonoBehaviour {
 				foreach (LevelObject obj in objs) {
 
 
-					if (obj.type != null && !(obj.type.name.Contains("Checkpoint") && stats.respawning == true)) {
+					if (obj.type != null && !(obj.type.name.Contains("Checkpoint") && stats.respawning)) {
 
 						GameObject comp = Instantiate (obj.type, obj.position, Quaternion.identity);
 					
@@ -110,7 +112,7 @@ public class Levels : MonoBehaviour {
 									checkpt.GetComponent<Checkpoint> ().Checkpt_State = States.active;
 								}
 							}
-							comp.transform.position = stats.P1_respawn;
+							comp.transform.position = stats.P1_respawn - new Vector3(0, 0, 1);
 						}
 
 						if (comp.name.Contains ("Player 2")) {
@@ -121,7 +123,7 @@ public class Levels : MonoBehaviour {
 									checkpt.GetComponent<Checkpoint> ().Checkpt_State = States.active;
 								}
 							}
-							comp.transform.position = stats.P2_respawn;
+							comp.transform.position = stats.P2_respawn - new Vector3(0, 0, 1);
 						}
 
 						if (comp.GetComponent<Platform> () != null) {
