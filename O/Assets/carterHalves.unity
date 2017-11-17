@@ -155,10 +155,6 @@ MonoBehaviour:
   right: 275
   jump: 119
   Player: 2
-  maxRunSpeed: 0
-  terminalVelocity: 0
-  runAcc: 0
-  quadraticDragCoefficient: 0
   runSpeed: 6
   jumpForce: 1300
 --- !u!50 &48601011
@@ -308,10 +304,6 @@ MonoBehaviour:
   right: 275
   jump: 119
   Player: 2
-  maxRunSpeed: 0
-  terminalVelocity: 0
-  runAcc: 0
-  quadraticDragCoefficient: 0
   runSpeed: 6
   jumpForce: 1300
 --- !u!50 &60278329
@@ -787,8 +779,8 @@ GameObject:
   - component: {fileID: 862887659}
   - component: {fileID: 862887658}
   - component: {fileID: 862887657}
-  - component: {fileID: 862887656}
   - component: {fileID: 862887655}
+  - component: {fileID: 862887656}
   m_Layer: 0
   m_Name: Player 1(Clone)
   m_TagString: LevelObj
@@ -811,7 +803,7 @@ CharacterController:
   m_SlopeLimit: 45
   m_StepOffset: 0.3
   m_SkinWidth: 0.08
-  m_MinMoveDistance: 0.001
+  m_MinMoveDistance: 0.008
   m_Center: {x: 0, y: -0.2, z: 0}
 --- !u!114 &862887656
 MonoBehaviour:
@@ -826,15 +818,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   left: 97
   right: 100
-  jump: 330
-  horizontal: Horizontal_J1
+  jump: 273
+  horizontal: 
   Player: 0
-  maxRunSpeed: 83
-  terminalVelocity: 0
+  maxRunSpeed: 10
+  terminalVelocity: 31
   runAcc: 0.5
-  quadraticDragCoefficient: 0
+  quadraticDragCoefficient: -0.1
   runSpeed: 0
-  jumpForce: 0
+  jumpForce: 10
 --- !u!114 &862887657
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -896,7 +888,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 862887654}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -7.8, y: 3.5, z: -1}
+  m_LocalPosition: {x: -7.74, y: 3.53, z: 0}
   m_LocalScale: {x: 0.8, y: 0.75, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
