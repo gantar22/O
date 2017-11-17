@@ -30,11 +30,22 @@ public class Checkpoint : MonoBehaviour {
 	}
 
 	void OnTriggerEnter2D(Collider2D other) {
+		get_references ();
 		if (other.name.Contains("Player 1") && Player == PlayerNums.P1 && Checkpt_State == States.idle) {
 			change_state(States.triggered);
+			if (stats.trig_P1_check != null) {
+				stats.trig_P1_check.change_state (States.idle);
+			}
+			stats.trig_P1_check = this;
+
 			EventManager.TriggerEvent ("Find_P2_checkpt");
 		} else if (other.name.Contains("Player 2") && Player == PlayerNums.P2 && Checkpt_State == States.idle) {
 			change_state(States.triggered);
+			if (stats.trig_P2_check != null) {
+				stats.trig_P2_check.change_state (States.idle);
+			}
+			stats.trig_P2_check = this;
+
 			EventManager.TriggerEvent ("Find_P1_checkpt");
 		}
 	}
@@ -42,13 +53,13 @@ public class Checkpoint : MonoBehaviour {
 	void Try_to_pair() {
 		if (Checkpt_State == States.triggered) {
 			EventManager.TriggerEvent ("Pair_found");
+			stats.trig_P1_check = null;
+			stats.trig_P2_check = null;
 		}
 	}
 
 	void Pair_found() {
-		if (GameController == null)
-			GameController = GameObject.FindGameObjectWithTag ("GameController");
-		stats = GameController.GetComponent<Stats> ();
+		get_references ();
 
 		if (Checkpt_State == States.active) {
 			// Fading/dissapearing animation?
@@ -67,6 +78,13 @@ public class Checkpoint : MonoBehaviour {
 	public void change_state(States new_state) {
 		Checkpt_State = new_state;
 		update_sprite ();
+	}
+	
+	void get_references() {
+		if (GameController == null)
+			GameController = GameObject.FindGameObjectWithTag ("GameController");
+		if (stats == null)
+			stats = GameController.GetComponent<Stats> ();
 	}
 
 	void update_sprite() {

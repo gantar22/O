@@ -94,7 +94,7 @@ public class PlayerMovement : MonoBehaviour {
 
 		if (Physics2D.Linecast (p1, p2)) {
 			string collider = Physics2D.Linecast (p1, p2).collider.name;
-			if (!(collider.Contains ("Exit") || collider.Contains ("Checkpoint"))) {
+			if (!(collider.Contains ("Exit") || collider.Contains ("Checkpoint") || collider.Contains("Spikes"))) {
 				return true;
 			}
 		}

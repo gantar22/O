@@ -82,6 +82,9 @@ public class Levels : MonoBehaviour {
 					Camera.main.GetComponent<DynamicCamera>().enabled = false;
 				}
 
+				stats.trig_P1_check = null;
+				stats.trig_P2_check = null;
+
 				LevelObject[] objs = level.components;
 
 				//put all the objects in the level
