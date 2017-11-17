@@ -74,7 +74,14 @@ public class Levels : MonoBehaviour {
 				if (updateSaveNewLevel) {
 					gameObject.GetComponent<SaveLevel> ().newLevel = level;
 				}
+
 				Camera.main.orthographicSize = levels [num].cameraSize;
+				if (levels [num].dynamicCam) {
+					Camera.main.GetComponent<DynamicCamera>().enabled = true;
+				} else {
+					Camera.main.GetComponent<DynamicCamera>().enabled = false;
+				}
+
 				LevelObject[] objs = level.components;
 
 				//put all the objects in the level

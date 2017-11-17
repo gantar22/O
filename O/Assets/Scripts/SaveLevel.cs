@@ -35,6 +35,7 @@ public class SaveLevel : MonoBehaviour {
 
 	void Update() {
 		newLevel.cameraSize = Camera.main.orthographicSize;
+		newLevel.dynamicCam = Camera.main.GetComponent<DynamicCamera> ().enabled;
 		newLevel.components = GetComponentList();
 		#if UNITY_EDITOR
 			EditorUtility.SetDirty (newLevel);
