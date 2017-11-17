@@ -87,6 +87,7 @@ public class Levels : MonoBehaviour {
 				//put all the objects in the level
 				foreach (LevelObject obj in objs) {
 
+
 					if (obj.type != null && !(obj.type.name.Contains("Checkpoint") && stats.respawning == true)) {
 
 						GameObject comp = Instantiate (obj.type, obj.position, Quaternion.identity);
@@ -98,6 +99,7 @@ public class Levels : MonoBehaviour {
 							comp.transform.localScale = new Vector3 (obj.scale.x, obj.scale.y, 1f);
 
 						if (comp.name.Contains ("Player 1")) {
+
 							if (!stats.respawning) {
 								stats.P1_respawn = comp.transform.position;
 								if (Application.isPlaying) {

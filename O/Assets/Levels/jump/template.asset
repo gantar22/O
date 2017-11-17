@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Name: template
   m_EditorClassIdentifier: 
   components:
-  - type: {fileID: 1349471688338012, guid: 56a255af996e12c4da9ce60393b32e8b, type: 2}
+  - type: {fileID: 1612545665011686, guid: 56a255af996e12c4da9ce60393b32e8b, type: 2}
     position: {x: 0.01, y: -6.781, z: 0}
     rotation: 0
     scale: {x: 27.39, y: 7.481347}
@@ -62,7 +62,7 @@ MonoBehaviour:
     BTswitched: 0
     BTtriggerList: []
     BTuntriggerList: []
-  - type: {fileID: 1349471688338012, guid: 56a255af996e12c4da9ce60393b32e8b, type: 2}
+  - type: {fileID: 1612545665011686, guid: 56a255af996e12c4da9ce60393b32e8b, type: 2}
     position: {x: -13.25, y: -1, z: 0}
     rotation: 0
     scale: {x: 2.5, y: 6.32}
@@ -87,7 +87,7 @@ MonoBehaviour:
     BTswitched: 0
     BTtriggerList: []
     BTuntriggerList: []
-  - type: {fileID: 1349471688338012, guid: 56a255af996e12c4da9ce60393b32e8b, type: 2}
+  - type: {fileID: 1612545665011686, guid: 56a255af996e12c4da9ce60393b32e8b, type: 2}
     position: {x: -0.01, y: -3.1, z: -4.2}
     rotation: 0
     scale: {x: 5.57, y: 3.31}
@@ -162,7 +162,7 @@ MonoBehaviour:
     BTswitched: 0
     BTtriggerList: []
     BTuntriggerList: []
-  - type: {fileID: 1349471688338012, guid: 56a255af996e12c4da9ce60393b32e8b, type: 2}
+  - type: {fileID: 1612545665011686, guid: 56a255af996e12c4da9ce60393b32e8b, type: 2}
     position: {x: 13.31, y: -1, z: 0}
     rotation: 0
     scale: {x: 2.5, y: 6.32}

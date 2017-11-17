@@ -79,7 +79,7 @@ public class PlayerMovement : MonoBehaviour {
 	bool OnGround () {
 
 		//find width and height of character
-		BoxCollider2D coll = GetComponent<BoxCollider2D> ();
+		CapsuleCollider2D coll = GetComponent<CapsuleCollider2D> ();
 		Vector2 pos = new Vector2(transform.position.x + coll.offset.x * transform.localScale.x, 
 			transform.position.y + coll.offset.y * transform.localScale.y);
 		float width = coll.bounds.size.x;
@@ -103,7 +103,7 @@ public class PlayerMovement : MonoBehaviour {
 
 	void OnPlatform () {
 		//find width and height of character
-		BoxCollider2D coll = GetComponent<BoxCollider2D> ();
+		CapsuleCollider2D coll = GetComponent<CapsuleCollider2D> ();
 		Vector2 pos = new Vector2(transform.position.x + coll.offset.x * transform.localScale.x, 
 			transform.position.y + coll.offset.y * transform.localScale.y);
 		float width = coll.bounds.size.x;
