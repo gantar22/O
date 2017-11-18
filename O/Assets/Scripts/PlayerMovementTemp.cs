@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerMovement : MonoBehaviour {
+public class PlayerMovementTemp : MonoBehaviour {
 
 	public KeyCode left;
 	public KeyCode right;
