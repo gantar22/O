@@ -10,50 +10,90 @@ public class Levels : MonoBehaviour {
 	public Level[] levels;
 	public int startingLevel;
 
+	[HideInInspector]
+	Stats stats;
+
 	void Start() {
 
+		stats = GetComponent<Stats> ();
 		EndLevel ();
 		LoadLevel (startingLevel);
 
 	}
 
+	public void restart() {
+		int currLevel = stats.currLevel;
+		EndLevel ();
+		LoadLevel (currLevel);
+	}
+
+	public void respawn() {
+		if (stats == null)
+			stats = GetComponent<Stats> ();
+		
+		stats.respawning = true;
+		restart ();
+		stats.respawning = false;
+	}
+
 	public void EndLevel () {
-
 		//destroy all level objects not to carry over into next level
-		GameObject[] objs = GameObject.FindGameObjectsWithTag ("LevelObj");
-		foreach (GameObject obj in objs) {
-			if (Application.isPlaying)
-				Destroy (obj);
-			else
-				DestroyImmediate (obj);
-		}/*
-		while (objs.Length > 0) {
-			DestroyImmediate(objs[0]);
-		} */
+		if (stats == null)
+			stats = GetComponent<Stats> ();
 
+		GameObject[] objs = GameObject.FindGameObjectsWithTag ("LevelObj");
+
+		foreach (GameObject obj in objs) {
+			if (!(obj == null)) {
+				if (obj.GetComponent<Checkpoint> () != null && stats.respawning) {
+					if (obj.GetComponent<Checkpoint> ().Checkpt_State == States.triggered)
+						obj.GetComponent<Checkpoint> ().change_state (States.idle);
+				} else {
+					if (Application.isPlaying)
+						Destroy (obj);
+					else
+						DestroyImmediate (obj);
+				}
+			}
+		} 
 	}
 
 	public void LoadLevel(int num) {
+		if (stats == null)
+			stats = GetComponent<Stats> ();
 
 		if (0 <= num && num < levels.Length) { //make sure level index is valid
 
 			if (levels [num] != null) { //make sure level to load exists
 				//update current level in Stats
-				GetComponent<Stats>().currLevel = num;
+				stats.currLevel = num;
 
 			
 				//set the level to be loaded
 				Level level = levels [num];
 				if (updateSaveNewLevel) {
-					gameObject.GetComponent<SaveLevel>().newLevel = level;
+					gameObject.GetComponent<SaveLevel> ().newLevel = level;
 				}
-				Camera.main.orthographicSize = levels[num].cameraSize;
+					
+				if (levels [num].dynamicCam) {
+					Camera.main.GetComponent<DynamicCamera>().enabled = true;
+				} else {
+					Camera.main.GetComponent<DynamicCamera>().enabled = false;
+					Camera.main.transform.position = new Vector3 (0, 0, Camera.main.transform.position.z);
+				}
+				if (!stats.respawning)
+					Camera.main.orthographicSize = levels [num].cameraSize;
+
+				stats.trig_P1_check = null;
+				stats.trig_P2_check = null;
+
 				LevelObject[] objs = level.components;
 
 				//put all the objects in the level
 				foreach (LevelObject obj in objs) {
 
-					if (obj.type != null) {
+
+					if (obj.type != null && !(obj.type.name.Contains("Checkpoint") && stats.respawning)) {
 
 						GameObject comp = Instantiate (obj.type, obj.position, Quaternion.identity);
 					
@@ -62,6 +102,29 @@ public class Levels : MonoBehaviour {
 							comp.transform.localScale = Vector3.one;
 						else
 							comp.transform.localScale = new Vector3 (obj.scale.x, obj.scale.y, 1f);
+
+						if (comp.name.Contains ("Player 1")) {
+
+							if (!stats.respawning) {
+								stats.P1_respawn = comp.transform.position;
+								if (Application.isPlaying) {
+									GameObject checkpt = Instantiate (this.GetComponentInParent<SaveLevel> ().CheckpointP1, comp.transform.position, Quaternion.identity);
+									checkpt.GetComponent<Checkpoint> ().Checkpt_State = States.active;
+								}
+							}
+							comp.transform.position = stats.P1_respawn - new Vector3(0, 0, 1);
+						}
+
+						if (comp.name.Contains ("Player 2")) {
+							if (!stats.respawning) {
+								stats.P2_respawn = comp.transform.position;
+								if (Application.isPlaying) {
+									GameObject checkpt = Instantiate (this.GetComponentInParent<SaveLevel> ().CheckpointP2, comp.transform.position, Quaternion.identity);
+									checkpt.GetComponent<Checkpoint> ().Checkpt_State = States.active;
+								}
+							}
+							comp.transform.position = stats.P2_respawn - new Vector3(0, 0, 1);
+						}
 
 						if (comp.GetComponent<Platform> () != null) {
 							Platform plat = comp.GetComponent<Platform> ();
@@ -75,7 +138,8 @@ public class Levels : MonoBehaviour {
 							plat.verticalMoveSpeed = obj.platVerticalMoveSpeed;
 							plat.returnOnUntrigger = obj.platReturnOnUntrigger;
 						}
-						if(comp.GetComponent<PlayerMovement> () != null) {
+
+						if (comp.GetComponent<PlayerMovement> () != null) {
 							PlayerMovement move = comp.GetComponent<PlayerMovement> ();
 							move.left = obj.left;
 							move.right = obj.right;

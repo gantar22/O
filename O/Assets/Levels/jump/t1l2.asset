@@ -1,0 +1,290 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9eae96df7c2cd4d88a0bce0332189e3f, type: 3}
+  m_Name: t1l2
+  m_EditorClassIdentifier: 
+  components:
+  - type: {fileID: 1612545665011686, guid: 56a255af996e12c4da9ce60393b32e8b, type: 2}
+    position: {x: 12.5, y: -1, z: 0}
+    rotation: 0
+    scale: {x: 1, y: 12}
+    right: 0
+    left: 0
+    jump: 0
+    Player: 0
+    runSpeed: 0
+    jumpForce: 0
+    platformID: 0
+    platMoveSetting: 0
+    platTranslation: {x: 0, y: 0}
+    platTravelTime: 0
+    platMoveDelay: 0
+    platManualMapping: 0
+    platHorizontalMoveSpeed: 0
+    platVerticalMoveSpeed: 0
+    platReturnOnUntrigger: 0
+    BTmappingNames: []
+    BTcallName: 
+    BTplayerSpecific: 0
+    BTswitched: 0
+    BTtriggerList: []
+    BTuntriggerList: []
+  - type: {fileID: 1612545665011686, guid: 56a255af996e12c4da9ce60393b32e8b, type: 2}
+    position: {x: -12.5, y: 2.5, z: 0}
+    rotation: 0
+    scale: {x: 1, y: 5}
+    right: 0
+    left: 0
+    jump: 0
+    Player: 0
+    runSpeed: 0
+    jumpForce: 0
+    platformID: 0
+    platMoveSetting: 0
+    platTranslation: {x: 0, y: 0}
+    platTravelTime: 0
+    platMoveDelay: 0
+    platManualMapping: 0
+    platHorizontalMoveSpeed: 0
+    platVerticalMoveSpeed: 0
+    platReturnOnUntrigger: 0
+    BTmappingNames: []
+    BTcallName: 
+    BTplayerSpecific: 0
+    BTswitched: 0
+    BTtriggerList: []
+    BTuntriggerList: []
+  - type: {fileID: 1612545665011686, guid: 56a255af996e12c4da9ce60393b32e8b, type: 2}
+    position: {x: 4, y: -0.5, z: 0}
+    rotation: 0
+    scale: {x: 5, y: 1}
+    right: 0
+    left: 0
+    jump: 0
+    Player: 0
+    runSpeed: 0
+    jumpForce: 0
+    platformID: 0
+    platMoveSetting: 0
+    platTranslation: {x: 0, y: 0}
+    platTravelTime: 0
+    platMoveDelay: 0
+    platManualMapping: 0
+    platHorizontalMoveSpeed: 0
+    platVerticalMoveSpeed: 0
+    platReturnOnUntrigger: 0
+    BTmappingNames: []
+    BTcallName: 
+    BTplayerSpecific: 0
+    BTswitched: 0
+    BTtriggerList: []
+    BTuntriggerList: []
+  - type: {fileID: 1612545665011686, guid: 56a255af996e12c4da9ce60393b32e8b, type: 2}
+    position: {x: -12, y: -5, z: 0}
+    rotation: 0
+    scale: {x: 10, y: 10}
+    right: 0
+    left: 0
+    jump: 0
+    Player: 0
+    runSpeed: 0
+    jumpForce: 0
+    platformID: 0
+    platMoveSetting: 0
+    platTranslation: {x: 0, y: 0}
+    platTravelTime: 0
+    platMoveDelay: 0
+    platManualMapping: 0
+    platHorizontalMoveSpeed: 0
+    platVerticalMoveSpeed: 0
+    platReturnOnUntrigger: 0
+    BTmappingNames: []
+    BTcallName: 
+    BTplayerSpecific: 0
+    BTswitched: 0
+    BTtriggerList: []
+    BTuntriggerList: []
+  - type: {fileID: 1612545665011686, guid: 56a255af996e12c4da9ce60393b32e8b, type: 2}
+    position: {x: 0, y: -7, z: 0}
+    rotation: 0
+    scale: {x: 36, y: 2}
+    right: 0
+    left: 0
+    jump: 0
+    Player: 0
+    runSpeed: 0
+    jumpForce: 0
+    platformID: 0
+    platMoveSetting: 0
+    platTranslation: {x: 0, y: 0}
+    platTravelTime: 0
+    platMoveDelay: 0
+    platManualMapping: 0
+    platHorizontalMoveSpeed: 0
+    platVerticalMoveSpeed: 0
+    platReturnOnUntrigger: 0
+    BTmappingNames: []
+    BTcallName: 
+    BTplayerSpecific: 0
+    BTswitched: 0
+    BTtriggerList: []
+    BTuntriggerList: []
+  - type: {fileID: 1612545665011686, guid: 56a255af996e12c4da9ce60393b32e8b, type: 2}
+    position: {x: 13, y: -5, z: 0}
+    rotation: 0
+    scale: {x: -8.968297, y: 3.6473856}
+    right: 0
+    left: 0
+    jump: 0
+    Player: 0
+    runSpeed: 0
+    jumpForce: 0
+    platformID: 0
+    platMoveSetting: 0
+    platTranslation: {x: 0, y: 0}
+    platTravelTime: 0
+    platMoveDelay: 0
+    platManualMapping: 0
+    platHorizontalMoveSpeed: 0
+    platVerticalMoveSpeed: 0
+    platReturnOnUntrigger: 0
+    BTmappingNames: []
+    BTcallName: 
+    BTplayerSpecific: 0
+    BTswitched: 0
+    BTtriggerList: []
+    BTuntriggerList: []
+  - type: {fileID: 1912214553670882, guid: dc80944325554442b9c3828bf253b97d, type: 2}
+    position: {x: 4, y: 2, z: 1}
+    rotation: 0
+    scale: {x: 1, y: 1}
+    right: 0
+    left: 0
+    jump: 0
+    Player: 0
+    runSpeed: 0
+    jumpForce: 0
+    platformID: 0
+    platMoveSetting: 0
+    platTranslation: {x: 0, y: 0}
+    platTravelTime: 0
+    platMoveDelay: 0
+    platManualMapping: 0
+    platHorizontalMoveSpeed: 0
+    platVerticalMoveSpeed: 0
+    platReturnOnUntrigger: 0
+    BTmappingNames: []
+    BTcallName: 
+    BTplayerSpecific: 0
+    BTswitched: 0
+    BTtriggerList: []
+    BTuntriggerList: []
+  - type: {fileID: 1055245372309042, guid: 45aeefa8179926747b91555d81068bca, type: 2}
+    position: {x: -7.8, y: 3.5, z: -1}
+    rotation: 0
+    scale: {x: 0.8, y: 0.75}
+    right: 100
+    left: 97
+    jump: 273
+    Player: 1
+    runSpeed: 6
+    jumpForce: 1300
+    platformID: 0
+    platMoveSetting: 0
+    platTranslation: {x: 0, y: 0}
+    platTravelTime: 0
+    platMoveDelay: 0
+    platManualMapping: 0
+    platHorizontalMoveSpeed: 0
+    platVerticalMoveSpeed: 0
+    platReturnOnUntrigger: 0
+    BTmappingNames: []
+    BTcallName: 
+    BTplayerSpecific: 0
+    BTswitched: 0
+    BTtriggerList: []
+    BTuntriggerList: []
+  - type: {fileID: 1636419914159170, guid: a4a576d95fd6a5844b60010fc3d8c1c6, type: 2}
+    position: {x: -7.8, y: 3.5, z: -1}
+    rotation: 0
+    scale: {x: 0.7, y: 0.7}
+    right: 0
+    left: 0
+    jump: 0
+    Player: 0
+    runSpeed: 0
+    jumpForce: 0
+    platformID: 0
+    platMoveSetting: 0
+    platTranslation: {x: 0, y: 0}
+    platTravelTime: 0
+    platMoveDelay: 0
+    platManualMapping: 0
+    platHorizontalMoveSpeed: 0
+    platVerticalMoveSpeed: 0
+    platReturnOnUntrigger: 0
+    BTmappingNames: []
+    BTcallName: 
+    BTplayerSpecific: 0
+    BTswitched: 0
+    BTtriggerList: []
+    BTuntriggerList: []
+  - type: {fileID: 1081735922096214, guid: d0e6d8f5f9b0059439d42de6107b1ef2, type: 2}
+    position: {x: -10.6, y: 3.6, z: -1}
+    rotation: 0
+    scale: {x: 0.7, y: 0.7}
+    right: 0
+    left: 0
+    jump: 0
+    Player: 0
+    runSpeed: 0
+    jumpForce: 0
+    platformID: 0
+    platMoveSetting: 0
+    platTranslation: {x: 0, y: 0}
+    platTravelTime: 0
+    platMoveDelay: 0
+    platManualMapping: 0
+    platHorizontalMoveSpeed: 0
+    platVerticalMoveSpeed: 0
+    platReturnOnUntrigger: 0
+    BTmappingNames: []
+    BTcallName: 
+    BTplayerSpecific: 0
+    BTswitched: 0
+    BTtriggerList: []
+    BTuntriggerList: []
+  - type: {fileID: 1243324096993798, guid: 6885f8908e3096944a2f2734e9d6c498, type: 2}
+    position: {x: -10.6, y: 3.6, z: -1}
+    rotation: 0
+    scale: {x: 0.8, y: 0.75}
+    right: 275
+    left: 276
+    jump: 119
+    Player: 2
+    runSpeed: 6
+    jumpForce: 1300
+    platformID: 0
+    platMoveSetting: 0
+    platTranslation: {x: 0, y: 0}
+    platTravelTime: 0
+    platMoveDelay: 0
+    platManualMapping: 0
+    platHorizontalMoveSpeed: 0
+    platVerticalMoveSpeed: 0
+    platReturnOnUntrigger: 0
+    BTmappingNames: []
+    BTcallName: 
+    BTplayerSpecific: 0
+    BTswitched: 0
+    BTtriggerList: []
+    BTuntriggerList: []
+  cameraSize: 7

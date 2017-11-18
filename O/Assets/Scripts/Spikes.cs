@@ -12,9 +12,7 @@ public class Spikes : MonoBehaviour {
 			if (GameController == null)
 				GameController = GameObject.FindGameObjectWithTag ("GameController");
 
-			int currLevel = GameController.GetComponent<Stats> ().currLevel;
-			GameController.GetComponent<Levels> ().EndLevel ();
-			GameController.GetComponent<Levels> ().LoadLevel (currLevel);
+			GameController.GetComponent<Levels> ().respawn ();
 		}
 	}
 }

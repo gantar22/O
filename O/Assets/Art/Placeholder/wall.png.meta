@@ -1,6 +1,6 @@
 fileFormatVersion: 2
-guid: 69bce6578e554634388f80c6fe17f7f3
-timeCreated: 1509168638
+guid: 90f7466f65a65974781a54d0a6a01db1
+timeCreated: 1509834958
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName: {}
@@ -58,7 +58,7 @@ TextureImporter:
   - buildTarget: DefaultTexturePlatform
     maxTextureSize: 2048
     textureFormat: -1
-    textureCompression: 2
+    textureCompression: 1
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -66,7 +66,7 @@ TextureImporter:
   - buildTarget: Standalone
     maxTextureSize: 2048
     textureFormat: -1
-    textureCompression: 2
+    textureCompression: 1
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -74,7 +74,7 @@ TextureImporter:
   - buildTarget: iPhone
     maxTextureSize: 2048
     textureFormat: -1
-    textureCompression: 2
+    textureCompression: 1
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -82,7 +82,7 @@ TextureImporter:
   - buildTarget: Android
     maxTextureSize: 2048
     textureFormat: -1
-    textureCompression: 2
+    textureCompression: 1
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -90,7 +90,7 @@ TextureImporter:
   - buildTarget: WebGL
     maxTextureSize: 2048
     textureFormat: -1
-    textureCompression: 2
+    textureCompression: 1
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -99,65 +99,7 @@ TextureImporter:
     serializedVersion: 2
     sprites: []
     outline: []
-    physicsShape:
-    - - {x: 46, y: -150}
-      - {x: 43, y: -134}
-      - {x: 41, y: -125}
-      - {x: 38, y: -110}
-      - {x: 36, y: -101}
-      - {x: 35, y: -97}
-      - {x: 35, y: -89}
-      - {x: 53, y: 9}
-      - {x: 57, y: 31}
-      - {x: 58, y: 37}
-      - {x: 63, y: 64}
-      - {x: 64, y: 69}
-      - {x: 64, y: 72}
-      - {x: 61, y: 74}
-      - {x: -58, y: 74}
-      - {x: -59, y: 75}
-      - {x: -62, y: 75}
-      - {x: -64, y: 74}
-      - {x: -64, y: 60}
-      - {x: -53, y: 6}
-      - {x: -52, y: 0}
-      - {x: -50, y: -11}
-      - {x: -49, y: -16}
-      - {x: -48, y: -22}
-      - {x: -47, y: -27}
-      - {x: -46, y: -33}
-      - {x: -45, y: -38}
-      - {x: -44, y: -44}
-      - {x: -43, y: -49}
-      - {x: -42, y: -55}
-      - {x: -41, y: -60}
-      - {x: -40, y: -66}
-      - {x: -39, y: -71}
-      - {x: -38, y: -77}
-      - {x: -37, y: -82}
-      - {x: -36, y: -88}
-      - {x: -35, y: -100}
-      - {x: -36, y: -101}
-      - {x: -38, y: -111}
-      - {x: -46, y: -154}
-      - {x: -50, y: -176}
-      - {x: -54, y: -197}
-      - {x: -54, y: -199}
-      - {x: -53, y: -200}
-      - {x: 56, y: -200}
-      - {x: 56, y: -198}
-      - {x: 54, y: -188}
-      - {x: 53, y: -178}
-    - - {x: 37, y: 138}
-      - {x: 26, y: 152}
-      - {x: 10, y: 161}
-      - {x: -19, y: 161}
-      - {x: -41, y: 144}
-      - {x: -41, y: 106}
-      - {x: -22, y: 83}
-      - {x: 15, y: 83}
-      - {x: 29, y: 92}
-      - {x: 37, y: 108}
+    physicsShape: []
   spritePackingTag: 
   userData: 
   assetBundleName: 

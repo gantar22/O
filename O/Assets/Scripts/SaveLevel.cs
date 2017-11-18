@@ -9,6 +9,8 @@ using UnityEngine;
 public class SaveLevel : MonoBehaviour {
 
 	public Level newLevel;
+	[HideInInspector]
+	Stats stats;
 
 	//make all level object prefabs a public game object here
 	public GameObject exitBoth;
@@ -25,12 +27,15 @@ public class SaveLevel : MonoBehaviour {
 	public GameObject exitPlatform;
 	public GameObject spikedWall;
 	public GameObject spikedBall;
+	public GameObject CheckpointP1;
+	public GameObject CheckpointP2;
 
 
 	private LevelObject newObj;
 
 	void Update() {
 		newLevel.cameraSize = Camera.main.orthographicSize;
+		newLevel.dynamicCam = Camera.main.GetComponent<DynamicCamera> ().enabled;
 		newLevel.components = GetComponentList();
 		#if UNITY_EDITOR
 			EditorUtility.SetDirty (newLevel);
@@ -80,6 +85,17 @@ public class SaveLevel : MonoBehaviour {
 		//find prefab's name
 		string name = comp.GetComponent<ObjIdentifier> ().prefabName;
 
+
+		if (stats == null)
+			stats = GetComponent<Stats> ();
+		
+		if (comp.name.Contains ("Player 1")) {
+			stats.P1_respawn = comp.transform.position;
+		}
+		if (comp.name.Contains ("Player 2")) {
+			stats.P2_respawn = comp.transform.position;
+		}
+
 		if (comp.GetComponent<PlayerMovement>() != null) {
 			PlayerMovement move = comp.GetComponent<PlayerMovement>();
 			newObj.left = move.left;
@@ -112,6 +128,7 @@ public class SaveLevel : MonoBehaviour {
 			newObj.BTtriggerList = BT.triggerList;
 			newObj.BTuntriggerList = BT.untriggerList;
 		}
+		
 
 		//ADD NEW PROPERTIES ABOVE THIS LINE
 
@@ -144,6 +161,10 @@ public class SaveLevel : MonoBehaviour {
 			return spikedWall;
 		if (name == "spikedBall")
 			return spikedBall;
+		if (name == "CheckpointP1")
+			return CheckpointP1;
+		if (name == "CheckpointP2")
+			return CheckpointP2;
 		//ADD NEW PREFABS ABOVE THIS LINE
 
 		//object's name didn't match a prefab
