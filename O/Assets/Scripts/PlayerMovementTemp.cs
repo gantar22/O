@@ -2,17 +2,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerMovementTemp : MonoBehaviour {
+public class PlayerMovement : MonoBehaviour {
 
 	public KeyCode left;
 	public KeyCode right;
 	public KeyCode jump;
-	public string horizontal;
 	public int Player;
-	public int maxRunSpeed;
-	public int terminalVelocity;
-	public float runAcc;
-	public float quadraticDragCoefficient;
 
 	private Rigidbody2D rb;
 
@@ -24,15 +19,12 @@ public class PlayerMovementTemp : MonoBehaviour {
 	private float timeSinceLastGround;
 	private float jumpGrace;
 
-	private Vector2 velocity;
-	private Vector2 acceleration;
-
 	// Use this for initialization
 	void Start () {
 
 		rb = GetComponent<Rigidbody2D> ();
 		velo = 0f;
-		jumpGrace = .2f;
+		jumpGrace = .15f;
 	}
 
 	void OnEnable () {
@@ -40,14 +32,12 @@ public class PlayerMovementTemp : MonoBehaviour {
 		inputManager.Map("Jump"  + Player.ToString(),jump);
 		inputManager.Map("left"  + Player.ToString(),left);
 		inputManager.Map("right" + Player.ToString(),right);
-		inputManager.Map("horizontal" + Player.ToString(),horizontal);
 	}
 
 	void LetCSharpCollectItsOwnGarbage () {
 		inputManager.Remove("Jump"  + Player.ToString(),jump);
 		inputManager.Remove("left"  + Player.ToString(),left);
 		inputManager.Remove("right" + Player.ToString(),right);
-		inputManager.Remove("horizontal" + Player.ToString(),horizontal);
 	}
 
 	// Update is called once per frame
@@ -55,93 +45,86 @@ public class PlayerMovementTemp : MonoBehaviour {
 		OnPlatform();
 		//horizontal movement:
 		velo = 0f;
-
-
-		acceleration = new Vector2(Mathf.Sign(velocity.x) * quadraticDragCoefficient * velocity.x * velocity.x,
-						   Mathf.Sign(velocity.y) * quadraticDragCoefficient * velocity.y * velocity.y);
-		//acceleration = new Vector2(0,0);
+		
 		foreach(KeyCode key in inputManager.Get_Buttons("left" + Player.ToString())) {
-			if (Input.GetKey (key)) {
+			if (Input.GetKey (key))
 				velo -= runSpeed;
-				if(velocity.x > 0)
-					acceleration.x += -10 * runAcc;
-				else
-					acceleration.x -= runAcc;
-				}
 		}
 
 		foreach(KeyCode key in inputManager.Get_Buttons("right" + Player.ToString())) {
-			if (Input.GetKey (key)) {
+			if (Input.GetKey (key))
 				velo += runSpeed;
-				if(velocity.x < 0)
-					acceleration.x += 10 * runAcc;
-				else
-					acceleration.x += runAcc;
-				}
 		}
 
 
-		
-
 		timeSinceLastGround += Time.deltaTime;
-		if (GetComponent<CharacterController>().isGrounded) {
+		if (OnGround()) 
 			timeSinceLastGround = 0;
-			print(":");}
-		else
-			acceleration.y -= 2f;
 		canJump = timeSinceLastGround < jumpGrace;
 
+
+
+		rb.velocity = new Vector2 (velo, rb.velocity.y);
+
+		//jumping, it checks each key that could cause the player to jump:
 		foreach (KeyCode key in inputManager.Get_Buttons("Jump" + Player.ToString())) {
 			if (Input.GetKeyDown (key) && canJump) {
-				//rb.AddForce (Vector2.up * jumpForce);
-				velocity.y = jumpForce;
+				rb.AddForce (Vector2.up * jumpForce);
 				timeSinceLastGround += jumpGrace;
 			}
 		}
-
-		velocity = new Vector2(Mathf.Clamp(velocity.x + acceleration.x,-1 * maxRunSpeed,maxRunSpeed),Mathf.Clamp(velocity.y + acceleration.y,-1 * terminalVelocity,terminalVelocity));
-
-		//transform.position = new Vector3(transform.position.x + (velocity.x * Time.deltaTime) + (acceleration.x * (Time.deltaTime * Time.deltaTime * .5f))
-		//						,        transform.position.y + (velocity.y * Time.deltaTime) + (acceleration.y * (Time.deltaTime * Time.deltaTime * .5f))
-		//						,0f);
-		GetComponent<CharacterController>().Move (new Vector3((velocity.x * Time.deltaTime) + (acceleration.x * (Time.deltaTime * Time.deltaTime * .5f))
-								,         (velocity.y * Time.deltaTime) + (acceleration.y * (Time.deltaTime * Time.deltaTime * .5f))
-								,0f));
-		//rb.velocity = new Vector2 (velo, rb.velocity.y);
-
 			
+	}
+
+	bool OnGround () {
+
+		//find width and height of character
+		CapsuleCollider2D coll = GetComponent<CapsuleCollider2D> ();
+		Vector2 pos = new Vector2(transform.position.x + coll.offset.x * transform.localScale.x, 
+			transform.position.y + coll.offset.y * transform.localScale.y);
+		float width = coll.bounds.size.x;
+		float height = coll.bounds.size.y;
+
+		//the ground check draws a line right underneath the player
+		//if there is a collider on that line, the player is on something
+		//and therefore can jump
+		//p1 and p2 are the ends of that line
+		Vector2 p1 = new Vector2 (pos.x - width / 2f + 0.01f, pos.y - height / 2f - 0.02f);
+		Vector2 p2 = new Vector2 (pos.x + width / 2f - 0.01f, pos.y - height / 2f - 0.02f);
+
+		if (Physics2D.Linecast (p1, p2)) {
+			string collider = Physics2D.Linecast (p1, p2).collider.name;
+			if (!(collider.Contains ("Exit") || collider.Contains ("Checkpoint") || collider.Contains("Spikes"))) {
+				return true;
+			}
+		}
+		return false;
 	}
 
 	void OnPlatform () {
 		//find width and height of character
-		CharacterController coll = GetComponent<CharacterController> ();
-		Vector2 pos = new Vector2(transform.position.x + coll.center.x * transform.localScale.x, 
-			transform.position.y + (coll.center.y - (coll.height / 2)) * transform.localScale.y);
+		CapsuleCollider2D coll = GetComponent<CapsuleCollider2D> ();
+		Vector2 pos = new Vector2(transform.position.x + coll.offset.x * transform.localScale.x, 
+			transform.position.y + coll.offset.y * transform.localScale.y);
 		float width = coll.bounds.size.x;
 		float height = coll.bounds.size.y;
 
-		Vector2 p1 = new Vector2 (pos.x - coll.radius * transform.localScale.x, pos.y);
-		Vector2 p2 = new Vector2 (pos.x + coll.radius * transform.localScale.x, pos.y);
+		Vector2 p1 = new Vector2 (pos.x - width / 2f + 0.01f, pos.y - height / 2f - 0.02f);
+		Vector2 p2 = new Vector2 (pos.x + width / 2f - 0.01f, pos.y - height / 2f - 0.02f);
 
 
-
-
-		if (Physics2D.Linecast (p1, p2) && (Physics2D.Linecast (p1, p2).collider.name.Contains("Platform")
-			|| Physics2D.Linecast (p1, p2).collider.name.Contains("Button"))) {
+		if (Physics2D.Linecast (p1, p2) && (Physics2D.Linecast (p1, p2).collider.name.Contains ("Platform")
+		    || Physics2D.Linecast (p1, p2).collider.name.Contains ("Button"))) {
 			transform.parent = Physics2D.Linecast (p1, p2).collider.gameObject.transform;
-		} 
+		} else if (transform.parent != null) {
+			transform.parent = null;
+		}
 	}
 	void OnCollisionExit2D(Collision2D coll) {
-		if (coll.collider.name.Contains("Platform") || coll.collider.name.Contains("Button")) {
-			if (transform.parent != null && transform.parent == coll.collider.transform) {
-				transform.parent = null;
-			}
-		}
+		
 	}
-	void OnCollisionEnter2D(Collision2D coll) { //wont get used
-		if (coll.collider.name.Contains("Button")) {
-			transform.parent = coll.collider.transform;
-		}
+	void OnCollisionEnter2D(Collision2D coll) {
+		
 	}
 
 }
