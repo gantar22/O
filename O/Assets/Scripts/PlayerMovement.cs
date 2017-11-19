@@ -24,7 +24,7 @@ public class PlayerMovement : MonoBehaviour {
 
 		rb = GetComponent<Rigidbody2D> ();
 		velo = 0f;
-		jumpGrace = .2f;
+		jumpGrace = .15f;
 	}
 
 	void OnEnable () {
