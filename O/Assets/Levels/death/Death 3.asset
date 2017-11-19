@@ -11,6 +11,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9eae96df7c2cd4d88a0bce0332189e3f, type: 3}
   m_Name: Death 3
   m_EditorClassIdentifier: 
+  designNotes: This level was originally just testing the players on not jumping for
+    themselves when they needed to be jumped, but I (carter) fucked up and made it
+    about not jumping in full parabolas. This is probably not the most concise design.
+    I also threw in a red herrng. Some people like some do not. We need to decide
+    whether this is the kind of puzzle we want to have. The red herring didn't fool
+    anyone I know for too long so it isn't frustrating. The gap at the end is makable,
+    but depends on the spike colliders being so small which might change.
+  cameraSize: 15
+  dynamicCam: 1
   components:
   - type: {fileID: 1504169841305752, guid: 5d14798ae3fd4ca4a91c1f0684134f1d, type: 2}
     position: {x: 6, y: -2, z: -1}
@@ -4212,5 +4221,3 @@ MonoBehaviour:
     BTswitched: 0
     BTtriggerList: []
     BTuntriggerList: []
-  cameraSize: 15
-  dynamicCam: 0
