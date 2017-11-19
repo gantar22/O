@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum ExitOptions {And, Or, P1, P2};
+public enum ExitOptions {And, P1, P2};
 
 public class Exit : MonoBehaviour {
 
@@ -14,10 +14,6 @@ public class Exit : MonoBehaviour {
 	//we may want this to be loaded for each level with the serializer,
 	//but that will come once we start messing with different types of doors.
 	public ExitOptions ExitSetting;
-	[HideInInspector]
-	public bool p1Exit;
-	[HideInInspector]
-	public bool p2Exit;
 
 	//whether or not each player is currently in the exit.
 	[HideInInspector]
@@ -25,14 +21,38 @@ public class Exit : MonoBehaviour {
 	[HideInInspector]
 	public bool p2Colliding = false;
 
+	void Start() {
+		if (ExitSetting == ExitOptions.P1) {
+			EventManager.StartListening ("Find_P1_exit", Try_to_exit);
+		} else if (ExitSetting == ExitOptions.P2) {
+			EventManager.StartListening ("Find_P2_exit", Try_to_exit);
+		}
+	}
+
+	void Try_to_exit() {
+		if (ExitSetting == ExitOptions.P1 && p1Colliding) {
+			loadNext ();
+		} else if (ExitSetting == ExitOptions.P2 && p2Colliding) {
+			loadNext ();
+		}
+	}
+
 	void OnTriggerEnter2D(Collider2D other) {
 		if (other.name.Contains("Player 1")) {
 			p1Colliding = true;
+			if (ExitSetting == ExitOptions.P1) {
+				EventManager.TriggerEvent ("Find_P2_exit");
+			}
 		} else if (other.name.Contains("Player 2")) {
 			p2Colliding = true;
+			if (ExitSetting == ExitOptions.P2) {
+				EventManager.TriggerEvent ("Find_P1_exit");
+			}
 		}
 
-		checkFinish ();
+		if (ExitSetting == ExitOptions.And) {
+			checkAndFinish ();
+		}
 	}
 
 	void OnTriggerExit2D(Collider2D other) {
@@ -41,33 +61,20 @@ public class Exit : MonoBehaviour {
 		} else if (other.name.Contains("Player 2")) {
 			p2Colliding = false;
 		}
-
-		checkFinish ();
 	}
 
-	//checks to see if each player is Finnish if they are required to be Finnish.
-	void checkFinish() {
-		p1Exit = true;
-		p2Exit = true;
-
-		if (ExitSetting == ExitOptions.P2 || ExitSetting == ExitOptions.Or) {
-			p1Exit = false;
+	void checkAndFinish() {
+		if (p1Colliding && p2Colliding) {
+			loadNext ();
 		}
-		if (ExitSetting == ExitOptions.P1 || ExitSetting == ExitOptions.Or) {
-			p2Exit = false;
-		}
-			
-		bool OrNotSatisfied = (ExitSetting == ExitOptions.Or && !p1Colliding && !p2Colliding);
+	}
 
-		if ((p1Exit && !p1Colliding) || (p2Exit && !p2Colliding) || OrNotSatisfied) {
-			return;
-		} else {
-			if (GameController == null)
-				GameController = GameObject.FindGameObjectWithTag ("GameController");
-			int nextLevel = 1 + GameController.GetComponent<Stats> ().currLevel;
+	void loadNext() {
+		if (GameController == null)
+			GameController = GameObject.FindGameObjectWithTag ("GameController");
+		int nextLevel = 1 + GameController.GetComponent<Stats> ().currLevel;
 
-			GameController.GetComponent<Levels> ().EndLevel ();
-			GameController.GetComponent<Levels> ().LoadLevel (nextLevel);
-		}
+		GameController.GetComponent<Levels> ().EndLevel ();
+		GameController.GetComponent<Levels> ().LoadLevel (nextLevel);
 	}
 }

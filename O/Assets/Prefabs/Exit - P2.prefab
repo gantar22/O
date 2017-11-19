@@ -82,9 +82,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   GameController: {fileID: 0}
-  ExitSetting: 3
-  p1Exit: 0
-  p2Exit: 1
+  ExitSetting: 2
   p1Colliding: 0
   p2Colliding: 0
 --- !u!212 &212303799038725670
