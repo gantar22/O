@@ -38,7 +38,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1055245372309042}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -22.13, y: 5.65, z: -1}
+  m_LocalPosition: {x: -22.27, y: 7.85, z: -2}
   m_LocalScale: {x: 0.8, y: 0.75, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -54,8 +54,8 @@ Rigidbody2D:
   m_BodyType: 0
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
-  m_UseAutoMass: 1
-  m_Mass: 2.1438124
+  m_UseAutoMass: 0
+  m_Mass: 2.45
   m_LinearDrag: 0
   m_AngularDrag: 0.05
   m_GravityScale: 1.75
@@ -76,8 +76,8 @@ CapsuleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: -0.24}
-  m_Size: {x: 1.1, y: 3.5}
+  m_Offset: {x: -0.005248785, y: -0.00002829234}
+  m_Size: {x: 1.005528, y: 2.9274414}
   m_Direction: 0
 --- !u!114 &114272050895599080
 MonoBehaviour:
@@ -140,7 +140,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 6251b14c17c4aed43a07778128483235, type: 3}
+  m_Sprite: {fileID: 21300000, guid: c946e3f592f51134f9c034d357ba47f9, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0

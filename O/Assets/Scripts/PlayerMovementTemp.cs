@@ -9,8 +9,6 @@ public class PlayerMovementTemp : MonoBehaviour {
 	public KeyCode jump;
 	public int Player;
 
-	private Rigidbody2D rb;
-
 	public float runSpeed;
 	public float jumpForce;
 	private float velo;
@@ -22,7 +20,6 @@ public class PlayerMovementTemp : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 
-		rb = GetComponent<Rigidbody2D> ();
 		velo = 0f;
 		jumpGrace = .15f;
 	}
@@ -42,7 +39,6 @@ public class PlayerMovementTemp : MonoBehaviour {
 
 	// Update is called once per frame
 	void Update () {
-		OnPlatform();
 		//horizontal movement:
 		velo = 0f;
 		
@@ -64,12 +60,9 @@ public class PlayerMovementTemp : MonoBehaviour {
 
 
 
-		rb.velocity = new Vector2 (velo, rb.velocity.y);
-
 		//jumping, it checks each key that could cause the player to jump:
 		foreach (KeyCode key in inputManager.Get_Buttons("Jump" + Player.ToString())) {
 			if (Input.GetKeyDown (key) && canJump) {
-				rb.AddForce (Vector2.up * jumpForce);
 				timeSinceLastGround += jumpGrace;
 			}
 		}
@@ -92,6 +85,17 @@ public class PlayerMovementTemp : MonoBehaviour {
 		Vector2 p1 = new Vector2 (pos.x - width / 2f + 0.01f, pos.y - height / 2f - 0.02f);
 		Vector2 p2 = new Vector2 (pos.x + width / 2f - 0.01f, pos.y - height / 2f - 0.02f);
 
+
+		/************************/
+		/* Check for platforms! */
+		if (Physics2D.Linecast (p1, p2) && (Physics2D.Linecast (p1, p2).collider.name.Contains ("Platform")
+		    || Physics2D.Linecast (p1, p2).collider.name.Contains ("Button"))) {
+			transform.parent = Physics2D.Linecast (p1, p2).collider.gameObject.transform;
+		} else if (transform.parent != null) {
+			transform.parent = null;
+		}
+		/************************/
+
 		if (Physics2D.Linecast (p1, p2)) {
 			string collider = Physics2D.Linecast (p1, p2).collider.name;
 			if (!(collider.Contains ("Exit") || collider.Contains ("Checkpoint") || collider.Contains("Spikes"))) {
@@ -101,25 +105,7 @@ public class PlayerMovementTemp : MonoBehaviour {
 		return false;
 	}
 
-	void OnPlatform () {
-		//find width and height of character
-		CapsuleCollider2D coll = GetComponent<CapsuleCollider2D> ();
-		Vector2 pos = new Vector2(transform.position.x + coll.offset.x * transform.localScale.x, 
-			transform.position.y + coll.offset.y * transform.localScale.y);
-		float width = coll.bounds.size.x;
-		float height = coll.bounds.size.y;
 
-		Vector2 p1 = new Vector2 (pos.x - width / 2f + 0.01f, pos.y - height / 2f - 0.02f);
-		Vector2 p2 = new Vector2 (pos.x + width / 2f - 0.01f, pos.y - height / 2f - 0.02f);
-
-
-		if (Physics2D.Linecast (p1, p2) && (Physics2D.Linecast (p1, p2).collider.name.Contains ("Platform")
-		    || Physics2D.Linecast (p1, p2).collider.name.Contains ("Button"))) {
-			transform.parent = Physics2D.Linecast (p1, p2).collider.gameObject.transform;
-		} else if (transform.parent != null) {
-			transform.parent = null;
-		}
-	}
 	void OnCollisionExit2D(Collision2D coll) {
 		
 	}
