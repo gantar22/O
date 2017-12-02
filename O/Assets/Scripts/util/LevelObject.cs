@@ -12,9 +12,8 @@ public class LevelObject {
 	public Vector2 scale = Vector2.one;
 
 	//player specific paramters
-	public KeyCode right;
-	public KeyCode left;
-	public KeyCode jump;
+	public string horizontal;
+	public string jump;
 	public int Player;
 	public float runSpeed;
 	public float jumpForce;

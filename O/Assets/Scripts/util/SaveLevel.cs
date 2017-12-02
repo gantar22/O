@@ -97,8 +97,7 @@ public class SaveLevel : MonoBehaviour {
 
 		if (comp.GetComponent<PlayerMovement>() != null) {
 			PlayerMovement move = comp.GetComponent<PlayerMovement>();
-			newObj.left = move.left;
-			newObj.right = move.right;
+			newObj.horizontal = move.horizontal;
 			newObj.jump = move.jump;
 			newObj.Player = move.Player;
 			newObj.runSpeed = move.runSpeed;

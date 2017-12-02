@@ -138,16 +138,15 @@ public class Levels : MonoBehaviour {
 							plat.verticalMoveSpeed = obj.platVerticalMoveSpeed;
 							plat.returnOnUntrigger = obj.platReturnOnUntrigger;
 						}
-
+						/*
 						if (comp.GetComponent<PlayerMovement> () != null) {
 							PlayerMovement move = comp.GetComponent<PlayerMovement> ();
-							move.left = obj.left;
-							move.right = obj.right;
+							move.horizontal = obj.horizontal;
 							move.jump = obj.jump;
 							move.Player = obj.Player;
 							move.runSpeed = obj.runSpeed;
 							move.jumpForce = obj.jumpForce;
-						}
+						}*/
 
 						if (comp.GetComponentInChildren<ButtonTrigger> () != null) {
 							ButtonTrigger BT = comp.GetComponentInChildren<ButtonTrigger> ();

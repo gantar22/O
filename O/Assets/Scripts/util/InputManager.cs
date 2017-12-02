@@ -80,7 +80,7 @@ public class InputManager : MonoBehaviour {
     //input to listen to.
     {
         ArrayList thisList = null;
-        if (instance.inputDictionary.TryGetValue (actionName, out thisList))
+        if (instance.axisDictionary.TryGetValue (actionName, out thisList))
         {
             bool flag = true;
             foreach (Pair<string,int> input in thisList) {
@@ -96,7 +96,7 @@ public class InputManager : MonoBehaviour {
         {
             thisList = new ArrayList ();
             thisList.Add(new Pair<string,int>(inputName,1));
-            instance.inputDictionary.Add(actionName, thisList);
+            instance.axisDictionary.Add(actionName, thisList);
         }
     }
 
