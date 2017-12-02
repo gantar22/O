@@ -95,7 +95,7 @@ public class PlayerMovement : MonoBehaviour {
 	}
 
 	// Update is called once per frame
-	void FixedUpdate () {
+	void Update () {
 
 		//horizontal movement:
 		targetVelo = 0f;
@@ -133,7 +133,7 @@ public class PlayerMovement : MonoBehaviour {
 		{
 			if(rb.velocity.y < 0 || !jumpHeld)
 			{
-				//rb.velocity = new Vector2(rb.velocity.x,Mathf.Clamp(rb.velocity.y,-9999,0)); //stops you from going up
+				rb.velocity = new Vector2(rb.velocity.x,rb.velocity.y*.7f); //stops you from going up
 				v_s = v_state.down;
 				rb.AddForce(new Vector2(0,-7),ForceMode2D.Impulse);
 			}
