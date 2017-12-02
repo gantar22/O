@@ -9575,8 +9575,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b68bf3c3f963940ed9137e06e99305d4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  horizontal: Horizontal_J2
-  jump: Jump_J1
+  horizontal: Horizontal_K2
+  jump: Jump_K1
   Player: 2
   drag: 0
   runSpeed: 6.86
@@ -20150,8 +20150,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b68bf3c3f963940ed9137e06e99305d4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  horizontal: Horizontal_J1
-  jump: Jump_J2
+  horizontal: Horizontal_K1
+  jump: Jump_K2
   Player: 1
   drag: 0
   runSpeed: 6.86
