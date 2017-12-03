@@ -28,7 +28,7 @@ public class SaveLevel : MonoBehaviour {
 	public GameObject spikedBall;
 	public GameObject CheckpointP1;
 	public GameObject CheckpointP2;
-
+	public GameObject wallCorner;
 
 	private LevelObject newObj;
 
@@ -161,6 +161,8 @@ public class SaveLevel : MonoBehaviour {
 			return CheckpointP1;
 		if (name == "CheckpointP2")
 			return CheckpointP2;
+		if (name == "wallCorner")
+			return wallCorner;
 		//ADD NEW PREFABS ABOVE THIS LINE
 
 		//object's name didn't match a prefab
