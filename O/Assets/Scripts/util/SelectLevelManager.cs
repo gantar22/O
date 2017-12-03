@@ -12,7 +12,7 @@ public class SelectLevelManager : MonoBehaviour {
 
 		Button[] buttons = gameObject.GetComponentsInChildren<Button> ();
 		foreach (Button butt in buttons) {
-			if (int.Parse (butt.name) <= levelProgress + 1) {
+			if (int.Parse (butt.name) <= levelProgress + 2) {
 				butt.interactable = true;
 			}
 		}

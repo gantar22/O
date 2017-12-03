@@ -104,6 +104,10 @@ public class PlayerMovement : MonoBehaviour {
 
 	// Update is called once per frame
 	void Update () {
+		if (PauseManager.paused) {
+			return;
+		}
+
 
 		//horizontal movement:
 		targetVelo = 0f;

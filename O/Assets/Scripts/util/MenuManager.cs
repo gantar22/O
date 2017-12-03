@@ -42,4 +42,21 @@ public class MenuManager : MonoBehaviour {
 			Application.Quit();
 		#endif
 	}
+
+	// Static level persistence calls
+	public void Continue() {
+		LevelPersistence.levelData.Continue ();
+	}
+		
+	public void startLevel (int levelNum) {
+		LevelPersistence.levelData.startLevel (levelNum);
+	}
+		
+	public void startDemo() {
+		LevelPersistence.levelData.startDemo ();
+	}
+
+	public void resetProgress() {
+		LevelPersistence.levelData.resetProgress ();
+	}
 }

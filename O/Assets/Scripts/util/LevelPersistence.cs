@@ -9,7 +9,7 @@ using UnityEngine.SceneManagement;
 public class LevelPersistence : MonoBehaviour {
 
 	public static LevelPersistence levelData;
-	public static int highestLevel; // Tracks the highest level completed. If no data is saved, begins at -1.
+	public static int highestLevel; // Tracks the highest level completed. If no data is saved, begins at -1 (no levels completed).
 	public static int levelToLoad;
 
 	// Make sure this is a singleton
@@ -25,7 +25,7 @@ public class LevelPersistence : MonoBehaviour {
 	}
 
 	// Save level progress (where int level should be the index of the level completed, but 1-indexed)
-	public static void saveLevelProgress(int level) {
+	public void saveLevelProgress(int level) {
 		if (level > highestLevel) {
 			Save (level);
 		}
@@ -75,7 +75,7 @@ public class LevelPersistence : MonoBehaviour {
 
 	// Continue the game at one level past the highest level beaten
 	public void Continue() {
-		startLevel (highestLevel);
+		startLevel (highestLevel + 1);
 	}
 
 	// Start the game at whichever level was selected
@@ -89,7 +89,7 @@ public class LevelPersistence : MonoBehaviour {
 	// Start demo levels
 	public void startDemo() {
 		//SceneManager.LoadScene(2);
-		//levelToLoad = 1;
+		//levelToLoad = 0;
 		return;
 	}
 }

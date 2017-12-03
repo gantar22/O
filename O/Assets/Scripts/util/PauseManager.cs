@@ -6,7 +6,10 @@ using UnityEngine.UI;
 public class PauseManager : MonoBehaviour {
 
 	public GameObject PausePanel;
-	private bool paused = false;
+	public GameObject OptionsPanel;
+
+	[HideInInspector]
+	public static bool paused = false;
 
 	void Update () {
 		// Pause keys
@@ -18,8 +21,10 @@ public class PauseManager : MonoBehaviour {
 			}
 		}
 
-		// Menu navigation
-
+		// Reset keys
+		if (Input.GetKeyDown (KeyCode.R) || Input.GetKeyDown (KeyCode.Keypad6)) {
+			gameObject.GetComponent<Levels> ().restart ();
+		}
 	}
 
 	public void pause() {
@@ -32,5 +37,6 @@ public class PauseManager : MonoBehaviour {
 		paused = false;
 		Time.timeScale = 1.0f;
 		PausePanel.SetActive (false);
+		OptionsPanel.SetActive (false);
 	}
 }

@@ -74,7 +74,7 @@ public class Exit : MonoBehaviour {
 			GameController = GameObject.FindGameObjectWithTag ("GameController");
 		int currentLevel = GameController.GetComponent<Stats> ().currLevel;
 
-		LevelPersistence.saveLevelProgress (currentLevel);
+		LevelPersistence.levelData.saveLevelProgress (currentLevel);
 
 		GameController.GetComponent<Levels> ().EndLevel ();
 		GameController.GetComponent<Levels> ().LoadLevel (currentLevel + 1);
