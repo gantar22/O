@@ -7,6 +7,7 @@ public class MenuManager : MonoBehaviour {
 
 	public EventSystem EventSystem;
 	public GameObject defaultSelect;
+	public GameObject defaultUpSelect;
 
 	private bool buttonSelected;
 
@@ -15,7 +16,12 @@ public class MenuManager : MonoBehaviour {
 			Debug.LogError("Missing event system in MenuManager script");
 
 		if (Input.GetAxisRaw ("Vertical") != 0 && !buttonSelected) {
-			EventSystem.SetSelectedGameObject (defaultSelect);
+			if (Input.GetAxisRaw ("Vertical") == -1) {
+				EventSystem.SetSelectedGameObject (defaultSelect);
+			} else {
+				EventSystem.SetSelectedGameObject (defaultUpSelect);
+			}
+
 			buttonSelected = true;
 		}
 	}
