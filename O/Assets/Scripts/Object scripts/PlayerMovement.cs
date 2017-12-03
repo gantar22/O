@@ -59,6 +59,14 @@ public class PlayerMovement : MonoBehaviour {
 		inputManager = InputManager.instance;
 		inputManager.Map("Jump"  + Player.ToString(),jump);
 		inputManager.Map("horizontal" + Player.ToString(),horizontal);
+
+		if (Player == 1) {
+			inputManager.Map ("Jump1", "Jump_K2");
+			inputManager.Map ("horizontal1", "Horizontal_K1");
+		} else {
+			inputManager.Map ("Jump2", "Jump_K1");
+			inputManager.Map ("horizontal2", "Horizontal_K2");
+		}
 	}
 
 	void LetCSharpCollectItsOwnGarbage () {
@@ -116,7 +124,6 @@ public class PlayerMovement : MonoBehaviour {
 			v_s = v_state.idle;
 		}
 		canJump = timeSinceLastGround < jumpGrace;
-		if(Player == 1) print(OnGround());
 
 		jumpHeld = false;
 		//jumping, it checks each key that could cause the player to jump:
