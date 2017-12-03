@@ -33,7 +33,7 @@ public class Platform : MonoBehaviour {
 	[HideInInspector]
 	public Vector2 startPoint, endPoint, velo;
 	[HideInInspector]
-	public float delayTimer, speed;
+	public float moveTimer, delayTimer, speed;
 	[HideInInspector]
 	public MoveStateOptions MoveState;
 	[HideInInspector]
@@ -124,8 +124,10 @@ public class Platform : MonoBehaviour {
 	void startMoving() {
 		if (MoveState == MoveStateOptions.idleAtStart || MoveState == MoveStateOptions.delayedAtStart || MoveState == MoveStateOptions.returningToStart) {
 			MoveState = MoveStateOptions.movingToEnd;
+			moveTimer = 0;
 		} else if (MoveState == MoveStateOptions.idleAtEnd || MoveState == MoveStateOptions.delayedAtEnd) {
 			MoveState = MoveStateOptions.movingToStart;
+			moveTimer = travelTime;
 		}
 	}
 
@@ -164,9 +166,6 @@ public class Platform : MonoBehaviour {
 
 	// Update is called once per frame
 	void Update () {
-		velo = Vector2.zero;
-		Vector2 Pos = new Vector2 (transform.position.x, transform.position.y);
-
 
 		// Managing automatic movement with movement settings, V2
 		if (MoveState == MoveStateOptions.delayedAtEnd || MoveState == MoveStateOptions.delayedAtStart) {
@@ -175,39 +174,19 @@ public class Platform : MonoBehaviour {
 				startMoving ();
 			}
 		} else if (MoveState == MoveStateOptions.movingToEnd) {
-			velo = (endPoint - Pos).normalized * speed;
-			if (hasReached(endPoint)) {
+			moveTimer += Time.deltaTime;
+			if (moveTimer >= travelTime) {
 				stopMoving ();
 			}
 		} else if (MoveState == MoveStateOptions.movingToStart || MoveState == MoveStateOptions.returningToStart) {
-			velo = (startPoint - Pos).normalized * speed;
-			if (hasReached(startPoint)) {
+			moveTimer -= Time.deltaTime;
+			if (moveTimer <= 0f) {
 				stopMoving ();
 			}
 		}
 
-
-		// Input mapping
-		if (MoveSetting == MoveOptions.InputMapping) {
-			foreach (KeyCode key in inputManager.Get_Buttons(actionString("left"))) {
-				if (Input.GetKey (key))
-					velo.x -= horizontalMoveSpeed;
-			}
-			foreach (KeyCode key in inputManager.Get_Buttons(actionString("right"))) {
-				if (Input.GetKey (key))
-					velo.x += horizontalMoveSpeed;
-			}
-			foreach (KeyCode key in inputManager.Get_Buttons(actionString("up"))) {
-				if (Input.GetKey (key))
-					velo.y += verticalMoveSpeed;
-			}
-			foreach (KeyCode key in inputManager.Get_Buttons(actionString("down"))) {
-				if (Input.GetKey (key))
-					velo.y -= verticalMoveSpeed;
-			}
-		}
-
-		this.GetComponent<Transform> ().position += (Vector3) (velo * Time.deltaTime);
+		Vector3 pos = startPoint + (endPoint - startPoint) * (moveTimer / travelTime);
+		this.GetComponent<Transform> ().position = pos;
 	}
 
 	// Helper functions
