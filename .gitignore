@@ -36,3 +36,6 @@ sysinfo.txt
 
 #fuck DS store
 .DS_STORE
+
+#Include InputManager.asset
+!ProjectSettings/InputManager.asset
