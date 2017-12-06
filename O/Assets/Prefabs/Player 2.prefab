@@ -209,7 +209,7 @@ Rigidbody2D:
   m_Mass: 2.45
   m_LinearDrag: 0
   m_AngularDrag: 0.05
-  m_GravityScale: 1.75
+  m_GravityScale: 3.29
   m_Material: {fileID: 6200000, guid: 2a97fc910d1b83f478406f486625b773, type: 2}
   m_Interpolate: 0
   m_SleepingMode: 1
@@ -277,7 +277,7 @@ MonoBehaviour:
   runSpeed: 6.86
   maxSpeed: 13.84
   sustainSpeed: 0
-  jumpForce: 11.1
+  jumpForce: 14.3
   accelTime: 0
   decayTime: 0
 --- !u!212 &212106991306306136
