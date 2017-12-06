@@ -58,7 +58,6 @@ public class musicmanager : MonoBehaviour {
 		else                   music1.volume = Mathf.Clamp(music1.volume - Time.deltaTime * .5f,                  0,maxPlayerVolume);
 
 
-		print(p1.GetComponent<Rigidbody2D>().velocity.x);
 		if(p2.GetComponent<Rigidbody2D>().velocity.x != 0f) music2.volume = Mathf.Clamp(music2.volume + Time.deltaTime * Mathf.Abs(p2.GetComponent<Rigidbody2D>().velocity.x) / (8 * 2),0,maxPlayerVolume);
 		else                   music2.volume = Mathf.Clamp(music2.volume - Time.deltaTime * .5f,                  0,maxPlayerVolume);
 
