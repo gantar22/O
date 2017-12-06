@@ -3125,9 +3125,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 03070d09f1b107c40b8cb458e284ff14, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  EventSystem: {fileID: 0}
-  defaultSelect: {fileID: 856536218}
-  buttonSelected: 0
 --- !u!114 &814702555
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4609,7 +4606,7 @@ AudioSource:
   DopplerLevel: 1
   MinDistance: 1
   MaxDistance: 500
-  Pan2D: 0
+  Pan2D: 1
   rolloffMode: 0
   BypassEffects: 0
   BypassListenerEffects: 0
@@ -5024,7 +5021,7 @@ AudioSource:
   DopplerLevel: 1
   MinDistance: 1
   MaxDistance: 500
-  Pan2D: 0
+  Pan2D: -1
   rolloffMode: 0
   BypassEffects: 0
   BypassListenerEffects: 0
