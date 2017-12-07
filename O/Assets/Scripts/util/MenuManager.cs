@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class MenuManager : MonoBehaviour {
 
@@ -10,9 +11,20 @@ public class MenuManager : MonoBehaviour {
 	public GameObject defaultSelect;
 	public GameObject defaultUpSelect;
 
+	public Toggle FullscreenToggle;
+	public Slider MasterVolumeSlider;
+
 	private bool buttonSelected;
 
-	public void Update() {
+	void onEnable() {
+		if (FullscreenToggle != null)
+			FullscreenToggle.onValueChanged.AddListener(delegate { OnFullscreenToggle(); } );
+
+		if (MasterVolumeSlider != null)
+			MasterVolumeSlider.onValueChanged.AddListener (delegate { OnMasterVolumeChange (); });
+	}
+
+	void Update() {
 		if (EventSystem == null)
 			Debug.LogError("Missing event system in MenuManager script");
 
@@ -30,6 +42,16 @@ public class MenuManager : MonoBehaviour {
 
 	private void OnDisable() {
 		buttonSelected = false;
+	}
+
+	public void OnFullscreenToggle() {
+		Screen.fullScreen = FullscreenToggle.isOn;
+		SettingsManager.gameSettings.fullscreen = FullscreenToggle.isOn;
+	}
+
+	public void OnMasterVolumeChange() {
+		//AudioSource.volume = masterVolumeSlider.value;
+		SettingsManager.gameSettings.masterVolume = MasterVolumeSlider.value;
 	}
 
 	public void MainMenu() {
