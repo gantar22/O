@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public enum ExitOptions {And, P1, P2};
 
@@ -72,9 +73,15 @@ public class Exit : MonoBehaviour {
 	void loadNext() {
 		if (GameController == null)
 			GameController = GameObject.FindGameObjectWithTag ("GameController");
-		int nextLevel = 1 + GameController.GetComponent<Stats> ().currLevel;
+		int currentLevel = GameController.GetComponent<Stats> ().currLevel;
+
+		if (!(SceneManager.GetActiveScene () == SceneManager.GetSceneByName ("Demo"))) {
+			if (LevelPersistence.levelData != null) {
+				LevelPersistence.levelData.saveLevelProgress (currentLevel);
+			}
+		}
 
 		GameController.GetComponent<Levels> ().EndLevel ();
-		GameController.GetComponent<Levels> ().LoadLevel (nextLevel);
+		GameController.GetComponent<Levels> ().LoadLevel (currentLevel + 1);
 	}
 }

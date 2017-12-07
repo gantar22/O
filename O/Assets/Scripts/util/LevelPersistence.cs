@@ -88,8 +88,8 @@ public class LevelPersistence : MonoBehaviour {
 
 	// Start demo levels
 	public void startDemo() {
-		//SceneManager.LoadScene(2);
-		//levelToLoad = 0;
+		SceneManager.LoadScene(2);
+		levelToLoad = 0;
 		return;
 	}
 }
