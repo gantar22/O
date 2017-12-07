@@ -51,10 +51,9 @@ public class SaveLevel : MonoBehaviour {
 		LevelObject[] things = new LevelObject[levelComponents.Length];
 
 		for (int i = 0; i < levelComponents.Length; i++) {
-
-			newObj = new LevelObject ();
-				
 			GameObject compToAdd = levelComponents [i];
+			newObj = new LevelObject ();
+
 			newObj.type = GetType (levelComponents [i]);
 			newObj.position = compToAdd.transform.position;
 			newObj.rotation = compToAdd.transform.eulerAngles.z;
@@ -72,14 +71,10 @@ public class SaveLevel : MonoBehaviour {
 		//every level object must have an ObjIdentifier component
 		//the variable "Prefab name" in the ObjIdentifier MUST be the same as its prefab
 		if (comp.GetComponent<ObjIdentifier> () == null) {
-			string prefabName = comp.transform.parent.gameObject.GetComponent<ObjIdentifier> ().prefabName;
-
-			if (comp.transform.parent.gameObject.GetComponent<ObjIdentifier> () != null) {
-				if (prefabName == "button" || prefabName == "spikedPlatform" || prefabName == "spikedBall" || prefabName == "spikedWall" || prefabName == "exitPlatform") { //if you make a parent object add it here
-					return null;
-				}
-			}
-
+			if (comp.transform.parent.gameObject.GetComponent<ObjIdentifier>() != null
+				&& (comp.transform.parent.gameObject.GetComponent<ObjIdentifier>().prefabName == "button"
+					||  comp.transform.parent.gameObject.GetComponent<ObjIdentifier>().prefabName == "spikedPlatform")) //if you make a parent object add it here
+				return null;
 			Debug.Log (comp.name + " has no object identifier and could not be saved to level data." + comp.transform.parent.gameObject.GetComponent<ObjIdentifier>().prefabName);
 			return null;
 		}
