@@ -565,10 +565,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   updateSaveNewLevel: 1
   levels:
-  - {fileID: 11400000, guid: e4603f4c6d2c95b47af6c8ac39bd7211, type: 2}
-  - {fileID: 11400000, guid: 973e413191d6d604cb6fad9cbd08ca21, type: 2}
-  - {fileID: 11400000, guid: 076411adbf2d0cd4289cfd839125341a, type: 2}
-  - {fileID: 11400000, guid: dc37f47c3fffe7d40a883c17a0713ed6, type: 2}
+  - {fileID: 11400000, guid: 3a869b09158d5ad479ce2cb5632a26bf, type: 2}
+  - {fileID: 11400000, guid: 852834c3ebdb5494dbe05e3bc77c330a, type: 2}
+  - {fileID: 11400000, guid: 8993b85ee0f4ab340b1c2c19cae4732b, type: 2}
+  - {fileID: 11400000, guid: 11f53e93bac4bce47a62541c7a13e3fa, type: 2}
   startingLevel: 0
 --- !u!4 &1019025549
 Transform:
