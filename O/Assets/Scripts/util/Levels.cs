@@ -137,6 +137,9 @@ public class Levels : MonoBehaviour {
 							plat.horizontalMoveSpeed = obj.platHorizontalMoveSpeed;
 							plat.verticalMoveSpeed = obj.platVerticalMoveSpeed;
 							plat.returnOnUntrigger = obj.platReturnOnUntrigger;
+
+							comp.transform.localScale = new Vector3(1,1,1);
+							comp.transform.GetChild(0).localScale = new Vector3(obj.scale.x,obj.scale.y,1);
 						}
 						/*
 						if (comp.GetComponent<PlayerMovement> () != null) {

@@ -59,6 +59,11 @@ public class SaveLevel : MonoBehaviour {
 			newObj.position = compToAdd.transform.position;
 			newObj.rotation = compToAdd.transform.eulerAngles.z;
 			newObj.scale = compToAdd.transform.localScale;
+			if(compToAdd.GetComponent<Platform> () != null){
+				newObj.scale.x = compToAdd.transform.GetChild(0).localScale.x;
+				newObj.scale.y = compToAdd.transform.GetChild(0).localScale.y;
+			}
+
 
 			things [i] = newObj;
 
