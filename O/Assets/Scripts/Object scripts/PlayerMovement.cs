@@ -33,6 +33,7 @@ public class PlayerMovement : MonoBehaviour {
 	private h_state h_s;
 	private v_state v_s;
 	private bool jumpHeld;
+	private float lastWinkTime;
 
 
 	// Use this for initialization
@@ -45,17 +46,22 @@ public class PlayerMovement : MonoBehaviour {
        of a second, and you jump if you are grounded and in that mode.
 	*/ 
 	void Start () {
-
 		runUp = maxSpeed / Mathf.Sqrt(accelTime);
-		rb = GetComponent<Rigidbody2D> ();
 		targetVelo = 0f;
 		jumpGrace = .1f;
 		lastIdleTime = Time.time;
 		h_s = h_state.idle;
 		v_s = v_state.idle;
+		lastWinkTime = Time.time;
+	}
+
+	void Awake()
+	{
+		rb = GetComponent<Rigidbody2D> ();
 	}
 
 	void OnEnable () {
+		rb = GetComponent<Rigidbody2D> ();
 		inputManager = InputManager.instance;
 		inputManager.Map("Jump"  + Player.ToString(),jump);
 		inputManager.Map("horizontal" + Player.ToString(),horizontal);
@@ -96,6 +102,18 @@ public class PlayerMovement : MonoBehaviour {
 
 	// Update is called once per frame
 	void Update () {
+		this.GetComponent<Animator>().SetFloat("speed",Mathf.Abs(rb.velocity.x));
+		if(Time.time - lastWinkTime > 5)
+		{
+			lastWinkTime = Time.time;
+			if(Random.Range(0.0f,2.0f) > 1.0f) 
+			{
+				this.GetComponent<Animator>().SetTrigger("blink");
+			}
+		}
+
+		this.GetComponent<Animator>().SetBool("left",rb.velocity.x < 0);
+		transform.localScale = new Vector3(rb.velocity.x < 0 ? -.8f : .8f,.75f,1f);
 
 		//horizontal movement:
 		targetVelo = 0f;
@@ -116,7 +134,6 @@ public class PlayerMovement : MonoBehaviour {
 			v_s = v_state.idle;
 		}
 		canJump = timeSinceLastGround < jumpGrace;
-		if(Player == 1) print(OnGround());
 
 		jumpHeld = false;
 		//jumping, it checks each key that could cause the player to jump:
@@ -166,6 +183,11 @@ public class PlayerMovement : MonoBehaviour {
 		} else if (transform.parent != null) {
 			transform.parent = null;
 		}
+		if (Physics2D.Linecast (p1, p2) && Physics2D.Linecast (p1, p2).collider.name.Contains ("head"))
+		{
+			rb.velocity = Physics2D.Linecast (p1, p2).collider.gameObject.transform.parent.gameObject.GetComponent<Rigidbody2D>().velocity;
+			rb.velocity = new Vector3(targetVelo + rb.velocity.x,rb.velocity.y,0);
+		}
 
 		if (Physics2D.Linecast (p1, p2)) {
 			string collider = Physics2D.Linecast (p1, p2).collider.name;
@@ -174,6 +196,38 @@ public class PlayerMovement : MonoBehaviour {
 			}
 		}
 		return false;
+	}
+
+	public bool OnAir(){
+		//find width and height of character
+		CapsuleCollider2D coll = GetComponent<CapsuleCollider2D> ();
+		Vector2 pos = new Vector2(transform.position.x + coll.offset.x * transform.localScale.x, 
+			transform.position.y + coll.offset.y * transform.localScale.y);
+		float width = coll.bounds.size.x;
+		float height = coll.bounds.size.y;
+
+		//the ground check draws a line right underneath the player
+		//if there is a collider on that line, the player is on something
+		//and therefore can jump
+		//p1 and p2 are the ends of that line
+		Vector2 p1 = new Vector2 (pos.x - width / 2f + 0.01f, pos.y - height / 2f - 4f);
+		Vector2 p2 = new Vector2 (pos.x + width / 2f - 0.01f, pos.y - height / 2f - 4f);
+
+
+		if (Physics2D.Linecast (p1, p2)) {
+			string collider = Physics2D.Linecast (p1, p2).collider.name;
+			if (!(collider.Contains ("Exit") || collider.Contains ("Checkpoint") || collider.Contains("Spikes"))) {
+				return false;
+			}
+		}
+		return true;
+
+	}
+
+	public float moving()
+	{
+		if(rb == null) return 1;
+		return Mathf.Abs(rb.velocity.x);
 	}
 
 
