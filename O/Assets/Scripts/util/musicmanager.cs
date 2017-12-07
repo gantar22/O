@@ -14,7 +14,7 @@ public class musicmanager : MonoBehaviour {
 	public AudioSource music2;
 	[HideInInspector]
 	public float maxPlayerVolume = .7f; //this is mine, no touch
-	public float maxMusicVolume;
+	public float maxMusicVolume = 1;
 
 
 
