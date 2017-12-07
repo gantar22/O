@@ -7,6 +7,9 @@ public enum States {idle, triggered, active, invis}
 
 public class Checkpoint : MonoBehaviour {
 
+	public AudioClip trigger;
+	public AudioClip activate;	
+
 	[HideInInspector]
 	public GameObject GameController;
 	[HideInInspector]
@@ -38,6 +41,10 @@ public class Checkpoint : MonoBehaviour {
 			}
 			stats.trig_P1_check = this;
 
+			get_references ();
+			float volume = SettingsManager.gameSettings.masterVolume;
+			GameController.GetComponent<AudioSource> ().PlayOneShot (trigger, volume);
+
 			EventManager.TriggerEvent ("Find_P2_checkpt");
 		} else if (other.name.Contains("Player 2") && Player == PlayerNums.P2 && Checkpt_State == States.idle) {
 			change_state(States.triggered);
@@ -45,6 +52,10 @@ public class Checkpoint : MonoBehaviour {
 				stats.trig_P2_check.change_state (States.idle);
 			}
 			stats.trig_P2_check = this;
+
+			get_references ();
+			float volume = SettingsManager.gameSettings.masterVolume;
+			GameController.GetComponent<AudioSource> ().PlayOneShot (trigger, volume);
 
 			EventManager.TriggerEvent ("Find_P1_checkpt");
 		}
@@ -55,6 +66,10 @@ public class Checkpoint : MonoBehaviour {
 			EventManager.TriggerEvent ("Pair_found");
 			stats.trig_P1_check = null;
 			stats.trig_P2_check = null;
+
+			get_references ();
+			float volume = SettingsManager.gameSettings.masterVolume;
+			GameController.GetComponent<AudioSource> ().PlayOneShot (activate, volume);
 		}
 	}
 

@@ -11,12 +11,11 @@ public class SettingsManager : MonoBehaviour {
 
 	public static GameSettings gameSettings;
 
-	void onEnable() {
-		gameSettings = new GameSettings ();
-	}
-
 	void Awake () {
 		if (settingsManager == null) {
+			gameSettings = new GameSettings ();
+			gameSettings.masterVolume = 1.0f;
+
 			DontDestroyOnLoad (gameObject);
 			settingsManager = this;
 
