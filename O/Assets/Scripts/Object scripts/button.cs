@@ -50,7 +50,7 @@ public class button : MonoBehaviour {
 	}
 
 	IEnumerator startShrink() { //We ought to clamp the player's x y so they can't get off while decending cause that will cause bugs often
-		while (transform.localPosition.y > .1 && !animating) {
+		while (transform.localPosition.y > .15 && !animating) {
 			transform.position -= new Vector3(0,Time.deltaTime * 3,0);
 			yield return null;
 		}
@@ -59,7 +59,7 @@ public class button : MonoBehaviour {
 
 	}
 	IEnumerator startGrow() {
-		while (transform.localPosition.y < .7) {
+		while (transform.localPosition.y < .65) {
 			transform.position += new Vector3(0,Time.deltaTime * 4,0);
 			yield return null;
 		}
