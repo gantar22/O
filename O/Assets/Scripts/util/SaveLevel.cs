@@ -48,35 +48,49 @@ public class SaveLevel : MonoBehaviour {
 
 		GameObject[] levelComponents = GameObject.FindGameObjectsWithTag ("LevelObj");
 
-		LevelObject[] things = new LevelObject[levelComponents.Length];
+		// First get number of non-null LevelObj's
+		int numOfObjs = 0;
+		for (int i = 0; i < levelComponents.Length; i++) {
+			if (GetType (levelComponents [i], true) != null) {
+				numOfObjs++;
+			}
+		}
 
-		for (int i = 0; i < things.Length; i++) {
+		LevelObject[] things = new LevelObject[numOfObjs];
 
-			GameObject compToAdd = levelComponents [i];
+		int objsIndex = 0;
+		for (int i = 0; i < levelComponents.Length; i++) {
+
 			newObj = new LevelObject ();
+			GameObject type = GetType (levelComponents [i], false);
+			if (type != null) {
+				
+				GameObject compToAdd = levelComponents [i];
+				newObj.type = type;
+				newObj.position = compToAdd.transform.position;
+				newObj.rotation = compToAdd.transform.eulerAngles.z;
+				newObj.scale = compToAdd.transform.localScale;
 
-			newObj.type = GetType (compToAdd);
-			newObj.position = compToAdd.transform.position;
-			newObj.rotation = compToAdd.transform.eulerAngles.z;
-			newObj.scale = compToAdd.transform.localScale;
-
-			things [i] = newObj;
-
+				things [objsIndex] = newObj;
+				objsIndex++;
+			}
 		}
 
 		return things;
 
 	}
 
-	GameObject GetType (GameObject comp) {
+	GameObject GetType (GameObject comp, bool justReturnType) {
 
 		//every level object must have an ObjIdentifier component
 		//the variable "Prefab name" in the ObjIdentifier MUST be the same as its prefab
 		if (comp.GetComponent<ObjIdentifier> () == null) {
-			if (comp.transform.parent.gameObject.GetComponent<ObjIdentifier>() != null
-				&& (comp.transform.parent.gameObject.GetComponent<ObjIdentifier>().prefabName == "button"
-				||  comp.transform.parent.gameObject.GetComponent<ObjIdentifier>().prefabName == "spikedPlatform")) //if you make a parent object add it here
-				return null;
+			string prefabName = comp.transform.parent.gameObject.GetComponent<ObjIdentifier> ().prefabName;
+
+			if (comp.transform.parent.gameObject.GetComponent<ObjIdentifier> () != null)
+				if (prefabName == "button" || prefabName == "spikedPlatform" || prefabName == "spikedBall" || prefabName == "spikedWall" || prefabName == "exitPlatform") //if you make a parent object add it here
+					return null;
+
 			Debug.Log (comp.name + " has no object identifier and could not be saved to level data." + comp.transform.parent.gameObject.GetComponent<ObjIdentifier>().prefabName);
 			return null;
 		}
@@ -84,51 +98,53 @@ public class SaveLevel : MonoBehaviour {
 		//find prefab's name
 		string name = comp.GetComponent<ObjIdentifier> ().prefabName;
 
+		if (!justReturnType) {
 
-		if (stats == null)
-			stats = GetComponent<Stats> ();
-		
-		if (comp.name.Contains ("Player 1")) {
-			stats.P1_respawn = comp.transform.position;
-		}
-		if (comp.name.Contains ("Player 2")) {
-			stats.P2_respawn = comp.transform.position;
-		}
+			if (stats == null)
+				stats = GetComponent<Stats> ();
+			
+			if (comp.name.Contains ("Player 1")) {
+				stats.P1_respawn = comp.transform.position;
+			}
+			if (comp.name.Contains ("Player 2")) {
+				stats.P2_respawn = comp.transform.position;
+			}
 
-		if (comp.GetComponent<PlayerMovement>() != null) {
-			PlayerMovement move = comp.GetComponent<PlayerMovement>();
-			newObj.horizontal = move.horizontal;
-			newObj.jump = move.jump;
-			newObj.Player = move.Player;
-			newObj.runSpeed = move.runSpeed;
-			newObj.jumpForce = move.jumpForce;
-		}
-		//if the prefab is any kind of platform, get its properties
-		if (comp.GetComponent<Platform> () != null) {
-			Platform plat = comp.GetComponent<Platform> ();
-			newObj.platformID = plat.platformID;
-			newObj.platMoveSetting = plat.MoveSetting;
-			newObj.platTranslation = plat.translation;
-			newObj.platTravelTime = plat.travelTime;
-			newObj.platMoveDelay = plat.moveDelay;
-			newObj.platManualMapping = plat.manualMapping;
-			newObj.platHorizontalMoveSpeed = plat.horizontalMoveSpeed;
-			newObj.platVerticalMoveSpeed = plat.verticalMoveSpeed;
-			newObj.platReturnOnUntrigger = plat.returnOnUntrigger;
-		}
+			if (comp.GetComponent<PlayerMovement>() != null) {
+				PlayerMovement move = comp.GetComponent<PlayerMovement>();
+				newObj.horizontal = move.horizontal;
+				newObj.jump = move.jump;
+				newObj.Player = move.Player;
+				newObj.runSpeed = move.runSpeed;
+				newObj.jumpForce = move.jumpForce;
+			}
+			//if the prefab is any kind of platform, get its properties
+			if (comp.GetComponent<Platform> () != null) {
+				Platform plat = comp.GetComponent<Platform> ();
+				newObj.platformID = plat.platformID;
+				newObj.platMoveSetting = plat.MoveSetting;
+				newObj.platTranslation = plat.translation;
+				newObj.platTravelTime = plat.travelTime;
+				newObj.platMoveDelay = plat.moveDelay;
+				newObj.platManualMapping = plat.manualMapping;
+				newObj.platHorizontalMoveSpeed = plat.horizontalMoveSpeed;
+				newObj.platVerticalMoveSpeed = plat.verticalMoveSpeed;
+				newObj.platReturnOnUntrigger = plat.returnOnUntrigger;
+			}
 
-		if (comp.GetComponentInChildren<ButtonTrigger> () != null) {
-			ButtonTrigger BT = comp.GetComponentInChildren<ButtonTrigger> ();
-			newObj.BTmappingNames = BT.mappingNames;
-			newObj.BTcallName = BT.callName;
-			newObj.BTplayerSpecific = BT.playerSpecific;
-			newObj.BTswitched = BT.switched;
-			newObj.BTtriggerList = BT.triggerList;
-			newObj.BTuntriggerList = BT.untriggerList;
-		}
-		
+			if (comp.GetComponentInChildren<ButtonTrigger> () != null) {
+				ButtonTrigger BT = comp.GetComponentInChildren<ButtonTrigger> ();
+				newObj.BTmappingNames = BT.mappingNames;
+				newObj.BTcallName = BT.callName;
+				newObj.BTplayerSpecific = BT.playerSpecific;
+				newObj.BTswitched = BT.switched;
+				newObj.BTtriggerList = BT.triggerList;
+				newObj.BTuntriggerList = BT.untriggerList;
+			}
+			
 
-		//ADD NEW PROPERTIES ABOVE THIS LINE
+			//ADD NEW PROPERTIES ABOVE THIS LINE
+		}
 
 		//match prefab name to prefab
 		if (name == "exitBoth")
