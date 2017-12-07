@@ -4,7 +4,10 @@
 [Bb]uild/
 [Bb]uilds/
 Assets/AssetStoreTools*
-ProjectSettings/
+#Include InputManager.asset
+!O/ProjectSettings/
+O/ProjectSettings/*
+!O/ProjectSettings/InputManager.asset
 
 # Visual Studio 2015 cache directory
 /.vs/
@@ -36,6 +39,3 @@ sysinfo.txt
 
 #fuck DS store
 .DS_STORE
-
-#Include InputManager.asset
-!ProjectSettings/InputManager.asset

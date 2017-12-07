@@ -539,6 +539,7 @@ MonoBehaviour:
     type: 2}
   CheckpointP2: {fileID: 1081735922096214, guid: d0e6d8f5f9b0059439d42de6107b1ef2,
     type: 2}
+  wallCorner: {fileID: 1705906357302102, guid: b1dca86528b29154bacdc9e7fd6b9233, type: 2}
 --- !u!114 &1019025547
 MonoBehaviour:
   m_ObjectHideFlags: 0

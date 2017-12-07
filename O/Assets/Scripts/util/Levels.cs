@@ -17,8 +17,14 @@ public class Levels : MonoBehaviour {
 
 		stats = GetComponent<Stats> ();
 		EndLevel ();
-		LoadLevel (startingLevel);
+		//LoadLevel (startingLevel);
 
+		GameObject lvlPersist = GameObject.Find ("LevelPersistence");
+		if (lvlPersist != null) {
+			LoadLevel (LevelPersistence.levelToLoad);
+		} else {
+			LoadLevel (startingLevel);
+		}
 	}
 
 	public void restart() {

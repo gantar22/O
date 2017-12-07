@@ -88,11 +88,11 @@ MonoBehaviour:
     BTtriggerList: []
     BTuntriggerList: []
   - type: {fileID: 1243324096993798, guid: 6885f8908e3096944a2f2734e9d6c498, type: 2}
-    position: {x: 15, y: -4, z: -3}
+    position: {x: 15, y: -4, z: -4}
     rotation: 0
     scale: {x: 0.8, y: 0.75}
-    horizontal: Horizontal_K1
-    jump: Jump_K2
+    horizontal: Horizontal_J1
+    jump: Jump_J2
     Player: 1
     runSpeed: 6.86
     jumpForce: 11.1
@@ -184,14 +184,14 @@ MonoBehaviour:
     BTtriggerList: []
     BTuntriggerList: []
   - type: {fileID: 1055245372309042, guid: 45aeefa8179926747b91555d81068bca, type: 2}
-    position: {x: -15, y: -4, z: -3}
+    position: {x: -15, y: -4, z: -4}
     rotation: 0
     scale: {x: 0.8, y: 0.75}
-    horizontal: Horizontal_K2
-    jump: Jump_K1
+    horizontal: Horizontal_J2
+    jump: Jump_J1
     Player: 2
     runSpeed: 7.95
-    jumpForce: 18.93
+    jumpForce: 14.3
     platformID: 0
     platMoveSetting: 0
     platTranslation: {x: 0, y: 0}

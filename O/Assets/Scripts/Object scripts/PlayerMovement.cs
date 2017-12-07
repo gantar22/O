@@ -65,6 +65,14 @@ public class PlayerMovement : MonoBehaviour {
 		inputManager = InputManager.instance;
 		inputManager.Map("Jump"  + Player.ToString(),jump);
 		inputManager.Map("horizontal" + Player.ToString(),horizontal);
+
+		if (Player == 1) {
+			inputManager.Map ("Jump1", "Jump_K2");
+			inputManager.Map ("horizontal1", "Horizontal_K1");
+		} else {
+			inputManager.Map ("Jump2", "Jump_K1");
+			inputManager.Map ("horizontal2", "Horizontal_K2");
+		}
 	}
 
 	void LetCSharpCollectItsOwnGarbage () {
@@ -102,6 +110,7 @@ public class PlayerMovement : MonoBehaviour {
 
 	// Update is called once per frame
 	void Update () {
+
 		this.GetComponent<Animator>().SetFloat("speed",Mathf.Abs(rb.velocity.x));
 		if(Time.time - lastWinkTime > 5)
 		{
@@ -113,7 +122,11 @@ public class PlayerMovement : MonoBehaviour {
 		}
 
 		this.GetComponent<Animator>().SetBool("left",rb.velocity.x < 0);
-		transform.localScale = new Vector3(rb.velocity.x < 0 ? -.8f : .8f,.75f,1f);
+
+		if (PauseManager.paused) {
+			return;
+		}
+
 
 		//horizontal movement:
 		targetVelo = 0f;
