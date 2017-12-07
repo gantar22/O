@@ -50,18 +50,17 @@ public class SaveLevel : MonoBehaviour {
 
 		LevelObject[] things = new LevelObject[levelComponents.Length];
 
-		for (int i = 0; i < things.Length; i++) {
+		for (int i = 0; i < levelComponents.Length; i++) {
 
-			GameObject compToAdd = levelComponents [i];
 			newObj = new LevelObject ();
-
-			newObj.type = GetType (compToAdd);
+				
+			GameObject compToAdd = levelComponents [i];
+			newObj.type = GetType (levelComponents [i]);
 			newObj.position = compToAdd.transform.position;
 			newObj.rotation = compToAdd.transform.eulerAngles.z;
 			newObj.scale = compToAdd.transform.localScale;
 
 			things [i] = newObj;
-
 		}
 
 		return things;
@@ -73,17 +72,20 @@ public class SaveLevel : MonoBehaviour {
 		//every level object must have an ObjIdentifier component
 		//the variable "Prefab name" in the ObjIdentifier MUST be the same as its prefab
 		if (comp.GetComponent<ObjIdentifier> () == null) {
-			if (comp.transform.parent.gameObject.GetComponent<ObjIdentifier>() != null
-				&& (comp.transform.parent.gameObject.GetComponent<ObjIdentifier>().prefabName == "button"
-				||  comp.transform.parent.gameObject.GetComponent<ObjIdentifier>().prefabName == "spikedPlatform")) //if you make a parent object add it here
-				return null;
+			string prefabName = comp.transform.parent.gameObject.GetComponent<ObjIdentifier> ().prefabName;
+
+			if (comp.transform.parent.gameObject.GetComponent<ObjIdentifier> () != null) {
+				if (prefabName == "button" || prefabName == "spikedPlatform" || prefabName == "spikedBall" || prefabName == "spikedWall" || prefabName == "exitPlatform") { //if you make a parent object add it here
+					return null;
+				}
+			}
+
 			Debug.Log (comp.name + " has no object identifier and could not be saved to level data." + comp.transform.parent.gameObject.GetComponent<ObjIdentifier>().prefabName);
 			return null;
 		}
 
 		//find prefab's name
 		string name = comp.GetComponent<ObjIdentifier> ().prefabName;
-
 
 		if (stats == null)
 			stats = GetComponent<Stats> ();
@@ -103,6 +105,7 @@ public class SaveLevel : MonoBehaviour {
 			newObj.runSpeed = move.runSpeed;
 			newObj.jumpForce = move.jumpForce;
 		}
+			
 		//if the prefab is any kind of platform, get its properties
 		if (comp.GetComponent<Platform> () != null) {
 			Platform plat = comp.GetComponent<Platform> ();

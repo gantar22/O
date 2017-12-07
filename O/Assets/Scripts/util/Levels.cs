@@ -92,7 +92,6 @@ public class Levels : MonoBehaviour {
 				//put all the objects in the level
 				foreach (LevelObject obj in objs) {
 
-
 					if (obj.type != null && !(obj.type.name.Contains("Checkpoint") && stats.respawning)) {
 
 						GameObject comp = Instantiate (obj.type, obj.position, Quaternion.identity);
