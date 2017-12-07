@@ -17,6 +17,7 @@ public class MenuManager : MonoBehaviour {
 			Debug.LogError("Missing event system in MenuManager script");
 
 		if (Input.GetAxisRaw ("Vertical") != 0 && !buttonSelected) {
+			print ("Got axis");
 			if (Input.GetAxisRaw ("Vertical") == -1) {
 				EventSystem.SetSelectedGameObject (defaultSelect);
 			} else {
