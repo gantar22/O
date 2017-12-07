@@ -42,8 +42,10 @@ public class Checkpoint : MonoBehaviour {
 			stats.trig_P1_check = this;
 
 			get_references ();
-			float volume = SettingsManager.gameSettings.masterVolume;
-			GameController.GetComponent<AudioSource> ().PlayOneShot (trigger, volume);
+			if (SettingsManager.gameSettings != null) {
+				float volume = SettingsManager.gameSettings.masterVolume;
+				GameController.GetComponent<AudioSource> ().PlayOneShot (trigger, volume);
+			}
 
 			EventManager.TriggerEvent ("Find_P2_checkpt");
 		} else if (other.name.Contains("Player 2") && Player == PlayerNums.P2 && Checkpt_State == States.idle) {
@@ -54,8 +56,10 @@ public class Checkpoint : MonoBehaviour {
 			stats.trig_P2_check = this;
 
 			get_references ();
-			float volume = SettingsManager.gameSettings.masterVolume;
-			GameController.GetComponent<AudioSource> ().PlayOneShot (trigger, volume);
+			if (SettingsManager.gameSettings != null) {
+				float volume = SettingsManager.gameSettings.masterVolume;
+				GameController.GetComponent<AudioSource> ().PlayOneShot (trigger, volume);
+			}
 
 			EventManager.TriggerEvent ("Find_P1_checkpt");
 		}
@@ -68,8 +72,10 @@ public class Checkpoint : MonoBehaviour {
 			stats.trig_P2_check = null;
 
 			get_references ();
-			float volume = SettingsManager.gameSettings.masterVolume;
-			GameController.GetComponent<AudioSource> ().PlayOneShot (activate, volume);
+			if (SettingsManager.gameSettings != null) {
+				float volume = SettingsManager.gameSettings.masterVolume;
+				GameController.GetComponent<AudioSource> ().PlayOneShot (activate, volume);
+			}
 		}
 	}
 
