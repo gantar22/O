@@ -81,6 +81,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ae5c39f93169ea942b6bfc83073b29f6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  trigger: {fileID: 8300000, guid: c871c2b9883860b47a565d568568150e, type: 3}
+  activate: {fileID: 8300000, guid: 3d12fc627c85fe74cbadab06f71f5f53, type: 3}
+  GameController: {fileID: 0}
   Player: 0
   Sprites:
   - {fileID: 21300000, guid: 8abb2c45c909be94a96faa867955acc0, type: 3}

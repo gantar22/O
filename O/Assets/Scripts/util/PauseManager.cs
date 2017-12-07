@@ -25,7 +25,7 @@ public class PauseManager : MonoBehaviour {
 		} else {
 			pressed = false;
 		}
-		print(Input.GetAxisRaw("Restart"));
+		//print(Input.GetAxisRaw("Restart"));
 
 		// Reset keys
 		if (Input.GetAxis("Restart") > 0) {
