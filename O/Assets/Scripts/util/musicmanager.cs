@@ -12,7 +12,9 @@ public class musicmanager : MonoBehaviour {
 	public AudioSource music;
 	public AudioSource music1;
 	public AudioSource music2;
-	public float maxPlayerVolume;
+	[HideInInspector]
+	public float maxPlayerVolume = .7f; //this is mine, no touch
+	public float maxMusicVolume;
 
 
 
@@ -37,6 +39,7 @@ public class musicmanager : MonoBehaviour {
 	         	p2 = gos[i];
 	         }
 	     }
+	     if(p1 == null || p2 == null) return;
 
  
 		if(p1.GetComponent<PlayerMovement>().OnAir())
@@ -44,14 +47,14 @@ public class musicmanager : MonoBehaviour {
 			CancelInvoke("end1");
 			Invoke("end1",duration);
 			a1 = true;
-			music.volume = Mathf.Clamp(music.volume - 2 * Time.deltaTime,0,1);
+			music.volume = Mathf.Clamp(music.volume - 2 * Time.deltaTime,0,maxMusicVolume);
 		}
 		if(p2.GetComponent<PlayerMovement>().OnAir())
 		{
 			CancelInvoke("end2");
 			Invoke("end2",duration);
 			a2 = true;
-			music.volume = Mathf.Clamp(music.volume - 2 * Time.deltaTime,0,1);
+			music.volume = Mathf.Clamp(music.volume - 2 * Time.deltaTime,0,maxMusicVolume);
 		}
 
 		if(p1.GetComponent<Rigidbody2D>().velocity.x != 0f) music1.volume = Mathf.Clamp(music1.volume + Time.deltaTime * Mathf.Abs(p1.GetComponent<Rigidbody2D>().velocity.x) / (8 * 2),0,maxPlayerVolume);
@@ -64,13 +67,13 @@ public class musicmanager : MonoBehaviour {
 
 		if(a1 && a2) 
 		{
-			music.volume = Mathf.Clamp(music.volume - duration * Time.deltaTime / 10,0,1); // in a tenth of the duration in seconds this moves from full to off
-			music1.volume = 1;
-			music2.volume = 1;
+			music.volume = Mathf.Clamp(music.volume - duration * Time.deltaTime / 10,0,maxMusicVolume); // in a tenth of the duration in seconds this moves from full to off
+			music1.volume = maxMusicVolume;
+			music2.volume = maxMusicVolume;
 		}
 		else 
 		{
-			music.volume = Mathf.Clamp(music.volume + duration * Time.deltaTime / 7,0,1);
+			music.volume = Mathf.Clamp(music.volume + duration * Time.deltaTime / 7,0,maxMusicVolume);
 		}
 		print(new Vector3(music.volume,music1.volume,music2.volume));
 	}

@@ -34,6 +34,9 @@ public class PlayerMovement : MonoBehaviour {
 	private v_state v_s;
 	private bool jumpHeld;
 	private float lastWinkTime;
+	public GameObject body;
+	[HideInInspector]
+	public bool dead;
 
 
 	// Use this for initialization
@@ -113,6 +116,7 @@ public class PlayerMovement : MonoBehaviour {
 		if (PauseManager.paused) {
 			return;
 		}
+		if(dead) rb.AddForce(Vector2.up * Time.deltaTime * 400,ForceMode2D.Force);
 
 		this.GetComponent<Animator>().SetFloat("speed",Mathf.Abs(rb.velocity.x));
 		if(Time.time - lastWinkTime > 5)
@@ -189,7 +193,6 @@ public class PlayerMovement : MonoBehaviour {
 		Vector2 p1 = new Vector2 (pos.x - width / 2f + 0.01f, pos.y - height / 2f - 0.02f);
 		Vector2 p2 = new Vector2 (pos.x + width / 2f - 0.01f, pos.y - height / 2f - 0.02f);
 
-		if (Physics2D.Linecast (p1, p2) ) print(Physics2D.Linecast (p1, p2).collider.name );
 		if (Physics2D.Linecast (p1, p2) && (Physics2D.Linecast (p1, p2).collider.name.Contains ("Platform"))) {
 			transform.parent = Physics2D.Linecast (p1, p2).collider.gameObject.transform.parent;
 		} else if(Physics2D.Linecast (p1, p2) && Physics2D.Linecast (p1, p2).collider.name.Contains ("Button")){
@@ -244,6 +247,28 @@ public class PlayerMovement : MonoBehaviour {
 		return Mathf.Abs(rb.velocity.x);
 	}
 
+	public void die(){
+			if(dead) return;
+			dead = true;
+			GameObject mybody = Instantiate(body,transform.position,Quaternion.identity);
+			foreach(Transform child in mybody.transform)
+			{
+				child.parent = null;
+				Rigidbody2D rbc = child.gameObject.GetComponent<Rigidbody2D>();
+				rbc.interpolation = RigidbodyInterpolation2D.None;
+				rbc.AddForce(new Vector2(Random.Range(-100,100),Random.Range(500,1200)),ForceMode2D.Impulse);
+				Destroy(child.gameObject,.5f);
+			}
+			foreach(Transform child in transform){
+				child.gameObject.GetComponent<SpriteRenderer>().enabled = false;
+				if(child.childCount > 0)
+				{
+					foreach(Transform child2 in child){
+						child2.gameObject.GetComponent<SpriteRenderer>().enabled = false;
+					}
+				}
+			}
+	}
 
 
 	void OnCollisionExit2D(Collision2D coll) {
