@@ -57,7 +57,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4212149216669988}
   - component: {fileID: 212491649975210100}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: right_eye
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -74,7 +74,7 @@ GameObject:
   - component: {fileID: 4919982833189732}
   - component: {fileID: 212108133980793522}
   - component: {fileID: 70517211074929636}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: head
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -106,7 +106,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4671530613596236}
   - component: {fileID: 212569468237251634}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: left_eye
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -232,7 +232,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1055245372309042}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -5.64, y: 0.61, z: -4}
+  m_LocalPosition: {x: 3.2781389, y: -11.61417, z: -4}
   m_LocalScale: {x: 0.8, y: 0.75, z: 1}
   m_Children:
   - {fileID: 4919982833189732}
