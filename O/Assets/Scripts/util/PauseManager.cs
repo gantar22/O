@@ -7,24 +7,37 @@ public class PauseManager : MonoBehaviour {
 
 	public GameObject PausePanel;
 	public GameObject OptionsPanel;
+	private bool pressed;
 
 	[HideInInspector]
 	public static bool paused = false;
 
 	void Update () {
 		// Pause keys
-		if (Input.GetKeyDown (KeyCode.Escape) || Input.GetKeyDown (KeyCode.Keypad7)) {
-			if (paused) {
+		if (Input.GetAxisRaw("Cancel") > 0) {
+			if (paused && !pressed) {
+				pressed = true;
 				resume ();
-			} else {
+			} else if (!pressed) {
+				pressed = true;
 				pause ();
-			}
+			} 
+		} else {
+			pressed = false;
 		}
+		print(Input.GetAxisRaw("Restart"));
 
 		// Reset keys
-		if (Input.GetKeyDown (KeyCode.R) || Input.GetKeyDown (KeyCode.Keypad6)) {
-			gameObject.GetComponent<Levels> ().restart ();
+		if (Input.GetAxis("Restart") > 0) {
+			Invoke("restart",2);
+		} else {
+			CancelInvoke("restart");
 		}
+	}
+
+	void restart()
+	{
+		gameObject.GetComponent<Levels> ().restart ();
 	}
 
 	public void pause() {
