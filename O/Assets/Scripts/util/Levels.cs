@@ -22,6 +22,9 @@ public class Levels : MonoBehaviour {
 	}
 
 	public void restart() {
+		if (stats == null)
+			stats = GetComponent<Stats> ();
+		
 		int currLevel = stats.currLevel;
 		EndLevel ();
 		LoadLevel (currLevel);

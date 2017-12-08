@@ -716,7 +716,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 1727357004}
         m_MethodName: resume
         m_Mode: 1
         m_Arguments:
@@ -727,7 +727,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 1727357010}
         m_MethodName: restart
         m_Mode: 1
         m_Arguments:
@@ -1681,7 +1681,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 1727357004}
         m_MethodName: resume
         m_Mode: 1
         m_Arguments:
@@ -3229,6 +3229,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7a19557c6a413c4409c81386d2b52dee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  levelComplete: {fileID: 0}
   GameController: {fileID: 0}
   clip: {fileID: 8300000, guid: 99e9aecb163424b49b94c9129b20f09b, type: 3}
   ExitSetting: 0
@@ -3642,7 +3643,7 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1727356999}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c11f202cd75224468ab4d16bf526988f, type: 3}
   m_Name: 
@@ -3658,7 +3659,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 4f42b36b151778144b88b9fd5b154556, type: 2}
   - {fileID: 11400000, guid: 00df042cbdf32c145bcd6d3b636fc3d4, type: 2}
   - {fileID: 11400000, guid: 076d3bc231f0ce6458771ee388f1363d, type: 2}
-  startingLevel: 7
+  startingLevel: 6
 --- !u!4 &1727357011
 Transform:
   m_ObjectHideFlags: 0
@@ -3750,7 +3751,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 1727357004}
         m_MethodName: resume
         m_Mode: 1
         m_Arguments:
