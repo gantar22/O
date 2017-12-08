@@ -254,27 +254,30 @@ public class PlayerMovement : MonoBehaviour {
 	}
 
 	public void die(){
-			if(dead) return;
-			dead = true;
-			GameController.GetComponent<AudioSource> ().PlayOneShot (death, SettingsManager.gameSettings.masterVolume);
-			GameObject mybody = Instantiate(body,transform.position,Quaternion.identity);
-			foreach(Transform child in mybody.transform)
+		if(dead) return;
+		dead = true;
+
+		jumpGrace = 0f;
+
+		GameController.GetComponent<AudioSource> ().PlayOneShot (death, SettingsManager.gameSettings.masterVolume);
+		GameObject mybody = Instantiate(body,transform.position,Quaternion.identity);
+		foreach(Transform child in mybody.transform)
+		{
+			child.parent = null;
+			Rigidbody2D rbc = child.gameObject.GetComponent<Rigidbody2D>();
+			rbc.interpolation = RigidbodyInterpolation2D.None;
+			rbc.AddForce(new Vector2(Random.Range(-100,100),Random.Range(500,1200)),ForceMode2D.Impulse);
+			Destroy(child.gameObject,.5f);
+		}
+		foreach(Transform child in transform){
+			child.gameObject.GetComponent<SpriteRenderer>().enabled = false;
+			if(child.childCount > 0)
 			{
-				child.parent = null;
-				Rigidbody2D rbc = child.gameObject.GetComponent<Rigidbody2D>();
-				rbc.interpolation = RigidbodyInterpolation2D.None;
-				rbc.AddForce(new Vector2(Random.Range(-100,100),Random.Range(500,1200)),ForceMode2D.Impulse);
-				Destroy(child.gameObject,.5f);
-			}
-			foreach(Transform child in transform){
-				child.gameObject.GetComponent<SpriteRenderer>().enabled = false;
-				if(child.childCount > 0)
-				{
-					foreach(Transform child2 in child){
-						child2.gameObject.GetComponent<SpriteRenderer>().enabled = false;
-					}
+				foreach(Transform child2 in child){
+					child2.gameObject.GetComponent<SpriteRenderer>().enabled = false;
 				}
 			}
+		}
 	}
 
 }
