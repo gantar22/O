@@ -81,6 +81,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7a19557c6a413c4409c81386d2b52dee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  levelComplete: {fileID: 8300000, guid: 99e9aecb163424b49b94c9129b20f09b, type: 3}
   GameController: {fileID: 0}
   ExitSetting: 2
   p1Colliding: 0

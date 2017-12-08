@@ -42,7 +42,7 @@ public class Checkpoint : MonoBehaviour {
 			stats.trig_P1_check = this;
 
 			get_references ();
-			if (SettingsManager.gameSettings != null) {
+			if (SettingsManager.gameSettings != null && trigger != null) {
 				float volume = SettingsManager.gameSettings.masterVolume;
 				GameController.GetComponent<AudioSource> ().PlayOneShot (trigger, volume);
 			}
@@ -56,7 +56,7 @@ public class Checkpoint : MonoBehaviour {
 			stats.trig_P2_check = this;
 
 			get_references ();
-			if (SettingsManager.gameSettings != null) {
+			if (SettingsManager.gameSettings != null && trigger != null) {
 				float volume = SettingsManager.gameSettings.masterVolume;
 				GameController.GetComponent<AudioSource> ().PlayOneShot (trigger, volume);
 			}
@@ -72,7 +72,7 @@ public class Checkpoint : MonoBehaviour {
 			stats.trig_P2_check = null;
 
 			get_references ();
-			if (SettingsManager.gameSettings != null) {
+			if (SettingsManager.gameSettings != null && activate != null) {
 				float volume = SettingsManager.gameSettings.masterVolume;
 				GameController.GetComponent<AudioSource> ().PlayOneShot (activate, volume);
 			}
