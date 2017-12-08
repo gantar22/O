@@ -339,7 +339,7 @@ MonoBehaviour:
   Player: 2
   drag: 0
   runSpeed: 7.95
-  maxSpeed: 13.84
+  maxSpeed: 10
   sustainSpeed: 0
   jumpForce: 14.3
   accelTime: 0
@@ -347,7 +347,7 @@ MonoBehaviour:
   body: {fileID: 1447723157364590, guid: 514dfda69387d3e478295761b25952cb, type: 2}
   dead: 0
   GameController: {fileID: 0}
-  death: {fileID: 8300000, guid: c871c2b9883860b47a565d568568150e, type: 3}
+  death: {fileID: 8300000, guid: 5cee99e175450924aab0507aa0832bc8, type: 3}
 --- !u!114 &114373025151823200
 MonoBehaviour:
   m_ObjectHideFlags: 1
