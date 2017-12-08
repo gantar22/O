@@ -291,7 +291,7 @@ MonoBehaviour:
   Player: 1
   drag: 0
   runSpeed: 7.95
-  maxSpeed: 10
+  maxSpeed: 11
   sustainSpeed: 0
   jumpForce: 14.3
   accelTime: 0
