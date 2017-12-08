@@ -16,9 +16,12 @@ public class MenuManager : MonoBehaviour {
 
 	private bool buttonSelected;
 
-	void onEnable() {
-		if (FullscreenToggle != null)
-			FullscreenToggle.onValueChanged.AddListener(delegate { OnFullscreenToggle(); } );
+	void OnEnable() {
+		if (FullscreenToggle != null) {
+			FullscreenToggle.onValueChanged.AddListener (delegate {
+				OnFullscreenToggle ();
+			});
+		}
 
 		if (MasterVolumeSlider != null)
 			MasterVolumeSlider.onValueChanged.AddListener (delegate { OnMasterVolumeChange (); });
@@ -28,16 +31,22 @@ public class MenuManager : MonoBehaviour {
 		if (EventSystem == null)
 			Debug.LogError("Missing event system in MenuManager script");
 
-		if (Input.GetAxisRaw ("Vertical") != 0 && !buttonSelected) {
-			print ("Got axis");
-			if (Input.GetAxisRaw ("Vertical") == -1) {
+		float vertical = Input.GetAxisRaw ("Vertical");
+		if (vertical != 0 && !buttonSelected) {
+			if (vertical == -1) {
 				EventSystem.SetSelectedGameObject (defaultSelect);
 			} else {
 				EventSystem.SetSelectedGameObject (defaultUpSelect);
 			}
 
 			buttonSelected = true;
-		}
+		} /* else if (vertical != 0) {
+			if (EventSystem.currentSelectedGameObject == defaultSelect && vertical == 1) {
+				EventSystem.SetSelectedGameObject (defaultUpSelect);
+			} else if (EventSystem.currentSelectedGameObject == defaultUpSelect && vertical == -1) {
+				EventSystem.SetSelectedGameObject (defaultSelect);
+			}
+		} */
 	}
 
 	private void OnDisable() {
@@ -51,6 +60,7 @@ public class MenuManager : MonoBehaviour {
 
 	public void OnMasterVolumeChange() {
 		//AudioSource.volume = masterVolumeSlider.value;
+		//Debug.Log("master volume changing to: " + MasterVolumeSlider.value);
 		SettingsManager.gameSettings.masterVolume = MasterVolumeSlider.value;
 	}
 
