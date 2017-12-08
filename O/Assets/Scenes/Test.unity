@@ -2664,6 +2664,7 @@ GameObject:
   - component: {fileID: 697729558}
   - component: {fileID: 697729557}
   - component: {fileID: 697729556}
+  - component: {fileID: 697729561}
   m_Layer: 0
   m_Name: Exit - Both(Clone)
   m_TagString: LevelObj
@@ -2768,6 +2769,23 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 22
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!95 &697729561
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 697729555}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 3ee99001e51bb04458ce0674a3b0b9d0, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
 --- !u!1 &771116118
 GameObject:
   m_ObjectHideFlags: 0
