@@ -111,7 +111,7 @@ public class Levels : MonoBehaviour {
 									checkpt.GetComponent<Checkpoint> ().Checkpt_State = States.active;
 								}
 							}
-							comp.transform.position = stats.P1_respawn - new Vector3(0, 0, 1);
+							comp.transform.position = new Vector3 (stats.P1_respawn.x, stats.P1_respawn.y, -7);
 						}
 
 						if (comp.name.Contains ("Player 2")) {
@@ -122,7 +122,7 @@ public class Levels : MonoBehaviour {
 									checkpt.GetComponent<Checkpoint> ().Checkpt_State = States.active;
 								}
 							}
-							comp.transform.position = stats.P2_respawn - new Vector3(0, 0, 1);
+							comp.transform.position = new Vector3 (stats.P2_respawn.x, stats.P2_respawn.y, -7);
 						}
 
 						if (comp.GetComponent<Platform> () != null) {

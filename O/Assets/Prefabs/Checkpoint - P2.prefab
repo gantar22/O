@@ -74,12 +74,12 @@ MonoBehaviour:
   GameController: {fileID: 0}
   Player: 1
   Sprites:
-  - {fileID: 21300000, guid: 8abb2c45c909be94a96faa867955acc0, type: 3}
-  - {fileID: 21300000, guid: 0971b2904f50f6b4f81e6717c9fae4f5, type: 3}
-  - {fileID: 21300000, guid: 571a0ccfdfa9cdf4daf5095646420464, type: 3}
   - {fileID: 21300000, guid: ef8c1007e4751d945bc45ae563dc48e4, type: 3}
   - {fileID: 21300000, guid: cfb3cf0fc80d8be4abc1ef5b0fa6e776, type: 3}
   - {fileID: 21300000, guid: 6a932b32d1d860d45a4eed6752c5c0d5, type: 3}
+  - {fileID: 21300000, guid: 8abb2c45c909be94a96faa867955acc0, type: 3}
+  - {fileID: 21300000, guid: 0971b2904f50f6b4f81e6717c9fae4f5, type: 3}
+  - {fileID: 21300000, guid: 571a0ccfdfa9cdf4daf5095646420464, type: 3}
   Checkpt_State: 0
 --- !u!114 &114658103063885518
 MonoBehaviour:
