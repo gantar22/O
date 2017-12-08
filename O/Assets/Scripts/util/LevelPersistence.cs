@@ -85,13 +85,6 @@ public class LevelPersistence : MonoBehaviour {
 
 		levelToLoad = levelNum;
 	}
-
-	// Start demo levels
-	public void startDemo() {
-		SceneManager.LoadScene(2);
-		levelToLoad = 0;
-		return;
-	}
 }
 
 [Serializable]

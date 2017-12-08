@@ -7,6 +7,8 @@ public enum ExitOptions {And, P1, P2};
 
 public class Exit : MonoBehaviour {
 
+	public AudioClip levelComplete;
+
 	[HideInInspector]
 	public GameObject GameController;
 
@@ -83,7 +85,15 @@ public class Exit : MonoBehaviour {
 	void loadNext() {
 		if (GameController == null)
 			GameController = GameObject.FindGameObjectWithTag ("GameController");
-		currentLevel = GameController.GetComponent<Stats> ().currLevel;
+
+
+		// Play level-success sound
+		if (SettingsManager.gameSettings != null && levelComplete != null) {
+			float volume = SettingsManager.gameSettings.masterVolume;
+			GameController.GetComponent<AudioSource> ().PlayOneShot (levelComplete, volume);
+		}
+
+
 
 		if (!(SceneManager.GetActiveScene () == SceneManager.GetSceneByName ("Demo"))) {
 			if (LevelPersistence.levelData != null) {

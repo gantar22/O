@@ -74,10 +74,6 @@ public class MenuManager : MonoBehaviour {
 	public void startLevel (int levelNum) {
 		LevelPersistence.levelData.startLevel (levelNum);
 	}
-		
-	public void startDemo() {
-		LevelPersistence.levelData.startDemo ();
-	}
 
 	public void resetProgress() {
 		LevelPersistence.levelData.resetProgress ();
