@@ -1313,7 +1313,7 @@ MonoBehaviour:
     BTtriggerList: []
     BTuntriggerList: []
   - type: {fileID: 1912214553670882, guid: dc80944325554442b9c3828bf253b97d, type: 2}
-    position: {x: 0.75, y: -112.15076, z: -1.59}
+    position: {x: 2, y: -112.15076, z: -1.59}
     rotation: 0
     scale: {x: 1, y: 1}
     horizontal: 
@@ -2081,9 +2081,9 @@ MonoBehaviour:
     BTtriggerList: []
     BTuntriggerList: []
   - type: {fileID: 1612545665011686, guid: 56a255af996e12c4da9ce60393b32e8b, type: 2}
-    position: {x: -3.558, y: -96.763, z: 0}
+    position: {x: -3.9, y: -96.763, z: 0}
     rotation: 0
-    scale: {x: 11.016909, y: 3.5398636}
+    scale: {x: 12.5, y: 3.5398636}
     horizontal: 
     jump: 
     Player: 0
@@ -2105,31 +2105,7 @@ MonoBehaviour:
     BTtriggerList: []
     BTuntriggerList: []
   - type: {fileID: 1264043383694622, guid: df91e76f37f22b7468d6ab9ce721c50c, type: 2}
-    position: {x: -8.57, y: -94.5, z: -2}
-    rotation: 0
-    scale: {x: 0.76, y: 0.76}
-    horizontal: 
-    jump: 
-    Player: 0
-    runSpeed: 0
-    jumpForce: 0
-    platformID: 0
-    platMoveSetting: 0
-    platTranslation: {x: 0, y: 0}
-    platTravelTime: 0
-    platMoveDelay: 0
-    platManualMapping: 0
-    platHorizontalMoveSpeed: 0
-    platVerticalMoveSpeed: 0
-    platReturnOnUntrigger: 0
-    BTmappingNames: []
-    BTcallName: 
-    BTplayerSpecific: 0
-    BTswitched: 0
-    BTtriggerList: []
-    BTuntriggerList: []
-  - type: {fileID: 1264043383694622, guid: df91e76f37f22b7468d6ab9ce721c50c, type: 2}
-    position: {x: -7.5600004, y: -94.5, z: -2}
+    position: {x: -8.61, y: -94.5, z: -2}
     rotation: 0
     scale: {x: 0.76, y: 0.76}
     horizontal: 
@@ -2153,7 +2129,7 @@ MonoBehaviour:
     BTtriggerList: []
     BTuntriggerList: []
   - type: {fileID: 1264043383694622, guid: df91e76f37f22b7468d6ab9ce721c50c, type: 2}
-    position: {x: -6.43, y: -94.5, z: -2}
+    position: {x: -7.59, y: -94.5, z: -2}
     rotation: 0
     scale: {x: 0.76, y: 0.76}
     horizontal: 
@@ -2177,7 +2153,7 @@ MonoBehaviour:
     BTtriggerList: []
     BTuntriggerList: []
   - type: {fileID: 1264043383694622, guid: df91e76f37f22b7468d6ab9ce721c50c, type: 2}
-    position: {x: -5.4199996, y: -94.5, z: -2}
+    position: {x: -6.57, y: -94.5, z: -2}
     rotation: 0
     scale: {x: 0.76, y: 0.76}
     horizontal: 
@@ -2201,7 +2177,31 @@ MonoBehaviour:
     BTtriggerList: []
     BTuntriggerList: []
   - type: {fileID: 1264043383694622, guid: df91e76f37f22b7468d6ab9ce721c50c, type: 2}
-    position: {x: -4.5099998, y: -94.5, z: -2}
+    position: {x: -5.55, y: -94.5, z: -2}
+    rotation: 0
+    scale: {x: 0.76, y: 0.76}
+    horizontal: 
+    jump: 
+    Player: 0
+    runSpeed: 0
+    jumpForce: 0
+    platformID: 0
+    platMoveSetting: 0
+    platTranslation: {x: 0, y: 0}
+    platTravelTime: 0
+    platMoveDelay: 0
+    platManualMapping: 0
+    platHorizontalMoveSpeed: 0
+    platVerticalMoveSpeed: 0
+    platReturnOnUntrigger: 0
+    BTmappingNames: []
+    BTcallName: 
+    BTplayerSpecific: 0
+    BTswitched: 0
+    BTtriggerList: []
+    BTuntriggerList: []
+  - type: {fileID: 1264043383694622, guid: df91e76f37f22b7468d6ab9ce721c50c, type: 2}
+    position: {x: -4.52, y: -94.5, z: -2}
     rotation: 0
     scale: {x: 0.76, y: 0.76}
     horizontal: 
@@ -3357,6 +3357,30 @@ MonoBehaviour:
     position: {x: 12.67, y: -5.807475, z: 4.07}
     rotation: 0
     scale: {x: 1, y: 1}
+    horizontal: 
+    jump: 
+    Player: 0
+    runSpeed: 0
+    jumpForce: 0
+    platformID: 0
+    platMoveSetting: 0
+    platTranslation: {x: 0, y: 0}
+    platTravelTime: 0
+    platMoveDelay: 0
+    platManualMapping: 0
+    platHorizontalMoveSpeed: 0
+    platVerticalMoveSpeed: 0
+    platReturnOnUntrigger: 0
+    BTmappingNames: []
+    BTcallName: 
+    BTplayerSpecific: 0
+    BTswitched: 0
+    BTtriggerList: []
+    BTuntriggerList: []
+  - type: {fileID: 1264043383694622, guid: df91e76f37f22b7468d6ab9ce721c50c, type: 2}
+    position: {x: -9.63, y: -94.5, z: -2}
+    rotation: 0
+    scale: {x: 0.76, y: 0.76}
     horizontal: 
     jump: 
     Player: 0
