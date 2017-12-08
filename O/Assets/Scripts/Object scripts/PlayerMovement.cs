@@ -143,7 +143,7 @@ public class PlayerMovement : MonoBehaviour {
 
 		//rb.AddForce(new Vector2(targetVelo,0),ForceMode2D.Force);
 		rb.velocity = new Vector2 (Mathf.Lerp(rb.velocity.x,targetVelo, 17.5f * Time.deltaTime),rb.velocity.y);
-		rb.velocity = new Vector2 (Mathf.Clamp(rb.velocity.x, -1 * maxSpeed,maxSpeed), rb.velocity.y);
+		rb.velocity = new Vector2 (rb.velocity.x,Mathf.Clamp(rb.velocity.y, -1 * maxSpeed,9999999));
 
 
 
