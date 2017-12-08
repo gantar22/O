@@ -25,7 +25,7 @@ GameObject:
   - component: {fileID: 114373025151823200}
   - component: {fileID: 70193947247596172}
   - component: {fileID: 95607239043245088}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Player 1
   m_TagString: LevelObj
   m_Icon: {fileID: 0}
@@ -41,7 +41,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4609271939134818}
   - component: {fileID: 212244151507729034}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: left_arm
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -90,7 +90,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4439912045481540}
   - component: {fileID: 212432927275863540}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: lower
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -122,7 +122,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4245555115232696}
   - component: {fileID: 212354348727747354}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: upper
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -138,7 +138,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4556022462619388}
   - component: {fileID: 212728015489722430}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: right_arm
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -232,7 +232,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1055245372309042}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 3.2781389, y: -11.61417, z: -4}
+  m_LocalPosition: {x: -13.95, y: 1.5, z: -3}
   m_LocalScale: {x: 0.8, y: 0.75, z: 1}
   m_Children:
   - {fileID: 4919982833189732}
@@ -288,8 +288,8 @@ CapsuleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.005248785, y: -0.05}
-  m_Size: {x: 1, y: 2.8}
+  m_Offset: {x: -0.005248785, y: 0}
+  m_Size: {x: 1, y: 2.9}
   m_Direction: 0
 --- !u!70 &70517211074929636
 CapsuleCollider2D:
@@ -344,7 +344,7 @@ MonoBehaviour:
   jumpForce: 14.3
   accelTime: 0
   decayTime: 0
-  body: {fileID: 1447723157364590, guid: 5717e2a60ad6dc14f89594cd9c455bed, type: 2}
+  body: {fileID: 1447723157364590, guid: 514dfda69387d3e478295761b25952cb, type: 2}
   dead: 0
 --- !u!114 &114373025151823200
 MonoBehaviour:

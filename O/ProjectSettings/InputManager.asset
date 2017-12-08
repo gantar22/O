@@ -35,8 +35,8 @@ InputManager:
     snap: 1
     invert: 0
     type: 2
-    axis: 3
-    joyNum: 1
+    axis: 0
+    joyNum: 2
   - serializedVersion: 3
     m_Name: Jump_J1
     descriptiveName: 
@@ -58,7 +58,7 @@ InputManager:
     descriptiveName: 
     descriptiveNegativeName: 
     negativeButton: 
-    positiveButton: joystick 1 button 2
+    positiveButton: joystick 2 button 0
     altNegativeButton: 
     altPositiveButton: mouse 1
     gravity: 1000
@@ -68,7 +68,7 @@ InputManager:
     invert: 0
     type: 0
     axis: 0
-    joyNum: 1
+    joyNum: 2
   - serializedVersion: 3
     m_Name: Submit
     descriptiveName: 
@@ -236,7 +236,7 @@ InputManager:
     negativeButton: 
     positiveButton: return
     altNegativeButton: 
-    altPositiveButton: 
+    altPositiveButton: joystick button 0
     gravity: 1000
     dead: 0.001
     sensitivity: 1000

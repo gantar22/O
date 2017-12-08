@@ -296,7 +296,7 @@ MonoBehaviour:
   jumpForce: 14.3
   accelTime: 0
   decayTime: 0
-  body: {fileID: 1275913342115074, guid: cc7b0f4f9db648945959363fd387bf99, type: 2}
+  body: {fileID: 1275913342115074, guid: 3e08e3d0306f7b14e9480824c436e4df, type: 2}
   dead: 0
 --- !u!212 &212106991306306136
 SpriteRenderer:

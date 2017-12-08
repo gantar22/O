@@ -39,7 +39,7 @@ MonoBehaviour:
     BTswitched: 0
     BTtriggerList: []
     BTuntriggerList: []
-  - type: {fileID: 0}
+  - type: {fileID: 1504169841305752, guid: 193d7fe30613ff447b2b98f03e38dae2, type: 2}
     position: {x: 23.805481, y: 8.706, z: 2.2}
     rotation: 0
     scale: {x: 0.7, y: 1}

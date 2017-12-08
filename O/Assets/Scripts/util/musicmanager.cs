@@ -47,14 +47,14 @@ public class musicmanager : MonoBehaviour {
 			CancelInvoke("end1");
 			Invoke("end1",duration);
 			a1 = true;
-			music.volume = Mathf.Clamp(music.volume - 2 * Time.deltaTime,0,maxMusicVolume);
+			music.volume = Mathf.Clamp(music.volume - 2 * Time.deltaTime,.6f,maxMusicVolume);
 		}
 		if(p2.GetComponent<PlayerMovement>().OnAir())
 		{
 			CancelInvoke("end2");
 			Invoke("end2",duration);
 			a2 = true;
-			music.volume = Mathf.Clamp(music.volume - 2 * Time.deltaTime,0,maxMusicVolume);
+			music.volume = Mathf.Clamp(music.volume - 2 * Time.deltaTime,.6f,maxMusicVolume);
 		}
 
 		if(p1.GetComponent<Rigidbody2D>().velocity.x != 0f) music1.volume = Mathf.Clamp(music1.volume + Time.deltaTime * Mathf.Abs(p1.GetComponent<Rigidbody2D>().velocity.x) / (8 * 2),0,maxPlayerVolume);
