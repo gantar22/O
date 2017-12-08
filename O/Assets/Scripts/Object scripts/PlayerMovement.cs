@@ -37,6 +37,9 @@ public class PlayerMovement : MonoBehaviour {
 	public GameObject body;
 	[HideInInspector]
 	public bool dead;
+	[HideInInspector]
+	public GameObject GameController;
+	public AudioClip death;
 
 
 	// Use this for initialization
@@ -56,6 +59,7 @@ public class PlayerMovement : MonoBehaviour {
 		h_s = h_state.idle;
 		v_s = v_state.idle;
 		lastWinkTime = Time.time;
+		GameController = GameObject.FindGameObjectWithTag ("GameController");
 	}
 
 	void Awake()
@@ -250,6 +254,7 @@ public class PlayerMovement : MonoBehaviour {
 	public void die(){
 			if(dead) return;
 			dead = true;
+			GameController.GetComponent<AudioSource> ().PlayOneShot (death, SettingsManager.gameSettings.masterVolume);
 			GameObject mybody = Instantiate(body,transform.position,Quaternion.identity);
 			foreach(Transform child in mybody.transform)
 			{

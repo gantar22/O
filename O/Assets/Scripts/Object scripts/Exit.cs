@@ -10,6 +10,10 @@ public class Exit : MonoBehaviour {
 	[HideInInspector]
 	public GameObject GameController;
 
+	public AudioClip clip;
+
+	private int currentLevel;
+
 	//whether or not each player is required to reach this exit
 	//in order to beat the level. Options are self-explanatory.
 	//we may want this to be loaded for each level with the serializer,
@@ -28,13 +32,19 @@ public class Exit : MonoBehaviour {
 		} else if (ExitSetting == ExitOptions.P2) {
 			EventManager.StartListening ("Find_P2_exit", Try_to_exit);
 		}
+		Invoke("init",.2f);
+	}
+
+	void init(){
+		p2Colliding = false;
+		p1Colliding = false;
 	}
 
 	void Try_to_exit() {
 		if (ExitSetting == ExitOptions.P1 && p1Colliding) {
-			loadNext ();
+			//loadNext ();
 		} else if (ExitSetting == ExitOptions.P2 && p2Colliding) {
-			loadNext ();
+			//loadNext ();
 		}
 	}
 
@@ -73,13 +83,20 @@ public class Exit : MonoBehaviour {
 	void loadNext() {
 		if (GameController == null)
 			GameController = GameObject.FindGameObjectWithTag ("GameController");
-		int currentLevel = GameController.GetComponent<Stats> ().currLevel;
+		currentLevel = GameController.GetComponent<Stats> ().currLevel;
 
 		if (!(SceneManager.GetActiveScene () == SceneManager.GetSceneByName ("Demo"))) {
 			if (LevelPersistence.levelData != null) {
 				LevelPersistence.levelData.saveLevelProgress (currentLevel);
 			}
 		}
+		gameObject.GetComponent<Animator>().SetTrigger("suc");
+		GameController.GetComponent<AudioSource> ().PlayOneShot (clip, SettingsManager.gameSettings.masterVolume);
+		Invoke("finish",4.5f);
+	}
+
+
+	void finish(){
 
 		GameController.GetComponent<Levels> ().EndLevel ();
 		GameController.GetComponent<Levels> ().LoadLevel (currentLevel + 1);
