@@ -13,9 +13,7 @@ public class PlayerMovement : MonoBehaviour {
 	public int Player;
 
 	private Rigidbody2D rb;
-	[HideInInspector]
-	public GameObject GameController;
-	public AudioClip deathSound;
+
 
 	public float drag;
 	public float runSpeed;
@@ -39,6 +37,9 @@ public class PlayerMovement : MonoBehaviour {
 	public GameObject body;
 	[HideInInspector]
 	public bool dead;
+	[HideInInspector]
+	public GameObject GameController;
+	public AudioClip death;
 
 
 	// Use this for initialization
@@ -58,6 +59,7 @@ public class PlayerMovement : MonoBehaviour {
 		h_s = h_state.idle;
 		v_s = v_state.idle;
 		lastWinkTime = Time.time;
+		GameController = GameObject.FindGameObjectWithTag ("GameController");
 	}
 
 	void Awake()
@@ -250,36 +252,27 @@ public class PlayerMovement : MonoBehaviour {
 	}
 
 	public void die(){
-		if(dead) return;
-		dead = true;
-		GameObject mybody = Instantiate(body,transform.position,Quaternion.identity);
-
-		foreach(Transform child in mybody.transform) {
-			child.parent = null;
-			Rigidbody2D rbc = child.gameObject.GetComponent<Rigidbody2D>();
-			rbc.interpolation = RigidbodyInterpolation2D.None;
-			rbc.AddForce(new Vector2(Random.Range(-100,100),Random.Range(500,1200)),ForceMode2D.Impulse);
-			Destroy(child.gameObject,.5f);
-		}
-		foreach(Transform child in transform) {
-			child.gameObject.GetComponent<SpriteRenderer>().enabled = false;
-			if(child.childCount > 0)
+			if(dead) return;
+			dead = true;
+			GameController.GetComponent<AudioSource> ().PlayOneShot (death, SettingsManager.gameSettings.masterVolume);
+			GameObject mybody = Instantiate(body,transform.position,Quaternion.identity);
+			foreach(Transform child in mybody.transform)
 			{
-				foreach(Transform child2 in child){
-					child2.gameObject.GetComponent<SpriteRenderer>().enabled = false;
+				child.parent = null;
+				Rigidbody2D rbc = child.gameObject.GetComponent<Rigidbody2D>();
+				rbc.interpolation = RigidbodyInterpolation2D.None;
+				rbc.AddForce(new Vector2(Random.Range(-100,100),Random.Range(500,1200)),ForceMode2D.Impulse);
+				Destroy(child.gameObject,.5f);
+			}
+			foreach(Transform child in transform){
+				child.gameObject.GetComponent<SpriteRenderer>().enabled = false;
+				if(child.childCount > 0)
+				{
+					foreach(Transform child2 in child){
+						child2.gameObject.GetComponent<SpriteRenderer>().enabled = false;
+					}
 				}
 			}
-		}
-
-		// Play death sound
-		if (GameController == null)
-			GameController = GameObject.FindGameObjectWithTag ("GameController");
-		
-		if (SettingsManager.gameSettings != null && deathSound != null) {
-			float volume = SettingsManager.gameSettings.masterVolume;
-			GameController.GetComponent<AudioSource> ().PlayOneShot (deathSound, volume);
-		}
-
 	}
 
 
