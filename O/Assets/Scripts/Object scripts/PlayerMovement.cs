@@ -187,7 +187,7 @@ public class PlayerMovement : MonoBehaviour {
 		CapsuleCollider2D coll = GetComponent<CapsuleCollider2D> ();
 		Vector2 pos = new Vector2(transform.position.x + coll.offset.x * transform.localScale.x, 
 			transform.position.y + coll.offset.y * transform.localScale.y);
-		float width = coll.bounds.size.x;
+		float width = coll.bounds.size.x - 0.3f;
 		float height = coll.bounds.size.y;
 
 		//the ground check draws a line right underneath the player
