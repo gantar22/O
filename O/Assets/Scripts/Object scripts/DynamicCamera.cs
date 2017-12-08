@@ -6,7 +6,7 @@ public class DynamicCamera : MonoBehaviour {
 
 											// ZOOM SETTINGS
 	private float dampTime = 0.01f; 		// How fast the camera should move to center itself
-	private float zoomSpeed = 0.01f; 		// How fast the camera should zoom in and out
+	private float zoomSpeed =   .2f; 		// How fast the camera should zoom in and out
 	private float lowerZoomLimit = 0.3f; 	// How close together the players have to be before the camera starts zooming in
 	private float upperZoomLimit = 0.8f;	// How far apart the players have to be before the camera starts zooming out
 	private float minSize = 17;				// Minimum orthographic size for the camera, so it doesn't zoom in super close

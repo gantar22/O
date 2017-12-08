@@ -201,6 +201,8 @@ public class PlayerMovement : MonoBehaviour {
 			transform.parent = Physics2D.Linecast (p1, p2).collider.gameObject.transform.parent;
 		} else if(Physics2D.Linecast (p1, p2) && Physics2D.Linecast (p1, p2).collider.name.Contains ("Button")){
 			transform.parent = Physics2D.Linecast (p1, p2).collider.gameObject.transform;
+		} else if(Physics2D.Linecast (p1, p2) && Physics2D.Linecast (p1, p2).collider.name.Contains ("pressable")){
+			
 		} else if (transform.parent != null) {
 			transform.parent = null;
 		}

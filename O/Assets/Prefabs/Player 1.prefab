@@ -337,8 +337,6 @@ MonoBehaviour:
   horizontal: Horizontal_J2
   jump: Jump_J1
   Player: 2
-  GameController: {fileID: 0}
-  deathSound: {fileID: 8300000, guid: 5cee99e175450924aab0507aa0832bc8, type: 3}
   drag: 0
   runSpeed: 7.95
   maxSpeed: 13.84

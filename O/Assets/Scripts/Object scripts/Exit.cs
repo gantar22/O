@@ -102,7 +102,7 @@ public class Exit : MonoBehaviour {
 		}
 		gameObject.GetComponent<Animator>().SetTrigger("suc");
 		GameController.GetComponent<AudioSource> ().PlayOneShot (clip, SettingsManager.gameSettings.masterVolume);
-		Invoke("finish",4.5f);
+		Invoke("finish",4f);
 	}
 
 
