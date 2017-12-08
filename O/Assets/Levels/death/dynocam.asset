@@ -64,7 +64,7 @@ MonoBehaviour:
     BTtriggerList: []
     BTuntriggerList: []
   - type: {fileID: 1243324096993798, guid: 6885f8908e3096944a2f2734e9d6c498, type: 2}
-    position: {x: -9.5, y: -0.2, z: -7}
+    position: {x: -10, y: -1, z: -7}
     rotation: 0
     scale: {x: 0.8, y: 0.75}
     horizontal: Horizontal_J1
@@ -88,7 +88,7 @@ MonoBehaviour:
     BTtriggerList: []
     BTuntriggerList: []
   - type: {fileID: 1055245372309042, guid: 45aeefa8179926747b91555d81068bca, type: 2}
-    position: {x: -10.030001, y: -0.25999832, z: -7}
+    position: {x: -14, y: -1, z: -7}
     rotation: 0
     scale: {x: 0.8, y: 0.75}
     horizontal: Horizontal_J2

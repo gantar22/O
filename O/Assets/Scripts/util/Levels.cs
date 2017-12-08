@@ -14,11 +14,14 @@ public class Levels : MonoBehaviour {
 	Stats stats;
 
 	void Start() {
-
 		stats = GetComponent<Stats> ();
 		EndLevel ();
-		LoadLevel (startingLevel);
 
+		if (LevelPersistence.levelData != null) {
+			LoadLevel (LevelPersistence.levelToLoad);
+		} else {
+			LoadLevel (startingLevel);
+		}
 	}
 
 	public void restart() {

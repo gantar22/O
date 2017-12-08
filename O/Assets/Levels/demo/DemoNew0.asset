@@ -64,31 +64,7 @@ MonoBehaviour:
     BTtriggerList: []
     BTuntriggerList: []
   - type: {fileID: 1912214553670882, guid: dc80944325554442b9c3828bf253b97d, type: 2}
-    position: {x: 10.83, y: 4.02, z: 0}
-    rotation: 0
-    scale: {x: 1, y: 1}
-    horizontal: 
-    jump: 
-    Player: 0
-    runSpeed: 0
-    jumpForce: 0
-    platformID: 0
-    platMoveSetting: 0
-    platTranslation: {x: 0, y: 0}
-    platTravelTime: 0
-    platMoveDelay: 0
-    platManualMapping: 0
-    platHorizontalMoveSpeed: 0
-    platVerticalMoveSpeed: 0
-    platReturnOnUntrigger: 0
-    BTmappingNames: []
-    BTcallName: 
-    BTplayerSpecific: 0
-    BTswitched: 0
-    BTtriggerList: []
-    BTuntriggerList: []
-  - type: {fileID: 0}
-    position: {x: 15.3526745, y: 3.1430123, z: 4.07}
+    position: {x: 10.83, y: 4.153, z: 0}
     rotation: 0
     scale: {x: 1, y: 1}
     horizontal: 
@@ -136,8 +112,32 @@ MonoBehaviour:
     BTtriggerList:
     - platform_0
     BTuntriggerList: []
+  - type: {fileID: 0}
+    position: {x: 15.3526745, y: 3.1430123, z: 4.07}
+    rotation: 0
+    scale: {x: 1, y: 1}
+    horizontal: 
+    jump: 
+    Player: 0
+    runSpeed: 0
+    jumpForce: 0
+    platformID: 0
+    platMoveSetting: 0
+    platTranslation: {x: 0, y: 0}
+    platTravelTime: 0
+    platMoveDelay: 0
+    platManualMapping: 0
+    platHorizontalMoveSpeed: 0
+    platVerticalMoveSpeed: 0
+    platReturnOnUntrigger: 0
+    BTmappingNames: []
+    BTcallName: 
+    BTplayerSpecific: 0
+    BTswitched: 0
+    BTtriggerList: []
+    BTuntriggerList: []
   - type: {fileID: 1055245372309042, guid: 45aeefa8179926747b91555d81068bca, type: 2}
-    position: {x: -12.46665, y: -4.449705, z: 1}
+    position: {x: -12.46665, y: -5, z: -7}
     rotation: 0
     scale: {x: 0.8, y: 0.75}
     horizontal: Horizontal_J2
@@ -161,7 +161,7 @@ MonoBehaviour:
     BTtriggerList: []
     BTuntriggerList: []
   - type: {fileID: 1243324096993798, guid: 6885f8908e3096944a2f2734e9d6c498, type: 2}
-    position: {x: -9.085232, y: -4.73, z: 1}
+    position: {x: -9.085232, y: -5, z: -7}
     rotation: 0
     scale: {x: 0.8, y: 0.75}
     horizontal: Horizontal_J1

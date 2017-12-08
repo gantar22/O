@@ -102,14 +102,13 @@ public class Exit : MonoBehaviour {
 			GameController = GameObject.FindGameObjectWithTag ("GameController");
 
 		int currentLevel = GameController.GetComponent<Stats> ().currLevel;
+		GameController.GetComponent<Stats> ().currLevel++;
 
 		if (!(SceneManager.GetActiveScene () == SceneManager.GetSceneByName ("Demo"))) {
 			if (LevelPersistence.levelData != null) {
 				LevelPersistence.levelData.saveLevelProgress (currentLevel);
 			}
 		}
-		
-		GameController.GetComponent<Stats> ().currLevel++;
 
 		GameController.GetComponent<Levels> ().EndLevel ();
 		GameController.GetComponent<Levels> ().LoadLevel (currentLevel + 1);
