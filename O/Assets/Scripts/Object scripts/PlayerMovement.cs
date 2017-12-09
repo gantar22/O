@@ -40,6 +40,7 @@ public class PlayerMovement : MonoBehaviour {
 	[HideInInspector]
 	public GameObject GameController;
 	public AudioClip death;
+	private bool indoor;
 
 
 	// Use this for initialization
@@ -80,6 +81,11 @@ public class PlayerMovement : MonoBehaviour {
 			inputManager.Map ("Jump2", "Jump_K1");
 			inputManager.Map ("horizontal2", "Horizontal_K2");
 		}
+		EventManager.StartListening ("hitdoor", hitdoor);
+	}
+
+	void hitdoor(){
+		indoor = false;
 	}
 
 	void LetCSharpCollectItsOwnGarbage () {
@@ -121,6 +127,8 @@ public class PlayerMovement : MonoBehaviour {
 			return;
 		}
 		if(dead) rb.AddForce(Vector2.up * Time.deltaTime * 400,ForceMode2D.Force);
+		if (indoor)
+			transform.position = new Vector3 (transform.position.x,transform.position.y,transform.position.z);
 
 		this.GetComponent<Animator>().SetFloat("speed",Mathf.Abs(rb.velocity.x));
 		if(Time.time - lastWinkTime > 5)

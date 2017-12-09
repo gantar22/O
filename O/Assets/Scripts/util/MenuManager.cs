@@ -15,6 +15,7 @@ public class MenuManager : MonoBehaviour {
 	public Slider MasterVolumeSlider;
 
 	private bool buttonSelected;
+	private bool delayed;
 
 	void OnEnable() {
 		if (FullscreenToggle != null) {
@@ -32,25 +33,34 @@ public class MenuManager : MonoBehaviour {
 			Debug.LogError("Missing event system in MenuManager script");
 
 		float vertical = Input.GetAxisRaw ("Vertical");
-		if (vertical != 0 && !buttonSelected) {
+		if ((vertical == -1 || vertical == 1) && !buttonSelected) {
+			print (vertical);
 			if (vertical == -1) {
 				EventSystem.SetSelectedGameObject (defaultSelect);
-			} else {
+			} else if (vertical == 1) {
 				EventSystem.SetSelectedGameObject (defaultUpSelect);
 			}
 
 			buttonSelected = true;
-		} /* else if (vertical != 0) {
+		}
+
+		/* } else if (vertical == -1 || vertical == 1) {
 			if (EventSystem.currentSelectedGameObject == defaultSelect && vertical == 1) {
-				EventSystem.SetSelectedGameObject (defaultUpSelect);
+				Invoke(()=>buttonSelected = false,0.2f);
+				//buttonSelected = false;
 			} else if (EventSystem.currentSelectedGameObject == defaultUpSelect && vertical == -1) {
-				EventSystem.SetSelectedGameObject (defaultSelect);
+				Invoke(()=>buttonSelected = false,0.2f);
 			}
 		} */
 	}
 
 	private void OnDisable() {
 		buttonSelected = false;
+		delayed = false;
+	}
+
+	private void undelay() {
+		delayed = false;
 	}
 
 	public void OnFullscreenToggle() {

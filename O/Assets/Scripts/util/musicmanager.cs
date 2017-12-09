@@ -75,7 +75,7 @@ public class musicmanager : MonoBehaviour {
 		{
 			music.volume = Mathf.Clamp(music.volume + duration * Time.deltaTime / 7,0,maxMusicVolume);
 		}
-		print(new Vector3(music.volume,music1.volume,music2.volume));
+		//print(new Vector3(music.volume,music1.volume,music2.volume));
 	}
 
 
