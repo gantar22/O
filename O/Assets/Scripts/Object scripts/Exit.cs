@@ -90,6 +90,7 @@ public class Exit : MonoBehaviour {
 			float volume = SettingsManager.gameSettings.masterVolume;
 			GameController.GetComponent<AudioSource> ().PlayOneShot (levelComplete, volume);
 		}
+		EventManager.TriggerEvent("hitdoor");
 
 		gameObject.GetComponent<Animator>().SetTrigger("suc");
 		GameController.GetComponent<AudioSource> ().PlayOneShot (clip, SettingsManager.gameSettings.masterVolume);
@@ -100,6 +101,8 @@ public class Exit : MonoBehaviour {
 	void finish(){
 		if (GameController == null)
 			GameController = GameObject.FindGameObjectWithTag ("GameController");
+
+
 
 		int currentLevel = GameController.GetComponent<Stats> ().currLevel;
 		GameController.GetComponent<Stats> ().currLevel++;

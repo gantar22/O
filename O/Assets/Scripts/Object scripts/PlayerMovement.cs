@@ -41,6 +41,8 @@ public class PlayerMovement : MonoBehaviour {
 	public GameObject GameController;
 	public AudioClip death;
 	private bool indoor;
+	private Transform door;
+	private float doorbounds;
 
 
 	// Use this for initialization
@@ -85,7 +87,20 @@ public class PlayerMovement : MonoBehaviour {
 	}
 
 	void hitdoor(){
-		indoor = false;
+		if(indoor) return;
+		indoor = true;
+		door = GameObject.FindGameObjectWithTag("door").transform.parent;
+		doorbounds = door.gameObject.GetComponent<CapsuleCollider2D>().size.x * .5f * door.localScale.x;
+		if(Mathf.Abs(doorbounds - 1f) > .1f)
+		{
+			print("You changed the scale of the door or its collider");
+		}
+		doorbounds += Mathf.Abs(transform.localScale.x) * .5f * gameObject.GetComponent<CapsuleCollider2D>().size.x;
+		if(Mathf.Abs(doorbounds - 1.4f) > .1f)
+		{
+			print("You changed the scale of the player or its collider");
+		}
+		print(doorbounds);
 	}
 
 	void LetCSharpCollectItsOwnGarbage () {
@@ -126,9 +141,13 @@ public class PlayerMovement : MonoBehaviour {
 		if (PauseManager.paused) {
 			return;
 		}
-		if(dead) rb.AddForce(Vector2.up * Time.deltaTime * 400,ForceMode2D.Force);
-		if (indoor)
-			transform.position = new Vector3 (transform.position.x,transform.position.y,transform.position.z);
+		if (indoor){
+			transform.position = new Vector3 
+			(Mathf.Clamp(transform.position.x,
+						door.position.x - doorbounds,
+						door.position.x + doorbounds),
+				transform.position.y,transform.position.z);
+				}
 
 		this.GetComponent<Animator>().SetFloat("speed",Mathf.Abs(rb.velocity.x));
 		if(Time.time - lastWinkTime > 5)
