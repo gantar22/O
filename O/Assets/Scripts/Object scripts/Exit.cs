@@ -26,6 +26,9 @@ public class Exit : MonoBehaviour {
 	[HideInInspector]
 	public bool p2Colliding = false;
 
+	//If the level has already been completed, but the animation is playing
+	private bool loadingNext = false;
+
 	void Start() {
 		if (ExitSetting == ExitOptions.P1) {
 			EventManager.StartListening ("Find_P1_exit", Try_to_exit);
@@ -81,6 +84,10 @@ public class Exit : MonoBehaviour {
 	}
 
 	void loadNext() {
+		if (loadingNext)
+			return;
+		loadingNext = true;
+
 		if (GameController == null)
 			GameController = GameObject.FindGameObjectWithTag ("GameController");
 
@@ -101,8 +108,6 @@ public class Exit : MonoBehaviour {
 	void finish(){
 		if (GameController == null)
 			GameController = GameObject.FindGameObjectWithTag ("GameController");
-
-
 
 		int currentLevel = GameController.GetComponent<Stats> ().currLevel;
 		GameController.GetComponent<Stats> ().currLevel++;
