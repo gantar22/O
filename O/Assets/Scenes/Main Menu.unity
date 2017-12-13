@@ -2632,6 +2632,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1221206536}
   - component: {fileID: 1221206535}
+  - component: {fileID: 1221206537}
   m_Layer: 0
   m_Name: Music Audio Source
   m_TagString: Untagged
@@ -2732,6 +2733,18 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1221206537
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1221206534}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1d04e8db8f293554ebfcff4ff1b02c4c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxMusicVolume: 0.65
 --- !u!1 &1327338584
 GameObject:
   m_ObjectHideFlags: 0

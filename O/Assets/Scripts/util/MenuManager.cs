@@ -24,8 +24,12 @@ public class MenuManager : MonoBehaviour {
 			});
 		}
 
-		if (MasterVolumeSlider != null)
-			MasterVolumeSlider.onValueChanged.AddListener (delegate { OnMasterVolumeChange (); });
+		if (MasterVolumeSlider != null) {
+			MasterVolumeSlider.value = SettingsManager.gameSettings.masterVolume;
+			MasterVolumeSlider.onValueChanged.AddListener (delegate {
+				OnMasterVolumeChange ();
+			});
+		}
 	}
 
 	void Update() {
