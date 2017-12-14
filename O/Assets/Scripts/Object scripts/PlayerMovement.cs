@@ -286,7 +286,7 @@ public class PlayerMovement : MonoBehaviour {
 
 		jumpGrace = 0f;
 
-		GameController.GetComponent<AudioSource> ().PlayOneShot (death, SettingsManager.gameSettings.masterVolume);
+		GameController.GetComponent<AudioSource> ().PlayOneShot (death, SettingsManager.gameSettings.SFXVolume);
 		GameObject mybody = Instantiate(body,transform.position,Quaternion.identity);
 		foreach(Transform child in mybody.transform)
 		{

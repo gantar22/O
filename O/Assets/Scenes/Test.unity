@@ -809,9 +809,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7a19557c6a413c4409c81386d2b52dee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  levelComplete: {fileID: 8300000, guid: 99e9aecb163424b49b94c9129b20f09b, type: 3}
   GameController: {fileID: 0}
-  clip: {fileID: 8300000, guid: 99e9aecb163424b49b94c9129b20f09b, type: 3}
+  levelComplete: {fileID: 8300000, guid: 99e9aecb163424b49b94c9129b20f09b, type: 3}
   ExitSetting: 0
   p1Colliding: 0
   p2Colliding: 0
@@ -1841,6 +1840,8 @@ MonoBehaviour:
   defaultUpSelect: {fileID: 63942184}
   FullscreenToggle: {fileID: 0}
   MasterVolumeSlider: {fileID: 0}
+  MusicVolumeSlider: {fileID: 0}
+  SFXVolumeSlider: {fileID: 0}
 --- !u!114 &814702555
 MonoBehaviour:
   m_ObjectHideFlags: 0

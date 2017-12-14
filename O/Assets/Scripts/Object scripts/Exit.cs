@@ -7,12 +7,10 @@ public enum ExitOptions {And, P1, P2};
 
 public class Exit : MonoBehaviour {
 
-	public AudioClip levelComplete;
-
 	[HideInInspector]
 	public GameObject GameController;
 
-	public AudioClip clip;
+	public AudioClip levelComplete;
 
 	//whether or not each player is required to reach this exit
 	//in order to beat the level. Options are self-explanatory.
@@ -94,13 +92,12 @@ public class Exit : MonoBehaviour {
 
 		// Play level-success sound
 		if (SettingsManager.gameSettings != null && levelComplete != null) {
-			float volume = SettingsManager.gameSettings.masterVolume;
+			float volume = SettingsManager.gameSettings.SFXVolume;
 			GameController.GetComponent<AudioSource> ().PlayOneShot (levelComplete, volume);
 		}
 		EventManager.TriggerEvent("hitdoor");
 
 		gameObject.GetComponent<Animator>().SetTrigger("suc");
-		GameController.GetComponent<AudioSource> ().PlayOneShot (clip, SettingsManager.gameSettings.masterVolume);
 		Invoke("finish",3.5f);
 	}
 

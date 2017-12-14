@@ -13,6 +13,8 @@ public class MenuManager : MonoBehaviour {
 
 	public Toggle FullscreenToggle;
 	public Slider MasterVolumeSlider;
+	public Slider MusicVolumeSlider;
+	public Slider SFXVolumeSlider;
 
 	private bool buttonSelected;
 	private bool delayed;
@@ -26,9 +28,12 @@ public class MenuManager : MonoBehaviour {
 
 		if (MasterVolumeSlider != null) {
 			MasterVolumeSlider.value = SettingsManager.gameSettings.masterVolume;
-			MasterVolumeSlider.onValueChanged.AddListener (delegate {
-				OnMasterVolumeChange ();
-			});
+			MusicVolumeSlider.value = SettingsManager.gameSettings.localMusicVolume;
+			SFXVolumeSlider.value = SettingsManager.gameSettings.localSFXVolume;
+
+			MasterVolumeSlider.onValueChanged.AddListener (delegate {OnMasterVolumeChange ();} );
+			MusicVolumeSlider.onValueChanged.AddListener (delegate {OnMusicVolumeChange ();} );
+			SFXVolumeSlider.onValueChanged.AddListener (delegate {OnSFXVolumeChange ();} );
 		}
 	}
 
@@ -72,12 +77,20 @@ public class MenuManager : MonoBehaviour {
 		SettingsManager.gameSettings.fullscreen = FullscreenToggle.isOn;
 	}
 
+	// Update volume settings
 	public void OnMasterVolumeChange() {
-		//AudioSource.volume = masterVolumeSlider.value;
-		//Debug.Log("master volume changing to: " + MasterVolumeSlider.value);
-		SettingsManager.gameSettings.masterVolume = MasterVolumeSlider.value;
+		SettingsManager.changeMasterVolume(MasterVolumeSlider.value);
 	}
 
+	public void OnMusicVolumeChange() {
+		SettingsManager.changeMusicVolume(MusicVolumeSlider.value);
+	}
+
+	public void OnSFXVolumeChange() {
+		SettingsManager.changeSFXVolume(SFXVolumeSlider.value);
+	}
+
+	// Change the scene to the main menu
 	public void MainMenu() {
 		SceneManager.LoadScene (0);
 	}

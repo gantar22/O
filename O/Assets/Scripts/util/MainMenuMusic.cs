@@ -7,6 +7,6 @@ public class MainMenuMusic : MonoBehaviour {
 	public float maxMusicVolume;
 
 	void Update () {
-		gameObject.GetComponent<AudioSource>().volume = maxMusicVolume * SettingsManager.gameSettings.masterVolume;
+		gameObject.GetComponent<AudioSource>().volume = maxMusicVolume * SettingsManager.gameSettings.musicVolume;
 	}
 }
