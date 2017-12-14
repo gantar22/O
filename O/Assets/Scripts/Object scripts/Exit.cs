@@ -58,7 +58,7 @@ public class Exit : MonoBehaviour {
 			camera.transform.eulerAngles = Vector3.forward * rot;
 			camera.orthographicSize = Mathf.Lerp(oldSize,r[0],elapsed / 4);
 			camPos = new Vector3(Mathf.Lerp(oldX, r[1], elapsed / 4),
-				Mathf.Lerp(0,40,elapsed / 4),camera.transform.position.z);
+				Mathf.Lerp(0,200,elapsed / 4),camera.transform.position.z);
 			Camera.main.transform.position = camPos;
 			//Vector3 dest = new Vector3(r[1],40,camera.transform.position.z);
 			//Vector3 velo = Vector3.zero;

@@ -259,7 +259,7 @@ public class Levels : MonoBehaviour {
 	
 					}
 				}
-				rotator.transform.position = new Vector3(dif,40,-.1f);
+				rotator.transform.position = new Vector3(dif,200,-.1f);
 				rotator.transform.eulerAngles = new Vector3(0,0,180);
 
 			} else //skips over gaps in list of levels
