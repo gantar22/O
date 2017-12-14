@@ -9,6 +9,9 @@ public class Exit : MonoBehaviour {
 
 	public AudioClip levelComplete;
 
+	private Vector3 camPos;
+	private bool trans;
+
 	[HideInInspector]
 	public GameObject GameController;
 
@@ -25,8 +28,11 @@ public class Exit : MonoBehaviour {
 	public bool p1Colliding = false;
 	[HideInInspector]
 	public bool p2Colliding = false;
+	private Camera camera;
 
 	void Start() {
+		camera = Camera.main;
+		camPos = Vector3.forward * -9;
 		if (ExitSetting == ExitOptions.P1) {
 			EventManager.StartListening ("Find_P1_exit", Try_to_exit);
 		} else if (ExitSetting == ExitOptions.P2) {
@@ -34,6 +40,37 @@ public class Exit : MonoBehaviour {
 		}
 		Invoke("init",.2f);
 	}
+
+
+
+
+	IEnumerator resize(){
+		trans = true;
+		float elapsed = 0f;
+		float[] r = GameController.GetComponent<Levels>().nextLevelData();
+		float oldSize = camera.orthographicSize;
+		float oldX = camera.transform.position.x;
+		float rot = 0f;
+		while(elapsed < 4.1f){
+			rot = Mathf.Lerp(0,180,elapsed / 4);
+			camera.transform.eulerAngles = Vector3.forward * rot;
+			camera.orthographicSize = Mathf.Lerp(oldSize,r[0],elapsed / 4);
+			camPos = new Vector3(Mathf.Lerp(oldX, r[1], elapsed / 4),
+				Mathf.Lerp(0,40,elapsed / 4),camera.transform.position.z);
+			Camera.main.transform.position = camPos;
+			//Vector3 dest = new Vector3(r[1],40,camera.transform.position.z);
+			//Vector3 velo = Vector3.zero;
+			//camera.reposition = Vector3.SmoothDamp(camera.transform.position,dest,ref velo,4);
+			elapsed += Time.deltaTime;
+			yield return null;	
+		}
+		trans = false;
+	}
+
+	void Update(){
+		if(trans) Camera.main.transform.position = camPos;
+	}
+
 
 	void init(){
 		p2Colliding = false;
@@ -64,6 +101,7 @@ public class Exit : MonoBehaviour {
 		if (ExitSetting == ExitOptions.And) {
 			checkAndFinish ();
 		}
+
 	}
 
 	void OnTriggerExit2D(Collider2D other) {
@@ -91,10 +129,14 @@ public class Exit : MonoBehaviour {
 			GameController.GetComponent<AudioSource> ().PlayOneShot (levelComplete, volume);
 		}
 		EventManager.TriggerEvent("hitdoor");
+		float[] r = GameController.GetComponent<Levels>().nextLevelData();
+		//Camera.main.gameObject.GetComponent<transition>().activate(r[0],r[1]);
+		StartCoroutine(resize());
 
 		gameObject.GetComponent<Animator>().SetTrigger("suc");
+		GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Animator>().SetTrigger("end");
 		GameController.GetComponent<AudioSource> ().PlayOneShot (clip, SettingsManager.gameSettings.masterVolume);
-		Invoke("finish",3.5f);
+		Invoke("finish",4f);
 	}
 
 
@@ -110,10 +152,19 @@ public class Exit : MonoBehaviour {
 		if (!(SceneManager.GetActiveScene () == SceneManager.GetSceneByName ("Demo"))) {
 			if (LevelPersistence.levelData != null) {
 				LevelPersistence.levelData.saveLevelProgress (currentLevel);
+
 			}
 		}
 
-		GameController.GetComponent<Levels> ().EndLevel ();
-		GameController.GetComponent<Levels> ().LoadLevel (currentLevel + 1);
+/*		GameController.GetComponent<Levels> ().EndLevel ();
+		GameController.GetComponent<Levels> ().LoadLevel (currentLevel + 1);*/
+
+		GameController.GetComponent<LoadLevel>().reset = true;
+		GameController.GetComponent<LoadLevel>().level = currentLevel + 1;
+
+		GameController.GetComponent<LoadLevel>().load();
+		camera.transform.eulerAngles = Vector3.zero;
 	}
+
+
 }

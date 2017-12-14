@@ -32,7 +32,7 @@ public class SaveLevel : MonoBehaviour {
 
 	private LevelObject newObj;
 
-	void Update() {
+	void OnEnable() {
 		newLevel.cameraSize = Camera.main.orthographicSize;
 		newLevel.dynamicCam = Camera.main.GetComponent<DynamicCamera> ().enabled;
 		newLevel.components = GetComponentList();

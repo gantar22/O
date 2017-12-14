@@ -5,6 +5,8 @@ TagManager:
   serializedVersion: 2
   tags:
   - LevelObj
+  - door
+  - adhoc1
   layers:
   - Default
   - TransparentFX

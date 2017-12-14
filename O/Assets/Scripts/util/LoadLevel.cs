@@ -8,10 +8,19 @@ public class LoadLevel : MonoBehaviour {
 	public bool reset;
 	public int level;
 	
-	void Update () {
+	void OnEnable () {
 		if (reset)
-			GameObject.FindGameObjectWithTag ("GameController").GetComponent<Levels> ().EndLevel ();
-		GameObject.FindGameObjectWithTag ("GameController").GetComponent<Levels> ().LoadLevel (level);
+			gameObject.GetComponent<Levels> ().EndLevel ();
+		gameObject.GetComponent<Levels> ().LoadLevel (level);
+	}
+	public void load(){
+		gameObject.GetComponent<Levels> ().EndLevel ();
+		gameObject.GetComponent<Levels> ().LoadLevel (level);
+		Invoke("doubleloadbestload",.00001f);
+	}
 
+	void doubleloadbestload(){ //Don't ask
+		load();
+		CancelInvoke();
 	}
 }

@@ -100,7 +100,7 @@ public class PlayerMovement : MonoBehaviour {
 		{
 			print("You changed the scale of the player or its collider");
 		}
-		print(doorbounds);
+		//Destroy(gameObject,1);
 	}
 
 	void LetCSharpCollectItsOwnGarbage () {
@@ -138,6 +138,7 @@ public class PlayerMovement : MonoBehaviour {
 
 	// Update is called once per frame
 	void Update () {
+		print(Camera.main.transform.position);
 		if (PauseManager.paused) {
 			return;
 		}

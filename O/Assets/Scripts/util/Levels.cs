@@ -9,6 +9,8 @@ public class Levels : MonoBehaviour {
 	public bool updateSaveNewLevel;
 	public Level[] levels;
 	public int startingLevel;
+	private float upperdoor;
+	private float dif;
 
 	[HideInInspector]
 	Stats stats;
@@ -17,6 +19,16 @@ public class Levels : MonoBehaviour {
 		stats = GetComponent<Stats> ();
 		EndLevel ();
 
+		if (LevelPersistence.levelData != null) {
+			LoadLevel (LevelPersistence.levelToLoad);
+		} else {
+			LoadLevel (startingLevel);
+		}
+		Invoke("doubleloadingiseasierthanfixingoutoforderproblems",.1f);
+	}
+
+	void doubleloadingiseasierthanfixingoutoforderproblems(){
+		EndLevel();
 		if (LevelPersistence.levelData != null) {
 			LoadLevel (LevelPersistence.levelToLoad);
 		} else {
@@ -64,6 +76,13 @@ public class Levels : MonoBehaviour {
 		} 
 	}
 
+	public float[] nextLevelData(){
+		float[] r = new float[2];
+		r[0] = levels[(stats.currLevel + 1) % levels.Length].cameraSize;
+		r[1] = dif;
+		return r;
+	}
+
 	public void LoadLevel(int num) {
 		if (stats == null)
 			stats = GetComponent<Stats> ();
@@ -78,7 +97,7 @@ public class Levels : MonoBehaviour {
 				//set the level to be loaded
 				Level level = levels [num];
 				if (updateSaveNewLevel) {
-					gameObject.GetComponent<SaveLevel> ().newLevel = level;
+					gameObject.GetComponent<SaveLevel>().newLevel = level;
 				}
 					
 				if (levels [num].dynamicCam) {
@@ -94,6 +113,7 @@ public class Levels : MonoBehaviour {
 				stats.trig_P2_check = null;
 
 				LevelObject[] objs = level.components;
+				LevelObject[] nextObjs = levels[(num + 1) % levels.Length].components;
 
 				//put all the objects in the level
 				foreach (LevelObject obj in objs) {
@@ -169,6 +189,78 @@ public class Levels : MonoBehaviour {
 						//ADD NEW PROPERTIES ABOVE THIS LINE
 					}
 				}
+				foreach( LevelObject obj in nextObjs) { 
+					if(obj != null && obj.type != null && obj.type.name.Contains("Exit")){
+						upperdoor = obj.position.x;
+					}
+				}
+				dif = upperdoor + GameObject.FindGameObjectsWithTag("door")[0].transform.position.x;
+				GameObject rotator = GameObject.FindGameObjectsWithTag("adhoc1")[0];
+				rotator.transform.position = Vector3.zero;
+				rotator.transform.eulerAngles = Vector3.zero;
+	
+
+				foreach (LevelObject obj in nextObjs) {
+
+					if (obj.type != null && !(obj.type.name.Contains("Checkpoint") && stats.respawning)) {
+						GameObject comp = null;
+
+						if (!(obj.type.name.Contains ("Player") || obj.type.name.Contains("Exit"))){ 
+								comp = Instantiate (obj.type, obj.position, Quaternion.identity);
+							}
+						else {
+								continue;
+							}	
+						comp.transform.eulerAngles = Vector3.forward * obj.rotation;
+						if (obj.scale == Vector2.zero)
+							comp.transform.localScale = Vector3.one;
+						else
+							comp.transform.localScale = new Vector3 (obj.scale.x, obj.scale.y, 1f);
+
+
+						if (comp.GetComponent<Platform> () != null) {
+							Platform plat = comp.GetComponent<Platform> ();
+							plat.platformID = -1;
+							plat.MoveSetting = MoveOptions.ButtonMoves;
+							plat.translation = obj.platTranslation;
+							plat.travelTime = obj.platTravelTime;
+							plat.moveDelay = obj.platMoveDelay;
+							plat.manualMapping = obj.platManualMapping;
+							plat.horizontalMoveSpeed = obj.platHorizontalMoveSpeed;
+							plat.verticalMoveSpeed = obj.platVerticalMoveSpeed;
+							plat.returnOnUntrigger = obj.platReturnOnUntrigger;
+
+							comp.transform.localScale = new Vector3(1,1,1);
+							comp.transform.GetChild(0).localScale = new Vector3(obj.scale.x,obj.scale.y,1);
+						}
+						/*
+						if (comp.GetComponent<PlayerMovement> () != null) {
+							PlayerMovement move = comp.GetComponent<PlayerMovement> ();
+							move.horizontal = obj.horizontal;
+							move.jump = obj.jump;
+							move.Player = obj.Player;
+							move.runSpeed = obj.runSpeed;
+							move.jumpForce = obj.jumpForce;
+						}*/
+
+						/*if (comp.GetComponentInChildren<ButtonTrigger> () != null) {
+							ButtonTrigger BT = comp.GetComponentInChildren<ButtonTrigger> ();
+							BT.mappingNames = obj.BTmappingNames;
+							BT.callName = obj.BTcallName;
+							BT.playerSpecific = obj.BTplayerSpecific;
+							BT.switched = obj.BTswitched;
+							BT.triggerList = obj.BTtriggerList;
+							BT.untriggerList = obj.BTuntriggerList;
+						}*/
+
+						//ADD NEW PROPERTIES ABOVE THIS LINE
+					comp.transform.parent = rotator.transform;
+
+	
+					}
+				}
+				rotator.transform.position = new Vector3(dif,40,-.1f);
+				rotator.transform.eulerAngles = new Vector3(0,0,180);
 
 			} else //skips over gaps in list of levels
 				LoadLevel (num + 1);
