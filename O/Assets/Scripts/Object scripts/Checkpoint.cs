@@ -41,11 +41,7 @@ public class Checkpoint : MonoBehaviour {
 			}
 			stats.trig_P1_check = this;
 
-			get_references ();
-			if (SettingsManager.gameSettings != null && trigger != null) {
-				float volume = SettingsManager.gameSettings.masterVolume;
-				GameController.GetComponent<AudioSource> ().PlayOneShot (trigger, volume);
-			}
+			Invoke ("playTrigger", 0.02f);
 
 			EventManager.TriggerEvent ("Find_P2_checkpt");
 		} else if (other.name.Contains("Player 2") && Player == PlayerNums.P2 && Checkpt_State == States.idle) {
@@ -55,11 +51,7 @@ public class Checkpoint : MonoBehaviour {
 			}
 			stats.trig_P2_check = this;
 
-			get_references ();
-			if (SettingsManager.gameSettings != null && trigger != null) {
-				float volume = SettingsManager.gameSettings.masterVolume;
-				GameController.GetComponent<AudioSource> ().PlayOneShot (trigger, volume);
-			}
+			Invoke ("playTrigger", 0.02f);
 
 			EventManager.TriggerEvent ("Find_P1_checkpt");
 		}
@@ -71,19 +63,15 @@ public class Checkpoint : MonoBehaviour {
 			stats.trig_P1_check = null;
 			stats.trig_P2_check = null;
 
-			get_references ();
-			if (SettingsManager.gameSettings != null && activate != null) {
-				float volume = SettingsManager.gameSettings.masterVolume;
-				GameController.GetComponent<AudioSource> ().PlayOneShot (activate, volume);
-			}
+			playSFX (2);
 		}
 	}
 
 	void Pair_found() {
 		get_references ();
+		CancelInvoke ("playTrigger");
 
 		if (Checkpt_State == States.active) {
-			// Fading/dissapearing animation?
 			change_state(States.invis);
 		}
 			
@@ -126,6 +114,27 @@ public class Checkpoint : MonoBehaviour {
 
 		if (!(SR.sprite == Sprites [sprite_index])) {
 			SR.sprite = Sprites [sprite_index];
+		}
+	}
+
+	void playTrigger() {
+		playSFX (1);
+	}
+
+	void playSFX(int clipNum) {
+		AudioClip toPlay = new AudioClip();
+		if (clipNum == 1) {
+			toPlay = trigger;
+		} else if (clipNum == 2) {
+			toPlay = activate;
+		} else {
+			Debug.Log ("clipNum" + clipNum + "in Checkpoint.cs not found");
+		}
+
+		get_references ();
+		if (SettingsManager.gameSettings != null && toPlay != null) {
+			float volume = SettingsManager.gameSettings.SFXVolume;
+			GameController.GetComponent<AudioSource> ().PlayOneShot (toPlay, volume);
 		}
 	}
 }

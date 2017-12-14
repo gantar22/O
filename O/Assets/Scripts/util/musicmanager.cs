@@ -27,6 +27,9 @@ public class musicmanager : MonoBehaviour {
 	}
 
 	void Update () {
+		maxMusicVolume = SettingsManager.gameSettings.musicVolume;
+		maxPlayerVolume = 0.7f * maxMusicVolume;
+
 		GameObject[] gos = (GameObject[])FindObjectsOfType(typeof(GameObject));
 	     for(int i=0;i<gos.Length;i++)
 	     {

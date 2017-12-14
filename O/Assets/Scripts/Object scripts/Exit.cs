@@ -15,7 +15,6 @@ public class Exit : MonoBehaviour {
 	[HideInInspector]
 	public GameObject GameController;
 
-	public AudioClip clip;
 
 	//whether or not each player is required to reach this exit
 	//in order to beat the level. Options are self-explanatory.
@@ -29,6 +28,9 @@ public class Exit : MonoBehaviour {
 	[HideInInspector]
 	public bool p2Colliding = false;
 	private Camera camera;
+
+	//If the level has already been completed, but the animation is playing
+	private bool loadingNext = false;
 
 	void Start() {
 		camera = Camera.main;
@@ -119,13 +121,17 @@ public class Exit : MonoBehaviour {
 	}
 
 	void loadNext() {
+		if (loadingNext)
+			return;
+		loadingNext = true;
+
 		if (GameController == null)
 			GameController = GameObject.FindGameObjectWithTag ("GameController");
 
 
 		// Play level-success sound
 		if (SettingsManager.gameSettings != null && levelComplete != null) {
-			float volume = SettingsManager.gameSettings.masterVolume;
+			float volume = SettingsManager.gameSettings.SFXVolume;
 			GameController.GetComponent<AudioSource> ().PlayOneShot (levelComplete, volume);
 		}
 		EventManager.TriggerEvent("hitdoor");
@@ -135,7 +141,7 @@ public class Exit : MonoBehaviour {
 
 		gameObject.GetComponent<Animator>().SetTrigger("suc");
 		GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Animator>().SetTrigger("end");
-		GameController.GetComponent<AudioSource> ().PlayOneShot (clip, SettingsManager.gameSettings.masterVolume);
+		GameController.GetComponent<AudioSource> ().PlayOneShot (levelComplete, SettingsManager.gameSettings.masterVolume);
 		Invoke("finish",4f);
 	}
 
@@ -143,8 +149,6 @@ public class Exit : MonoBehaviour {
 	void finish(){
 		if (GameController == null)
 			GameController = GameObject.FindGameObjectWithTag ("GameController");
-
-
 
 		int currentLevel = GameController.GetComponent<Stats> ().currLevel;
 		GameController.GetComponent<Stats> ().currLevel++;
