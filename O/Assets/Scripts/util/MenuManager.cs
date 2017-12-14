@@ -11,10 +11,14 @@ public class MenuManager : MonoBehaviour {
 	public GameObject defaultSelect;
 	public GameObject defaultUpSelect;
 
+	public Button backButton;
+
 	public Toggle FullscreenToggle;
 	public Slider MasterVolumeSlider;
 	public Slider MusicVolumeSlider;
 	public Slider SFXVolumeSlider;
+
+	public static float backTimer;
 
 	private bool buttonSelected;
 	private GameObject prevSelected;
@@ -51,12 +55,19 @@ public class MenuManager : MonoBehaviour {
 	void Update() {
 		if (EventSystem == null)
 			Debug.LogError("Missing event system in MenuManager script");
-		
+
+		// Press 'b' on joystick or backspace on keyboard to go back
+		backTimer += Time.deltaTime;
+		if (Input.GetAxisRaw ("Back") > 0 && backButton != null && (backTimer >= 0.5f || PauseManager.paused)) {
+			backButton.onClick.Invoke ();
+			backTimer = 0;
+		}
+
+		// Default select the top or bottom of the menu
 		if (EventSystem.currentSelectedGameObject == null) {
 			buttonSelected = false;
 		}
 
-		// Default select the top or bottom of the menu
 		float vertical = Input.GetAxisRaw ("Vertical");
 		if ((vertical == -1 || vertical == 1) && !buttonSelected) {
 			if (vertical == -1) {

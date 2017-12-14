@@ -1819,8 +1819,8 @@ RectTransform:
   m_Father: {fileID: 1333931495}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.25, y: 0.2}
-  m_AnchorMax: {x: 0.75, y: 0.8}
+  m_AnchorMin: {x: 0.3, y: 0.2}
+  m_AnchorMax: {x: 0.7, y: 0.8}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -1838,6 +1838,7 @@ MonoBehaviour:
   EventSystem: {fileID: 1193811635}
   defaultSelect: {fileID: 856536218}
   defaultUpSelect: {fileID: 63942184}
+  backButton: {fileID: 0}
   FullscreenToggle: {fileID: 0}
   MasterVolumeSlider: {fileID: 0}
   MusicVolumeSlider: {fileID: 0}
@@ -2100,7 +2101,7 @@ Prefab:
     - target: {fileID: 224840064162408064, guid: 44c4a66b50274f045b3607eca13fa238,
         type: 2}
       propertyPath: m_AnchorMin.x
-      value: 0.25
+      value: 0.3
       objectReference: {fileID: 0}
     - target: {fileID: 224840064162408064, guid: 44c4a66b50274f045b3607eca13fa238,
         type: 2}
@@ -2110,7 +2111,7 @@ Prefab:
     - target: {fileID: 224840064162408064, guid: 44c4a66b50274f045b3607eca13fa238,
         type: 2}
       propertyPath: m_AnchorMax.x
-      value: 0.75
+      value: 0.7
       objectReference: {fileID: 0}
     - target: {fileID: 224840064162408064, guid: 44c4a66b50274f045b3607eca13fa238,
         type: 2}
@@ -2127,21 +2128,16 @@ Prefab:
       propertyPath: m_Pivot.y
       value: 0.5
       objectReference: {fileID: 0}
-    - target: {fileID: 114684720082381298, guid: 44c4a66b50274f045b3607eca13fa238,
-        type: 2}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
-      value: 
-      objectReference: {fileID: 814702552}
-    - target: {fileID: 114684720082381298, guid: 44c4a66b50274f045b3607eca13fa238,
-        type: 2}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: SetActive
-      objectReference: {fileID: 0}
     - target: {fileID: 114175127804590836, guid: 44c4a66b50274f045b3607eca13fa238,
         type: 2}
       propertyPath: EventSystem
       value: 
       objectReference: {fileID: 1193811635}
+    - target: {fileID: 114684720082381298, guid: 44c4a66b50274f045b3607eca13fa238,
+        type: 2}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 814702552}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 44c4a66b50274f045b3607eca13fa238, type: 2}
   m_IsPrefabParent: 0

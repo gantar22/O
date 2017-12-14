@@ -629,6 +629,7 @@ MonoBehaviour:
   EventSystem: {fileID: 0}
   defaultSelect: {fileID: 1220992173639164}
   defaultUpSelect: {fileID: 1486666905268596}
+  backButton: {fileID: 114684720082381298}
   FullscreenToggle: {fileID: 114700312473602294}
   MasterVolumeSlider: {fileID: 114881821287591038}
   MusicVolumeSlider: {fileID: 114501291944589982}
@@ -2115,8 +2116,8 @@ RectTransform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.25, y: 0.2}
-  m_AnchorMax: {x: 0.75, y: 0.8}
+  m_AnchorMin: {x: 0.3, y: 0.2}
+  m_AnchorMax: {x: 0.7, y: 0.8}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
