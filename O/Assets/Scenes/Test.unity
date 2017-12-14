@@ -287,8 +287,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 187.5, y: -229.85}
-  m_SizeDelta: {x: 375, y: 26.700003}
+  m_AnchoredPosition: {x: 171.39998, y: -262.85004}
+  m_SizeDelta: {x: 375, y: 32.700005}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &63942186
 MonoBehaviour:
@@ -1517,8 +1517,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 187.5, y: -119.75001}
-  m_SizeDelta: {x: 375, y: 26.700003}
+  m_AnchoredPosition: {x: 171.39998, y: -134.75002}
+  m_SizeDelta: {x: 375, y: 32.700005}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &307914363
 MonoBehaviour:
@@ -3999,8 +3999,8 @@ RectTransform:
   m_Father: {fileID: 1333931495}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.25, y: 0.2}
-  m_AnchorMax: {x: 0.75, y: 0.8}
+  m_AnchorMin: {x: 0.3, y: 0.2}
+  m_AnchorMax: {x: 0.7, y: 0.8}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -4018,8 +4018,11 @@ MonoBehaviour:
   EventSystem: {fileID: 1193811635}
   defaultSelect: {fileID: 856536218}
   defaultUpSelect: {fileID: 63942184}
+  backButton: {fileID: 0}
   FullscreenToggle: {fileID: 0}
   MasterVolumeSlider: {fileID: 0}
+  MusicVolumeSlider: {fileID: 0}
+  SFXVolumeSlider: {fileID: 0}
 --- !u!114 &814702555
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4440,8 +4443,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 187.5, y: -83.05}
-  m_SizeDelta: {x: 375, y: 26.700003}
+  m_AnchoredPosition: {x: 171.39998, y: -92.05}
+  m_SizeDelta: {x: 375, y: 32.700005}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &859957060
 GameObject:
@@ -4587,7 +4590,7 @@ Prefab:
     - target: {fileID: 224840064162408064, guid: 44c4a66b50274f045b3607eca13fa238,
         type: 2}
       propertyPath: m_AnchorMin.x
-      value: 0.25
+      value: 0.3
       objectReference: {fileID: 0}
     - target: {fileID: 224840064162408064, guid: 44c4a66b50274f045b3607eca13fa238,
         type: 2}
@@ -4597,7 +4600,7 @@ Prefab:
     - target: {fileID: 224840064162408064, guid: 44c4a66b50274f045b3607eca13fa238,
         type: 2}
       propertyPath: m_AnchorMax.x
-      value: 0.75
+      value: 0.7
       objectReference: {fileID: 0}
     - target: {fileID: 224840064162408064, guid: 44c4a66b50274f045b3607eca13fa238,
         type: 2}
@@ -6261,8 +6264,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 187.5, y: -156.45001}
-  m_SizeDelta: {x: 375, y: 26.700003}
+  m_AnchoredPosition: {x: 171.39998, y: -177.45001}
+  m_SizeDelta: {x: 375, y: 32.700005}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1252582770
 MonoBehaviour:
@@ -7676,7 +7679,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   levelComplete: {fileID: 8300000, guid: 99e9aecb163424b49b94c9129b20f09b, type: 3}
   GameController: {fileID: 0}
-  clip: {fileID: 8300000, guid: 99e9aecb163424b49b94c9129b20f09b, type: 3}
   ExitSetting: 0
   p1Colliding: 0
   p2Colliding: 0
@@ -8716,8 +8718,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 187.5, y: -193.15001}
-  m_SizeDelta: {x: 375, y: 26.700003}
+  m_AnchoredPosition: {x: 171.39998, y: -220.15002}
+  m_SizeDelta: {x: 375, y: 32.700005}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1780447122
 MonoBehaviour:
@@ -10327,8 +10329,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 187.5, y: -34.850002}
-  m_SizeDelta: {x: 375, y: 49.700005}
+  m_AnchoredPosition: {x: 171.39998, y: -37.850002}
+  m_SizeDelta: {x: 375, y: 55.700005}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1916178521
 MonoBehaviour:
@@ -10351,12 +10353,12 @@ MonoBehaviour:
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_FontData:
     m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
-    m_FontSize: 30
+    m_FontSize: 36
     m_FontStyle: 0
     m_BestFit: 0
     m_MinSize: 3
     m_MaxSize: 40
-    m_Alignment: 1
+    m_Alignment: 4
     m_AlignByGeometry: 0
     m_RichText: 1
     m_HorizontalOverflow: 1
