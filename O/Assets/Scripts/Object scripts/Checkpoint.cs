@@ -122,7 +122,7 @@ public class Checkpoint : MonoBehaviour {
 	}
 
 	void playSFX(int clipNum) {
-		AudioClip toPlay = new AudioClip();
+		AudioClip toPlay = trigger;
 		if (clipNum == 1) {
 			toPlay = trigger;
 		} else if (clipNum == 2) {

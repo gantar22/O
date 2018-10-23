@@ -20,6 +20,8 @@ public class PlayerMovement : MonoBehaviour {
 	public float maxSpeed;
 	public float sustainSpeed;
 	public float jumpForce;
+    public float normalMass;
+    public float superMass;
 	private float targetVelo;
 	private InputManager inputManager;
 	private bool canJump;
@@ -169,10 +171,11 @@ public class PlayerMovement : MonoBehaviour {
 			targetVelo += Input.GetAxis(axis) * runSpeed;
 		}
 
+        rb.mass = normalMass;
 		//rb.AddForce(new Vector2(targetVelo,0),ForceMode2D.Force);
 		rb.velocity = new Vector2 (Mathf.Lerp(rb.velocity.x,targetVelo, 17.5f * Time.deltaTime),rb.velocity.y);
 		rb.velocity = new Vector2 (rb.velocity.x,Mathf.Clamp(rb.velocity.y, -1 * maxSpeed,9999999));
-
+        if (rb.velocity.sqrMagnitude < 0.1) rb.mass = superMass;
 
 
 		timeSinceLastGround += Time.deltaTime;
