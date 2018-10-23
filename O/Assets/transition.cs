@@ -26,7 +26,7 @@ public class transition : MonoBehaviour {
 		Vector3 velo = Vector3.zero;
 		while(elapsed < 3.8f){
 			Vector3 dest = new Vector3(x,40,transform.position.z);
-			transform.position = Vector3.SmoothDamp(transform.position,dest,ref velo,4);
+			transform.position = Vector3.SmoothDamp(transform.position,dest,ref velo,4,.15f);
 			cam.orthographicSize = Mathf.Lerp(oldSize,size,elapsed / 4);
 			yield return null;
 		}

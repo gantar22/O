@@ -176,6 +176,12 @@ public class PlayerMovement : MonoBehaviour {
 		rb.velocity = new Vector2 (Mathf.Lerp(rb.velocity.x,targetVelo, 17.5f * Time.deltaTime),rb.velocity.y);
 		rb.velocity = new Vector2 (rb.velocity.x,Mathf.Clamp(rb.velocity.y, -1 * maxSpeed,9999999));
         if (rb.velocity.sqrMagnitude < 0.1) rb.mass = superMass;
+        if (rb.velocity.y > 100)
+        {
+
+            transform.position -= (Vector3)rb.velocity * Time.deltaTime;
+            rb.velocity = new Vector2(rb.velocity.x, 0f);
+        }
 
 
 		timeSinceLastGround += Time.deltaTime;

@@ -296,7 +296,7 @@ MonoBehaviour:
   sustainSpeed: 0
   jumpForce: 14.3
   normalMass: 2.45
-  superMass: 99999
+  superMass: 100
   accelTime: 0
   decayTime: 0
   body: {fileID: 1275913342115074, guid: 3e08e3d0306f7b14e9480824c436e4df, type: 2}

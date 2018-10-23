@@ -12,7 +12,12 @@ public class PauseManager : MonoBehaviour {
 	[HideInInspector]
 	public static bool paused = false;
 
-	void Update () {
+    private void Start()
+    {
+        Cursor.visible = false;
+    }
+
+    void Update () {
 		// Pause keys
 		if (Input.GetAxisRaw("Cancel") > 0) {
 			if (paused && !pressed) {
@@ -40,12 +45,14 @@ public class PauseManager : MonoBehaviour {
 	}
 
 	public void pause() {
+        Cursor.visible = true;
 		paused = true;
 		Time.timeScale = 0f;
 		PausePanel.SetActive (true);
 	}
 
 	public void resume() {
+        Cursor.visible = false;
 		paused = false;
 		Time.timeScale = 1.0f;
 		PausePanel.SetActive (false);
